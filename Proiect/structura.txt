@@ -1,0 +1,39 @@
+Tema 5-cabinet medical(pacienti, medici, retete)
+1) Sistemul creat este menit sa serveasca la centralizarea datelor despre pacienti ale unui cabinet medical
+si eliberarea de retete. De asemenea, poate implementa si programarile online(deci trebuie memorate si datele despre medici si asistente)
+
+Actiuni/interogari:
+
+-se poate obtine lista de pacienti pe care ii are in evidenta
+-se poate obtine lista de medici care lucreaza in cabinetul respectiv
+-se poate obtine lista de asistenti care lucreaza in cabinet indiferent de medic
+-eliberare de retete
+-eliberare de trimiteri medicale
+-cate retete sunt eliberate in fiecare luna
+-se poate obtine programul de lucru al cabinetului
+-programare cabinet online
+-se poate obtine lista de pacienti ai unui medic
+-se poate obtine inventarul cabinetului
+-cerere concediu medical
+
+
+Obiecte:
+Clasa Entities.Persoana - Entities.Pacient
+	       - Entities.Medic
+	       - Entities.Asistent
+
+Clasa Entities.Document - Entities.Reteta
+	       - Trimitere medicala
+	       - Concediu medical
+	       - Adeverinta medicala
+Clasa CabinetMedical - nume
+		     - adresa
+		     - lista de medici
+		     - lista de asistenti
+		     - lista de pacienti
+
+Restrictii/Mentiuni:
+-asistentul nu poate avea o lista de pacienti, doar medicul poate avea pacienti in evidenta
+-nu se pot face programari in afara programului de lucru
+-nu se poate acorda concediu medical mai mult de 14 zile
+
