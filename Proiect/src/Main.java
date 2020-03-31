@@ -73,7 +73,7 @@ public class Main{
                     MedicService m3 = new MedicService();
                     MedicService m4 = new MedicService();
                     Medic m11  = m1.creareMedic("popescu", "andrei", "2/03/1980", 40, "masculin", "cardiologie", 9.0, 14.0, 123456789);
-                    Medic m22 = m2.creareMedic("iordache", "stefan", "30/04/1997", 23, "masculin", "prost", 12, 18, 987654);
+                    Medic m22 = m2.creareMedic("iordache", "stefan", "30/04/1997", 23, "masculin", "reumatologie", 12, 18, 987654);
                     System.out.println(m11.toString());
                     System.out.println();
                     System.out.println(m22.toString());
