@@ -1,6 +1,7 @@
 package Entities;
 
-public class Persoana {
+public abstract class Persoana extends GeneralEntity{
+
     protected String nume;
     protected String prenume;
     protected String dataNasterii;
@@ -54,4 +55,5 @@ public class Persoana {
     public String getGen(){
         return this.gen;
     }
+    public abstract void afiseaza();
 }

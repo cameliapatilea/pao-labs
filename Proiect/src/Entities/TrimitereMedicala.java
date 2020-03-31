@@ -10,6 +10,12 @@ public class TrimitereMedicala extends Document{
         this.scop = "";
         this.catre = "";
     }
+
+    @Override
+    public void afiseaza() {
+
+    }
+
     TrimitereMedicala(Pacient pacient, String eliberatDe, String eliberatLa, int valabilitate, String scop, String catre){
         super(pacient, eliberatDe, eliberatLa);
         this.valabilitate = valabilitate;

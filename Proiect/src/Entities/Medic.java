@@ -13,6 +13,12 @@ public class Medic extends Persoana {
         this.codParafa = 0;
 
     }
+
+    @Override
+    public void afiseaza() {
+
+    }
+
     Medic(String nume, String prenume, String specializare){
         super(nume, prenume);
         this.specializare = specializare;

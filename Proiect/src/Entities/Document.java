@@ -1,6 +1,6 @@
 package Entities;
 
-public class Document {
+public abstract class Document extends GeneralEntity{
     protected Pacient pacient;
     protected String eliberatDe;
     protected String eliberatLa;
@@ -31,4 +31,5 @@ public class Document {
     public String getEliberatLa(){
         return this.eliberatLa;
     }
+    public abstract void afiseaza();
 }

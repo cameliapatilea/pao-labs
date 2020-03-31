@@ -9,6 +9,12 @@ public class AdeverintaMedicala extends Document{
         this.scop = "";
         this.apt = false;
     }
+
+    @Override
+    public void afiseaza() {
+
+    }
+
     AdeverintaMedicala(Pacient pacient, String eliberatDe, String eliberatLa, boolean apt, String scop){
         super(pacient, eliberatDe, eliberatLa);
         this.scop = scop;

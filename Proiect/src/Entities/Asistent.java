@@ -12,6 +12,12 @@ public class Asistent extends Persoana{
         this.oraEnd = 0;
         this.ture = false;
     }
+
+    @Override
+    public void afiseaza() {
+
+    }
+
     Asistent(String nume, String prenume, String specializare){
         super(nume, prenume);
         this.specializare = specializare;

@@ -8,6 +8,12 @@ public class ConcediuMedical extends Document{
         this.nrZileConcediu = 0;
         this.dataFinal = "";
     }
+
+    @Override
+    public void afiseaza() {
+
+    }
+
     ConcediuMedical(Pacient pacient, String eliberatDe, String eliberatLa, int nrZileConcediu, String dataFinal){
         super(pacient, eliberatDe, eliberatLa);
         this.nrZileConcediu = nrZileConcediu;
