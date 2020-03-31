@@ -15,7 +15,7 @@ public class AdeverintaMedicala extends Document{
 
     }
 
-    AdeverintaMedicala(Pacient pacient, String eliberatDe, String eliberatLa, boolean apt, String scop){
+    public AdeverintaMedicala(Pacient pacient, String eliberatDe, String eliberatLa, boolean apt, String scop){
         super(pacient, eliberatDe, eliberatLa);
         this.scop = scop;
         this.apt = apt;
@@ -32,5 +32,15 @@ public class AdeverintaMedicala extends Document{
     }
     public String getScop(){
         return this.scop;
+    }
+
+    @Override
+    public String toString(){
+       String x ="Pacientului:\n " + pacient.toString() + "\ni-a fost eliberata adeverinta medicala de catre: " + this.eliberatDe + " la data de: " + this.eliberatLa + "\ncu scopul: " + this.scop + ".\nAcesta ";
+       if(this.apt == true)
+           x += "apt pentru scopul mentionat anterior.";
+       else
+           x+= "nu este apt pentru scopul mentionat mai sus";
+       return x;
     }
 }

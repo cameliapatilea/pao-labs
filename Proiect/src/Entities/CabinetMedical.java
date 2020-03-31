@@ -1,10 +1,12 @@
 package Entities;
 
+import Services.Implementations.GeneralService;
+
 import java.sql.ClientInfoStatus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CabinetMedical {
+public class CabinetMedical extends GeneralEntity {
     private List<Pacient> listaPacienti;
     private List<Medic> listaMedici;
     private List<Asistent> listaAsistenti;
@@ -12,7 +14,7 @@ public class CabinetMedical {
     private int oraInceput;
     private int oraStop;
 
-    CabinetMedical(){
+    public CabinetMedical(){
         listaMedici = new ArrayList<Medic>();
         listaAsistenti = new ArrayList<Asistent>();
         listaPacienti  = new ArrayList<Pacient>();
@@ -21,7 +23,7 @@ public class CabinetMedical {
         oraStop = 0;
 
     }
-    CabinetMedical(List<Pacient> listaPacienti, List<Asistent> listaAsistenti, List<Medic> listaMedici, String adresaCabinet, int oraInceput, int oraStop)
+    public CabinetMedical(List<Pacient> listaPacienti, List<Asistent> listaAsistenti, List<Medic> listaMedici, String adresaCabinet, int oraInceput, int oraStop)
     {
         this.listaPacienti.addAll(listaPacienti);
         this.listaMedici.addAll(listaMedici);
@@ -63,4 +65,14 @@ public class CabinetMedical {
     public void setAdresa(String adresaCabinet){this.adresaCabinet = adresaCabinet;}
     public void setOraInceput(int oraInceput){this.oraInceput = oraInceput;}
     public void setOraStop(int oraStop){this.oraStop = oraStop;}
+
+    @Override
+    public String toString(){
+        String x;
+        x = "Cabinetul medical are urmatorii medici: " + listaMedici.toString() + "\n" + "Are urmatorii pacienti in evidenta:\n" +
+                listaPacienti.toString() + "\nSi unde lucreaza urmatorii asistenti:\n" + listaAsistenti.toString();
+        x+= "\nIntervalul orar in care este deschis cabinetul: " + this.getOraInceput() + "-" + this.getOraStop() + "\n";
+        x+="Cabinetul se gaseste la adresa: " + this.getAdresa();
+        return x;
+    }
 }

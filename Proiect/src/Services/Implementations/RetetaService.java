@@ -24,22 +24,16 @@ public class RetetaService implements RetetaInterface {
     }
 
     @Override
-    public List<String> getMedicamente(Reteta r) {
-        return null;
+    public Map<String, Integer> getMedicamente(Reteta r) {
+        return r.getMedicamente();
     }
 
     @Override
-    public Reteta adaugaMedicament(List<String> medicamente, String medicament) {
-        return null;
+    public Reteta adaugaMedicament(Reteta r,String medicament, int oriZi) {
+        r.getMedicamente().put(medicament, oriZi);
+        return r;
     }
 
-    @Override
-    public Reteta stergeMedicament(List<String> medicament, int indx, boolean stergeTot) {
-        return null;
-    }
 
-    @Override
-    public List<Reteta> adaugaRetetaInLista(List<Reteta> lista, Reteta r) {
-        return null;
-    }
+
 }

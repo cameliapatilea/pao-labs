@@ -1,5 +1,6 @@
 package Entities;
 
+import java.security.Key;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ public class Reteta extends Document {
 
      public Reteta(Pacient pacient, String eliberatDe, String eliberatLa, Map<String, Integer> medicamente){
         super(pacient, eliberatDe, eliberatLa);
+        this.medicamente = new HashMap<String, Integer>();
         this.medicamente.putAll(medicamente);
     }
     public void setMedicamente(Map<String, Integer> medicamente)
@@ -28,5 +30,15 @@ public class Reteta extends Document {
     }
     public Map<String, Integer> getMedicamente(){
         return this.medicamente;
+    }
+
+    @Override
+    public String toString(){
+        String x = "Reteta este eliberata pentru pacientul " + this.pacient.toString() + "\n" + "De catre: " + this.eliberatDe + ", la data de: " + this.eliberatLa + "\n";
+
+       for(Map.Entry<String,Integer> entry: this.medicamente.entrySet()){
+           x += "Medicamentul " + entry.getKey() + " poate fi luat de " + entry.getValue() + " ori pe zi.\n";
+       }
+        return x;
     }
 }

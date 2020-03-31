@@ -1,18 +1,12 @@
-import Entities.Asistent;
-import Entities.Document;
-import Entities.Medic;
-import Entities.Pacient;
+import Entities.*;
 import Services.Implementations.AsistentService;
 import Services.Implementations.MedicService;
 import Services.Implementations.PacientService;
+import Services.Implementations.RetetaService;
 import Services.Interfaces.PacientInterface;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main{
     public static void main(String[] args) {
@@ -115,11 +109,24 @@ public class Main{
                     if(ok == 0)
                         System.out.println("Nu exista un asistent cu aceasta specializare");
 
-
-
                 }
                     break;
                 case 4:{
+                    RetetaService retetaService1  = new RetetaService();
+                    RetetaService retetaService2 = new RetetaService();
+                    List<String> lista = new ArrayList<String>();
+                    lista.add("diabet");
+                    lista.add("coronavirus");
+                    Pacient p1 =new Pacient("popescu", "andrei", "2/03/1980", 40, "masculin", lista);
+
+                    Map<String,Integer> listaMedicamente  = new HashMap<String, Integer>();
+                    listaMedicamente.put("paracetamol", 3);
+                    listaMedicamente.put("nurofen", 3);
+
+                    Reteta r1 = retetaService1.creareReteta(p1, "Popescu George", "12/03/2020", listaMedicamente);
+
+
+                    System.out.println(r1.toString());
                 }
                     break;
                 case 5:{

@@ -9,9 +9,8 @@ import java.util.Map;
 public interface RetetaInterface {
     Reteta getFromListById(List<Reteta> lista, int id);
     Reteta creareReteta(Pacient pacient, String eliberatDe, String eliberatLa, Map<String, Integer> medicamente);
-    List<String> getMedicamente(Reteta r);
-    Reteta adaugaMedicament(List<String> medicamente, String medicament);
-    Reteta stergeMedicament(List<String> medicament, int indx, boolean stergeTot);
-    List<Reteta> adaugaRetetaInLista(List<Reteta> lista, Reteta r);
+    Map<String,Integer> getMedicamente(Reteta r);
+    Reteta adaugaMedicament(Reteta r,  String medicament, int oriZi);
+
 
 }

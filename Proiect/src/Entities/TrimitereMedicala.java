@@ -16,7 +16,7 @@ public class TrimitereMedicala extends Document{
 
     }
 
-    TrimitereMedicala(Pacient pacient, String eliberatDe, String eliberatLa, int valabilitate, String scop, String catre){
+    public TrimitereMedicala(Pacient pacient, String eliberatDe, String eliberatLa, int valabilitate, String scop, String catre){
         super(pacient, eliberatDe, eliberatLa);
         this.valabilitate = valabilitate;
         this.scop = scop;
@@ -39,5 +39,14 @@ public class TrimitereMedicala extends Document{
     }
     public String getCatre(){
         return this.catre;
+    }
+
+    @Override
+    public String toString(){
+        String x = "Trimitere medicala eliberata pentru pacientul: \n" + pacient.toString()+
+                "\n eliberata de " + this.eliberatDe + " la data de " + this.eliberatLa +
+                "\nCu valabiliatate " + this.valabilitate + " zile" + "\n Pentru a servi la: " + this.scop
+                + "\nCatre: " + this.catre;
+        return x;
     }
 }

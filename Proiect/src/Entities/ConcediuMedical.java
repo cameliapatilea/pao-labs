@@ -14,7 +14,7 @@ public class ConcediuMedical extends Document{
 
     }
 
-    ConcediuMedical(Pacient pacient, String eliberatDe, String eliberatLa, int nrZileConcediu, String dataFinal){
+    public ConcediuMedical(Pacient pacient, String eliberatDe, String eliberatLa, int nrZileConcediu, String dataFinal){
         super(pacient, eliberatDe, eliberatLa);
         this.nrZileConcediu = nrZileConcediu;
         this.dataFinal = dataFinal;
@@ -30,5 +30,14 @@ public class ConcediuMedical extends Document{
     }
     public String getDataFinal(){
         return this.dataFinal;
+    }
+
+    @Override
+    public String toString(){
+        String x = "Concediu medical eliberat de " + this.eliberatDe  + " la data de " + this.eliberatLa+
+                "pentru pacientul:\n" + pacient.toString() + "\n" +
+                "Au fost acordate " + this.nrZileConcediu + " zile de concediu medical" +
+                "\n Cu valabilitate pana la data de " + this.dataFinal;
+        return x;
     }
 }
