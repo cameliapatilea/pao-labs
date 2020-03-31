@@ -55,4 +55,12 @@ public class Medic extends Persoana {
     public int getCodParafa(){
         return this.codParafa;
     }
+
+    @Override
+    public String toString(){
+        String x =  "Nume: " + this.nume + "\n" + "Prenume: " + this.prenume + "\n" + "Varsta: " + this.varsta + "\n" + "Data nasterii: " + this.dataNasterii + "\n" + "Gen: " + this.gen + "\n" + "Specializare: " +
+                this.specializare + "\nInterval orar de lucru: " + this.oraStart + "-" + this.oraEnd + "\nCod parafa: " + this.codParafa;
+
+        return  x;
+    }
 }

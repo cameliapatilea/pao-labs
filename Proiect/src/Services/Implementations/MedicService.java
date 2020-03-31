@@ -5,14 +5,14 @@ import Services.Interfaces.MedicInterface;
 
 import java.util.List;
 
-public class MedicImplementation implements MedicInterface {
+public class MedicService implements MedicInterface {
     @Override
     public Medic getFromListById(List<Medic> lista, int id) {
         for(int i = 0; i < lista.size(); i++)
             if(lista.get(i).getId() == id)
                 return lista.get(i);
 
-        return null; 
+        return null;
     }
 
     @Override
@@ -36,13 +36,13 @@ public class MedicImplementation implements MedicInterface {
 
     @Override
     public Medic updateNume(Medic m, String nume) {
-       m.setNume(nume);
-       return m;
+        m.setNume(nume);
+        return m;
     }
 
     @Override
     public String afiseazaSpecializare(Medic m) {
-      return m.getSpecializare();
+        return m.getSpecializare();
     }
 
     @Override
