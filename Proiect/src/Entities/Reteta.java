@@ -18,12 +18,12 @@ public class Reteta extends Document {
 
     }
 
-    Reteta(Pacient pacient, String eliberatDe, String eliberatLa, Map<String, Integer> medicamente){
+     public Reteta(Pacient pacient, String eliberatDe, String eliberatLa, Map<String, Integer> medicamente){
         super(pacient, eliberatDe, eliberatLa);
         this.medicamente.putAll(medicamente);
     }
     public void setMedicamente(Map<String, Integer> medicamente)
-    {   this.medicamente.clear();
+    {   //this.medicamente.clear();
         this.medicamente.putAll(medicamente);
     }
     public Map<String, Integer> getMedicamente(){

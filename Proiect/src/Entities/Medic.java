@@ -63,4 +63,23 @@ public class Medic extends Persoana {
 
         return  x;
     }
+
+    public int compareTo(Medic m) {
+        if(this.nume.compareTo(m.nume) == 0){
+            if(this.prenume.compareTo(m.prenume) == 0)
+            {
+                if(this.varsta > m.varsta)
+                    return 1;
+                else if(this.varsta == m.varsta)
+                    return 0;
+                else return -1;
+            }
+            else if(this.prenume.compareTo(m.prenume) > 0)
+                return 1;
+            else return -1;
+        }
+        else if(this.nume.compareTo(m.nume) < 0)
+            return -1;
+        else return 1;
+    }
 }

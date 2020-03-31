@@ -5,7 +5,7 @@ public class Asistent extends Persoana{
     private double oraStart;
     private double oraEnd;
     private boolean ture;
-    Asistent(){
+    public Asistent(){
         super();
         this.specializare = "";
         this.oraStart = 0;
@@ -18,11 +18,11 @@ public class Asistent extends Persoana{
 
     }
 
-    Asistent(String nume, String prenume, String specializare){
+    public Asistent(String nume, String prenume, String specializare){
         super(nume, prenume);
         this.specializare = specializare;
     }
-    Asistent(String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, boolean ture){
+    public Asistent(String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, boolean ture){
         super(nume, prenume, dataNasterii, varsta, gen);
         this.specializare = specializare;
         this.oraStart = oraStart;
@@ -52,5 +52,31 @@ public class Asistent extends Persoana{
     }
     public boolean getTure(){
         return this.ture;
+    }
+
+    @Override
+    public String toString(){
+        String x =  "Nume: " + this.nume + "\n" + "Prenume: " + this.prenume + "\n" + "Varsta: " + this.varsta + "\n" + "Data nasterii: " + this.dataNasterii + "\n" + "Gen: " + this.gen + "\n" + "Specializare: " +
+                this.specializare + "\nInterval orar de lucru: " + this.oraStart + "-" + this.oraEnd + "\nLucreaza in ture: " + this.ture;
+
+        return  x;
+    }
+    public int compareTo(Asistent asistent) {
+        if(this.nume.compareTo(asistent.nume) == 0){
+            if(this.prenume.compareTo(asistent.prenume) == 0)
+            {
+                if(this.varsta > asistent.varsta)
+                    return 1;
+                else if(this.varsta == asistent.varsta)
+                    return 0;
+                else return -1;
+            }
+            else if(this.prenume.compareTo(asistent.prenume) > 0)
+                return 1;
+            else return -1;
+        }
+        else if(this.nume.compareTo(asistent.nume) < 0)
+            return -1;
+        else return 1;
     }
 }

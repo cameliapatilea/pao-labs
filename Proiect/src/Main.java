@@ -1,6 +1,8 @@
+import Entities.Asistent;
 import Entities.Document;
 import Entities.Medic;
 import Entities.Pacient;
+import Services.Implementations.AsistentService;
 import Services.Implementations.MedicService;
 import Services.Implementations.PacientService;
 import Services.Interfaces.PacientInterface;
@@ -84,6 +86,36 @@ public class Main{
                 }
                     break;
                 case 3:{
+                    List<Asistent> listaAsistenti = new ArrayList<Asistent>();
+                    AsistentService a1 = new AsistentService();
+                    AsistentService a2 = new AsistentService();
+                    Asistent a = a1.creareAsistent("popescu", "andrei", "2/03/1980", 40, "masculin", "cardiologie", 9.0, 14.0, false);
+                    Asistent b = a2.creareAsistent("andrei", "george", "30/01/1987", 33, "masculin", "dermatologie", 13, 19, true);
+                    System.out.println(a.toString());
+
+                    a1.updateSpecializare(a, "reumatologie");
+                    System.out.println(a.toString());
+
+
+                    System.out.println();
+                    listaAsistenti = a1.adaugaAsistentInLista(a, listaAsistenti);
+                    listaAsistenti = a2.adaugaAsistentInLista(b, listaAsistenti);
+                    for(int i = 0; i <  listaAsistenti.size(); i++)
+                    {System.out.println();
+                        System.out.println(listaAsistenti.get(i).toString());}
+                    System.out.println();
+
+                    int ok = 0;
+                    for(int i = 0; i < listaAsistenti.size(); i++)
+                        if(listaAsistenti.get(i).getSpecializare().compareTo("oncologie") == 0)
+                        {
+                         ok = 1;
+                         System.out.println("Asistentul cu specializarea dermatologie este " + listaAsistenti.get(i).getNume() + " " + listaAsistenti.get(i).getPrenume());
+                        }
+                    if(ok == 0)
+                        System.out.println("Nu exista un asistent cu aceasta specializare");
+
+
 
                 }
                     break;
