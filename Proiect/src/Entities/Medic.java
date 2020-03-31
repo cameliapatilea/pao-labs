@@ -23,7 +23,7 @@ public class Medic extends Persoana {
         super(nume, prenume);
         this.specializare = specializare;
     }
-    Medic(String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, int codParafa){
+   public Medic(String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, int codParafa){
         super(nume, prenume, dataNasterii, varsta, gen);
         this.specializare = specializare;
         this.oraStart = oraStart;
