@@ -11,9 +11,7 @@ public class AdeverintaMedicala extends Document{
     }
 
     @Override
-    public void afiseaza() {
-
-    }
+    public void afiseaza() {}
 
     public AdeverintaMedicala(Pacient pacient, String eliberatDe, String eliberatLa, boolean apt, String scop){
         super(pacient, eliberatDe, eliberatLa);

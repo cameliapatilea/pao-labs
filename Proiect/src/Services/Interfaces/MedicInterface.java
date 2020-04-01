@@ -10,6 +10,6 @@ public interface MedicInterface {
     Medic updateSpecialiare(Medic m, String specializare);
     Medic updateVarsta(Medic m, int varsta);
     Medic updateNume(Medic m, String nume);
-    String afiseazaSpecializare(Medic m);
-    String afiseazaIntervalOrar(Medic m);
+    String afiseazaSpecializare(String nume, String prenume, List<Medic> medici);
+    String afiseazaIntervalOrar(String nume, String prenume, List<Medic> medici);
 }

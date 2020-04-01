@@ -5,7 +5,7 @@ public class Medic extends Persoana {
     private double oraStart;
     private double oraEnd;
     private int codParafa; //conventie: codul de parafa nu incepe cu 0 si nu depaseste dimensiunea unui int
-    Medic(){
+    public Medic(){
         super();
         this.oraStart = 0;
         this.oraEnd = 0;

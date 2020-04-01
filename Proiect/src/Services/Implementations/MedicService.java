@@ -41,14 +41,26 @@ public class MedicService implements MedicInterface {
     }
 
     @Override
-    public String afiseazaSpecializare(Medic m) {
-        return m.getSpecializare();
+    public String afiseazaSpecializare(String nume, String prenume, List<Medic> medici) {
+        String x = "";
+
+        for(int i = 0; i <  medici.size(); i++)
+            if(medici.get(i).getNume().compareTo(nume) == 0 && medici.get(i).getPrenume().compareTo(prenume) == 0)
+                x+= medici.get(i).getSpecializare();
+         return x;
     }
 
     @Override
-    public String afiseazaIntervalOrar(Medic m) {
-        double start = m.getOraStart();
-        double stop = m.getOraEnd();
-        return "Intervalul orar in care lucreaza medicul este" + start + "-" + stop;
+    public String afiseazaIntervalOrar(String nume, String prenume, List<Medic> medici) {
+        String x = "";
+        String y = "";
+
+        for(int i = 0; i <  medici.size(); i++)
+            if(medici.get(i).getNume().compareTo(nume) == 0 && medici.get(i).getPrenume().compareTo(prenume) == 0)
+            {
+                x+= medici.get(i).getOraStart();
+                y+= medici.get(i).getOraEnd();
+            }
+        return "Intervalul orar in care lucreaza medicul este" + x + "-" + y;
     }
 }
