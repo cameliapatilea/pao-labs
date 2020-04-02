@@ -4,7 +4,7 @@
 
  ### Tema proiectului - Cabinetul medical
 
- * Sistemul creat este menit sa serveasca la centralizarea datelor despre pacienti/medici/asistenti si respectiv docuemnteele eliberate de un cabinet medical. 
+ * Sistemul creat este menit sa serveasca la centralizarea datelor despre pacienti/medici/asistenti si respectiv documentele eliberate de un cabinet medical. 
 
  Overall, exista 3 clase care modeleaza aplicatia. Clasele Persoana, Document si CabinetMedical.
 
