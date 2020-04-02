@@ -59,6 +59,15 @@ public class Main{
         medici.add(m22);
 
 
+        //lista asistenti
+        List<Asistent> listaAsistenti = new ArrayList<Asistent>();
+        AsistentService a1 = new AsistentService();
+        AsistentService a2 = new AsistentService();
+        Asistent a = a1.creareAsistent("popescu", "andrei", "2/03/1980", 40, "masculin", "cardiologie", 9.0, 14.0, false);
+        Asistent b = a2.creareAsistent("andrei", "george", "30/01/1987", 33, "masculin", "dermatologie", 13, 19, true);
+
+        listaAsistenti = a1.adaugaAsistentInLista(a, listaAsistenti);
+        listaAsistenti = a2.adaugaAsistentInLista(b, listaAsistenti);
 
 
         //citeste comanda
@@ -321,34 +330,23 @@ break;
                 }
                     break;
                 case 3:{
-                    List<Asistent> listaAsistenti = new ArrayList<Asistent>();
-                    AsistentService a1 = new AsistentService();
-                    AsistentService a2 = new AsistentService();
-                    Asistent a = a1.creareAsistent("popescu", "andrei", "2/03/1980", 40, "masculin", "cardiologie", 9.0, 14.0, false);
-                    Asistent b = a2.creareAsistent("andrei", "george", "30/01/1987", 33, "masculin", "dermatologie", 13, 19, true);
-                    System.out.println(a.toString());
+                    System.out.println("Bine ati venit in sectiunea de asistenti!");
+                    System.out.println("Pentru a afla lista de asistenti, introduceti 1.");
+                    System.out.println("Pentru a adauga un asistent la lista, introduceti 2.");
+                    System.out.println("Pentru a modifica specializarea unui asistent, introduceti 3.");
+                    System.out.println("Pentru a afla programul de lucru al unui asistent, introduceti 4");
+                    System.out.println("Pentru a gasi un asistent cu o anumita specializare, introduceti 5.");
 
-                    a1.updateSpecializare(a, "reumatologie");
-                    System.out.println(a.toString());
+                    int y = scan.nextInt();
+                    while(y!= 0){
+                        switch(y){
+                            case 1:
+                            {
 
-
-                    System.out.println();
-                    listaAsistenti = a1.adaugaAsistentInLista(a, listaAsistenti);
-                    listaAsistenti = a2.adaugaAsistentInLista(b, listaAsistenti);
-                    for(int i = 0; i <  listaAsistenti.size(); i++)
-                    {System.out.println();
-                        System.out.println(listaAsistenti.get(i).toString());}
-                    System.out.println();
-
-                    int ok = 0;
-                    for(int i = 0; i < listaAsistenti.size(); i++)
-                        if(listaAsistenti.get(i).getSpecializare().compareTo("oncologie") == 0)
-                        {
-                         ok = 1;
-                         System.out.println("Asistentul cu specializarea dermatologie este " + listaAsistenti.get(i).getNume() + " " + listaAsistenti.get(i).getPrenume());
+                                break;
+                            }
                         }
-                    if(ok == 0)
-                        System.out.println("Nu exista un asistent cu aceasta specializare");
+                    }
 
                 }
                     break;
