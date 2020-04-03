@@ -331,7 +331,7 @@ break;
                     break;
                 case 3:{
                     System.out.println("Bine ati venit in sectiunea de asistenti!");
-                    System.out.println("Pentru a afla lista de asistenti, introduceti 1.");
+                    /*System.out.println("Pentru a afla lista de asistenti, introduceti 1.");
                     System.out.println("Pentru a adauga un asistent la lista, introduceti 2.");
                     System.out.println("Pentru a modifica specializarea unui asistent, introduceti 3.");
                     System.out.println("Pentru a afla programul de lucru al unui asistent, introduceti 4");
@@ -346,7 +346,7 @@ break;
                                 break;
                             }
                         }
-                    }
+                    }*/
 
                 }
                     break;
