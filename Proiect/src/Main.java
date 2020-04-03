@@ -121,11 +121,12 @@ public class Main{
                                 }
                              p = ps.crearePacient(nume,prenume,dataNasterii,varsta, gen, listaAfectiuni);
                              pacienti.add(p);
+                                Collections.sort(pacienti);
                                 break;
                             }
 
                             case 3:
-                            {   System.out.println("Pentru a adauga o afectiune unui pacienti, intai introduceti date despre pacientul respectiv");
+                            {   System.out.println("Pentru a adauga o afectiune unui pacient, intai introduceti date despre pacientul respectiv");
 
                                 System.out.println("Nume: ");
                                 String nume = scan.next();
@@ -159,7 +160,7 @@ public class Main{
 
                             case 4:
                             {
-                                System.out.println("Pentru a sterge una din afcetiunile unui pacienti, introduceti intai datele despre pacient");
+                                System.out.println("Pentru a sterge una din afectiunile unui pacient, introduceti intai datele despre pacient");
                                 System.out.println("Nume: ");
                                 String nume = scan.next();
                                 System.out.println("Prenume");
