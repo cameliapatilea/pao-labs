@@ -1,0 +1,4 @@
+george andrei 10
+vlad andreescu 52
+marian popa 36
+andra popa 16
