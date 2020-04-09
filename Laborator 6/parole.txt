@@ -1,0 +1,3 @@
+user user
+gigi parola
+user1 parolaGigi

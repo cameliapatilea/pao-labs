@@ -75,7 +75,7 @@ public class Main{
         while(x!=0){
 
             switch(x){
-                case 1: {
+                case 1: { 
 
                     System.out.println("Bine ati venit la categoria pacienti");
                     System.out.println("Pentru a vedea pacientii deja existenti, introduceti 1");
