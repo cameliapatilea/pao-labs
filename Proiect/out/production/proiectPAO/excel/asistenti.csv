@@ -1,0 +1,4 @@
+﻿ID,nume,prenume,dataNasterii,varsta,gen,specializare,oraStart,oraEnd,ture
+1,popescu ,mariana,2/3/1980,40,feminin,oftalmologie,9,14,FALSE
+2,andrei,george,1/30/1987,33,masculin,cardiologie,13,19,TRUE
+3,trust,georgiana,1/25/1956,64,feminin,reumatologie,12,16,TRUE

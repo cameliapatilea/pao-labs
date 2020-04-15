@@ -1,0 +1,5 @@
+﻿ID,nume,prenume,dataNasterii,varsta,gen,valabilitate,scop,catre,eliberatDe,eliberatLa
+1,popescu,andrei,1/1/1980,40,masculin,15,recuperare,fizioterapie, popescu maricia,
+2,roman,anisoara,2/2/1986,34,feminin,30,analize,cabinet,popescu pavel,
+3,mop,andreea,3/3/1990,30,feminin,30,recuperare,fizioterapie,andrei andrei,
+4,scundu,vlad,4/4/1976,44,masculin,30,consult,cardiologie,andrei mariana,
