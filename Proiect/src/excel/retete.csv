@@ -1,0 +1,5 @@
+﻿ID,nume,prenume,dataNasterii,varsta,gen,afectiuni,eliberatDe,eliberatLa,listaMedicamente
+1,popescu,andrei,1/1/1980,40,masculin,diabet astm,popescu george,3/12/2020,paracetamol nurofen
+2,roman,anisoara,2/2/1986,34,feminin,diabet ,popescu george,4/12/2020,ceva
+3,mop,andreea,3/3/1990,30,feminin,raceala,manea andreea,4/16/2020,algocalmin
+4,scundu,vlad,4/4/1976,44,masculin,gripa,manea andreea,4/13/2020,dexametazona
