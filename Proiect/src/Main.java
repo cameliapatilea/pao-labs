@@ -192,8 +192,7 @@ public class Main{
                                     for(int i = 0; i < listaPacienti.size(); i++)
                                     {
                                         Pacient pacient = listaPacienti.get(i);
-                                        csvWriter.writeNext(new String[]{Integer.toString(pacient.getID()),pacient.getNume(), pacient.getPrenume(), pacient.getDataNasterii(),
-                                                String.valueOf(pacient.getVarsta()), pacient.getGen(), String.join(" ",pacient.getAfectiuni())});
+                                        csvWriter.writeNext(pacient.objectToString(pacient));
                                     }
                                 }
                                 break;
@@ -236,8 +235,7 @@ public class Main{
                                     for(int i = 0; i < listaPacienti.size(); i++)
                                     {
                                         Pacient pacient = listaPacienti.get(i);
-                                        csvWriter.writeNext(new String[]{Integer.toString(pacient.getID()),pacient.getNume(), pacient.getPrenume(), pacient.getDataNasterii(),
-                                                String.valueOf(pacient.getVarsta()), pacient.getGen(), String.join(" ",pacient.getAfectiuni())});
+                                        csvWriter.writeNext(pacient.objectToString(pacient));
                                     }
                                 }
                                 break;
@@ -276,10 +274,10 @@ public class Main{
                                     for(int i = 0; i < listaPacienti.size(); i++)
                                     {
                                         Pacient pacient = listaPacienti.get(i);
-                                        csvWriter.writeNext(new String[]{Integer.toString(pacient.getID()),pacient.getNume(), pacient.getPrenume(), pacient.getDataNasterii(),
-                                                String.valueOf(pacient.getVarsta()), pacient.getGen(), String.join(" ",pacient.getAfectiuni())});
+                                        csvWriter.writeNext(pacient.objectToString(pacient));
                                     }
                                 }
+
 
                                 break;
                             }
@@ -528,15 +526,18 @@ public class Main{
                     }
                     break;
                     case 5: {
+                        System.out.println("Bine ati venit la categoria Concedii Medicale. Introduceti una din comenzile de mai jos:");
                     }
                     break;
                     case 6: {
+                        System.out.println("Bine ati venit la categoria Trimiteri Medicale. Introduceti una din comenzile de mai jos:");
                     }
                     case 7: {
-
+                        System.out.println("Bine ati venit la categoria Adeverinte medicale. Introduceti una din comenzile de mai jos:");
                     }
                     break;
                     case 8: {
+                        System.out.println("Bine ati venit la categoria Cabinet Medical. Introduceti una din comenzile de mai jos:");
                     }
                     break;
 
