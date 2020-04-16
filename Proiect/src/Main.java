@@ -17,15 +17,26 @@ import java.util.*;
 public class Main{
 
     private static final String pacientiPath = FileHelper.getFullPath("src/excel/pacienti.csv");
-    private static final String mediciPath = "src/excel/medici.csv";
-    private static final String asistentiPath = "src/excel/asistenti.csv";
-    private static final String retetePath = "src/excel/retete.csv";
-    private static final String adeverintePath = "src/excel/adeverintaMedicala.csv";
-    private static final String trimiteriPath = "src/excel/trimiteriMedicale.csv";
-    private static final String concediiPath = "src/excel/concediuMedical.csv";
+    private static final String mediciPath = FileHelper.getFullPath("src/excel/medici.csv");
+    private static final String asistentiPath = FileHelper.getFullPath("src/excel/asistenti.csv");
+    private static final String retetePath = FileHelper.getFullPath("src/excel/retete.csv");
+    private static final String adeverintePath = FileHelper.getFullPath("src/excel/adeverintaMedicala.csv");
+    private static final String trimiteriPath = FileHelper.getFullPath("src/excel/trimiteriMedicale.csv");
+    private static final String concediiPath = FileHelper.getFullPath("src/excel/concediuMedical.csv");
 
-    public static void main(String[] args) throws IOException {
-        Scanner scan = new Scanner(System.in);
+   public  static List<Pacient> listaPacienti;
+   public  static PacientService pacientService;
+   public  static List<String> listapb;
+
+
+   public static void initializeazaPacienti(){
+       listaPacienti = new ArrayList<Pacient>();
+       pacientService = new PacientService();
+       listapb = new ArrayList<String>();
+       Collections.sort(listaPacienti);
+   }
+
+    public static void afiseazaMeniu(){
         System.out.println("Bine ati venit. Introduceti una din comenzile de mai jos, in functie de actiunea pe care o doriti.");
         System.out.println("Pentru a accesa datele despre pacineti, intrudceti 1");
         System.out.println("Pentru a accesa datele despre medici, introduceti 2");
@@ -35,27 +46,22 @@ public class Main{
         System.out.println("Pentru a accesa datele despre concediile medicale, introduceti 6");
         System.out.println("Pentru a accesa datele despre adeverintele medicale, introduceti 7");
         System.out.println("Pentru a accesa datele despre cabinetul medical, introduceti 8");
+    }
 
 
 
-        List<Pacient> listaPacienti = new ArrayList<Pacient>();
-
-        //Lista generala de Pacienti si medicamente, populata pentru a avea o "baza de date"
-        PacientService pacientService = new PacientService();
-
-
-        List<String> listapb = new ArrayList<String>();
+    public static void main(String[] args) throws IOException {
+        Scanner scan = new Scanner(System.in);
+        afiseazaMeniu();
 
 
-
-
-        //listaPacienti.add(p1);
-
-        Collections.sort(listaPacienti);
+        //pacienti - lista locala pentru a extrage datele din csv
+        initializeazaPacienti();
 
 
 
-        //lista medici deja initializata
+        //lista medici - pt a extrage datele din csv
+        MedicService medicService = new MedicService();
         MedicService m1 = new MedicService();
         MedicService m2 = new MedicService();
         MedicService m3 = new MedicService();
@@ -67,7 +73,7 @@ public class Main{
         medici.add(m22);
 
 
-        //lista asistenti
+        //lista asistenti pt a extrage datele din csv
         List<Asistent> listaAsistenti = new ArrayList<Asistent>();
         AsistentService a1 = new AsistentService();
         AsistentService a2 = new AsistentService();
@@ -76,6 +82,19 @@ public class Main{
 
         listaAsistenti = a1.adaugaAsistentInLista(a, listaAsistenti);
         listaAsistenti = a2.adaugaAsistentInLista(b, listaAsistenti);
+
+
+        //lista retete- date din csv
+        List<Reteta> listaRetete = new ArrayList<Reteta>();
+
+        //lista adeverinte medicale
+        List<AdeverintaMedicala> listaAdeverinte = new ArrayList<AdeverintaMedicala>();
+
+        //lista concedii medicale
+        List<ConcediuMedical> listaConcedii = new ArrayList<ConcediuMedical>();
+
+        //lista trimiteri medicale
+        List<TrimitereMedicala> listaTrimiteri = new ArrayList<TrimitereMedicala>();
 
 
         //citeste comanda
@@ -245,9 +264,40 @@ public class Main{
                     while(y!=0){
                         switch(y){
                             case 1:{
-                                System.out.println("Lista de medici este: \n");
+                                try(Reader reader = Files.newBufferedReader(Paths.get(mediciPath));
+                                    CSVReader csvReader = new CSVReader(reader);)
+                                {
+                                    System.out.println("Lista de medici este: \n");
+                                    String[] next;
+                                    next = csvReader.readNext();
+                                    while((next =csvReader.readNext())!=null){
+                                        System.out.println("ID : " + next[0]);
+                                        System.out.println("Nume : " + next[1]);
+                                        System.out.println("Prenume : " + next[2]);
+                                        System.out.println("Data nasterii : " + next[3]);
+                                        System.out.println("Varsta : " + next[4]);
+                                        System.out.println("Gen: " + next[5]);
+                                        System.out.println("Specializare: " + next[6]);
+                                        System.out.println("Ora la care incepe: " + next[7]);
+                                        System.out.println("Ora la care inchide: " + next[8]);
+
+                                        System.out.println("Cod parafa: " + next[9]);
+                                        System.out.println("==========================");
+
+                                        Medic m = medicService.creareMedic(next[1], next[2], next[3], Integer.parseInt(next[4]), next[5], next[6], Double.parseDouble(next[7]), Double.parseDouble(next[8]), Integer.parseInt(next[9]));
+                                        medici.add(m);
+
+                                    }
+
+                                }
+                                System.out.println("Lista de pacienti dupa citire este:");
                                 for(int i = 0; i < medici.size(); i++)
+                                {
                                     System.out.println(medici.get(i).toString());
+                                    System.out.println("======================================================");
+                                }
+
+
                                 break;
                             }
                             case 2:
@@ -257,7 +307,7 @@ public class Main{
                                 String nume = scan.next();
                                 System.out.println("Prenume");
                                 String prenume = scan.next();
-                                System.out.println("Data nasterii, sub forma dd/ll/aaaa");
+                                System.out.println("Data nasterii, sub forma ll/dd/aaaa");
                                 String dataNasterii = scan.next();
                                 System.out.println("Varsta: ");
                                 int varsta = scan.nextInt();
