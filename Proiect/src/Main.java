@@ -200,7 +200,7 @@ public class Main{
                             }
 
                             case 3: {
-                                System.out.println("Pentru a adauga o afectiune unui pacient, intai introduceti date despre pacientul respectiv");
+                                System.out.println("Pentru a adauga o afectiune unui pacient, intai introduceti id-ul si numele pacientului");
 
                                 System.out.println("ID: ");
                                 int id = scan.nextInt();
@@ -208,65 +208,81 @@ public class Main{
                                 String nume = scan.next();
                                 System.out.println("Prenume");
                                 String prenume = scan.next();
-                                System.out.println("Data nasterii, sub forma dd/ll/aaaa");
-                                String dataNasterii = scan.next();
-                                System.out.println("Varsta: ");
-                                int varsta = scan.nextInt();
-                                System.out.println("Gen:");
-                                String gen = scan.next();
-                                int nr;
-                                System.out.println("Numarul de afectiuni deja existente pe care le are pacientul: ");
-                                nr = scan.nextInt();
-                                List<String> listaAfectiuni = new ArrayList<String>();
-                                for (int i = 0; i < nr; i++) {
-                                    System.out.println("Introduceti afectiunea deja existenta: ");
-                                    String afect = scan.next();
-                                    listaAfectiuni.add(afect);
-                                }
+                                List<String> listaNouaAfectiuni = new ArrayList<>();
+                                PacientService p = new PacientService();
                                 System.out.println("Introduceti afectiunea pe care doriti sa o adaugati");
                                 String afect = scan.next();
-                                Pacient p = new Pacient(id, nume, prenume, dataNasterii, varsta, gen, listaAfectiuni);
-                                PacientService ps = new PacientService();
-                                p = ps.adaugaAfectiune(p, afect);
-                                System.out.println();
-                                System.out.println(p.toString());
+
+                                listaPacienti = p.adaugaAfectiune(id, listaPacienti, afect);
+
+
+
+                                System.out.println("====================================================");
+                                for (int i = 0; i < listaPacienti.size(); i++)
+                                    System.out.println(listaPacienti.get(i).toString());
+
+
+                                try (
+                                        Writer writer = Files.newBufferedWriter(Paths.get(pacientiPath));
+
+                                        CSVWriter csvWriter = new CSVWriter(writer,
+                                                CSVWriter.DEFAULT_SEPARATOR,
+                                                CSVWriter.NO_QUOTE_CHARACTER,
+                                                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                                                CSVWriter.DEFAULT_LINE_END);
+                                ){
+                                    String[] header = { "ID","nume", "prenume", "dataNasterii", "varsta", "gen", "afectiuni"};
+                                    csvWriter.writeNext(header);
+                                    for(int i = 0; i < listaPacienti.size(); i++)
+                                    {
+                                        Pacient pacient = listaPacienti.get(i);
+                                        csvWriter.writeNext(new String[]{Integer.toString(pacient.getID()),pacient.getNume(), pacient.getPrenume(), pacient.getDataNasterii(),
+                                                String.valueOf(pacient.getVarsta()), pacient.getGen(), String.join(" ",pacient.getAfectiuni())});
+                                    }
+                                }
                                 break;
                             }
-/*
+
                             case 4:
                             {
                                 System.out.println("Pentru a sterge una din afectiunile unui pacient, introduceti intai datele despre pacient");
+                                System.out.println("ID: ");
+                                int id = scan.nextInt();
                                 System.out.println("Nume: ");
                                 String nume = scan.next();
                                 System.out.println("Prenume");
                                 String prenume = scan.next();
-                                System.out.println("Data nasterii, sub forma dd/ll/aaaa");
-                                String dataNasterii = scan.next();
-                                System.out.println("Varsta: ");
-                                int varsta = scan.nextInt();
-                                System.out.println("Gen:");
-                                String gen = scan.next();
-                                int nr;
-                                System.out.println("Numarul de afectiuni deja existente pe care le are pacientul: ");
-                                nr = scan.nextInt();
-                                List<String> listaAfectiuni = new ArrayList<String>();
-                                for(int i = 0;  i<  nr; i++)
-                                {
-                                    System.out.println("Introduceti afectiunea deja existenta: ");
-                                    String afect = scan.next();
-                                    listaAfectiuni.add(afect);
-                                }
+
                                 System.out.println("Introduceti afectiunea pe care doriti sa o stergeti");
                                 String afect = scan.next();
-                                Pacient p = new Pacient(nume, prenume, dataNasterii, varsta, gen, listaAfectiuni);
                                 PacientService ps = new PacientService();
-                                p = ps.stergeAfectiune(p, afect);
+                                listaPacienti = ps.stergeAfectiune(id, listaPacienti, afect);
 
-                                pacienti.add(p);
-                                System.out.println();
-                                System.out.println(p.toString());
+                                for(int i = 0; i < listaPacienti.size(); i++)
+                                    System.out.println(listaPacienti.get(i).toString());
+
+
+                                try (
+                                        Writer writer = Files.newBufferedWriter(Paths.get(pacientiPath));
+
+                                        CSVWriter csvWriter = new CSVWriter(writer,
+                                                CSVWriter.DEFAULT_SEPARATOR,
+                                                CSVWriter.NO_QUOTE_CHARACTER,
+                                                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                                                CSVWriter.DEFAULT_LINE_END);
+                                ){
+                                    String[] header = { "ID","nume", "prenume", "dataNasterii", "varsta", "gen", "afectiuni"};
+                                    csvWriter.writeNext(header);
+                                    for(int i = 0; i < listaPacienti.size(); i++)
+                                    {
+                                        Pacient pacient = listaPacienti.get(i);
+                                        csvWriter.writeNext(new String[]{Integer.toString(pacient.getID()),pacient.getNume(), pacient.getPrenume(), pacient.getDataNasterii(),
+                                                String.valueOf(pacient.getVarsta()), pacient.getGen(), String.join(" ",pacient.getAfectiuni())});
+                                    }
+                                }
+
                                 break;
-                            }*/
+                            }
 
                         }
                         System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");

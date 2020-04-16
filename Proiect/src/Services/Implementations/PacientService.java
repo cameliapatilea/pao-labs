@@ -17,11 +17,15 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     }
 
     @Override
-    public Pacient adaugaAfectiune(Pacient pacient, String afectiune) {
-
-      pacient.getAfectiuni().add(afectiune);
-
-       return pacient;
+    public List<Pacient> adaugaAfectiune(int id, List<Pacient> pacienti, String afectiune) {
+    for(int i = 0; i < pacienti.size(); i++)
+    {
+        if(pacienti.get(i).getID() == id)
+        {
+            pacienti.get(i).getAfectiuni().add(afectiune);
+        }
+    }
+        return pacienti;
     }
 
     @Override
@@ -47,10 +51,18 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     }
 
     @Override
-    public Pacient stergeAfectiune(Pacient pacient, String afectiune) {
-         pacient.getAfectiuni().remove(afectiune);
+    public List<Pacient> stergeAfectiune(int id, List<Pacient> pacienti, String afectiune) {
+        for(int i = 0; i < pacienti.size(); i++)
+        {
+            if(pacienti.get(i).getID() == id)
+            {
+                pacienti.get(i).getAfectiuni().remove(afectiune);
+            }
+        }
 
-        return pacient;
+
+
+        return pacienti;
     }
 
     @Override
