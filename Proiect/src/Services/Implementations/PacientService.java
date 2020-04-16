@@ -91,8 +91,8 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     }
 
     @Override
-    public Pacient crearePacient(String nume, String prenume, String dataNasterii,int varsta, String gen, List<String> afectiuni) {
-        Pacient p = new Pacient(nume, prenume, dataNasterii, varsta, gen, afectiuni);
+    public Pacient crearePacient(int id, String nume, String prenume, String dataNasterii,int varsta, String gen, List<String> afectiuni) {
+        Pacient p = new Pacient(id, nume, prenume, dataNasterii, varsta, gen, afectiuni);
         return p;
     }
 

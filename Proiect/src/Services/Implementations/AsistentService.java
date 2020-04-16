@@ -16,8 +16,8 @@ public class AsistentService implements AsistentInterface {
     }
 
     @Override
-    public Asistent creareAsistent(String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, boolean ture) {
-       Asistent a = new Asistent(nume, prenume, dataNasterii, varsta, gen, specializare, oraStart, oraEnd, ture);
+    public Asistent creareAsistent(int id, String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, boolean ture) {
+       Asistent a = new Asistent(id, nume, prenume, dataNasterii, varsta, gen, specializare, oraStart, oraEnd, ture);
        return a;
     }
 

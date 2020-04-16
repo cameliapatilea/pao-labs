@@ -18,12 +18,12 @@ public class Asistent extends Persoana{
 
     }
 
-    public Asistent(String nume, String prenume, String specializare){
-        super(nume, prenume);
+    public Asistent(int ID, String nume, String prenume, String specializare){
+        super(ID,nume, prenume);
         this.specializare = specializare;
     }
-    public Asistent(String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, boolean ture){
-        super(nume, prenume, dataNasterii, varsta, gen);
+    public Asistent(int ID, String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, boolean ture){
+        super(ID, nume, prenume, dataNasterii, varsta, gen);
         this.specializare = specializare;
         this.oraStart = oraStart;
         this.oraEnd = oraEnd;
@@ -56,7 +56,7 @@ public class Asistent extends Persoana{
 
     @Override
     public String toString(){
-        String x =  "Nume: " + this.nume + "\n" + "Prenume: " + this.prenume + "\n" + "Varsta: " + this.varsta + "\n" + "Data nasterii: " + this.dataNasterii + "\n" + "Gen: " + this.gen + "\n" + "Specializare: " +
+        String x ="ID: " + this.ID + "\n" + "Nume: " + this.nume + "\n" + "Prenume: " + this.prenume + "\n" + "Varsta: " + this.varsta + "\n" + "Data nasterii: " + this.dataNasterii + "\n" + "Gen: " + this.gen + "\n" + "Specializare: " +
                 this.specializare + "\nInterval orar de lucru: " + this.oraStart + "-" + this.oraEnd + "\nLucreaza in ture: " + this.ture;
 
         return  x;
@@ -78,5 +78,10 @@ public class Asistent extends Persoana{
         else if(this.nume.compareTo(asistent.nume) < 0)
             return -1;
         else return 1;
+    }
+
+    public static String[] objectToString(Asistent a){
+        return new String[]{Integer.toString(a.ID), a.nume, a.prenume, a.dataNasterii, Integer.toString(a.varsta), a.gen, a.specializare, Double.toString(a.oraStart),
+                Double.toString(a.oraEnd), Boolean.toString(a.ture)};
     }
 }

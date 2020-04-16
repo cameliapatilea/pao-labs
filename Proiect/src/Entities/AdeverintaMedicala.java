@@ -41,4 +41,5 @@ public class AdeverintaMedicala extends Document{
            x+= "nu este apt pentru scopul mentionat mai sus";
        return x;
     }
+
 }

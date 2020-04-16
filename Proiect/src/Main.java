@@ -130,7 +130,7 @@ public class Main{
                                         System.out.println("Afectiuni: " + next[6]);
                                         System.out.println("==========================");
                                         listapb = new ArrayList<>(Arrays.asList(next[6].split(" ")));
-                                        Pacient p = pacientService.crearePacient(next[1], next[2], next[3], Integer.parseInt(next[4]), next[5], listapb);
+                                        Pacient p = pacientService.crearePacient(Integer.parseInt(next[0]), next[1], next[2], next[3], Integer.parseInt(next[4]), next[5], listapb);
                                         listaPacienti.add(p);
 
                                     }
@@ -148,6 +148,8 @@ public class Main{
                              PacientService ps = new PacientService();
                              Pacient p = new Pacient();
                              System.out.println("Pentru a adauga un pacient in baza de date, introduceti urmatoarele date:\n");
+                             System.out.println("ID: ");
+                             int id = scan.nextInt();
                              System.out.println("Nume: ");
                              String nume = scan.next();
                              System.out.println("Prenume");
@@ -168,7 +170,7 @@ public class Main{
                                     String afect = scan.next();
                                     listaAfectiuni.add(afect);
                                 }
-                             p = ps.crearePacient(nume,prenume,dataNasterii,varsta, gen, listaAfectiuni);
+                             p = ps.crearePacient(id, nume,prenume,dataNasterii,varsta, gen, listaAfectiuni);
                              listaPacienti.add(p);
                                 Collections.sort(listaPacienti);
 
@@ -190,7 +192,7 @@ public class Main{
                                     for(int i = 0; i < listaPacienti.size(); i++)
                                     {
                                         Pacient pacient = listaPacienti.get(i);
-                                        csvWriter.writeNext(new String[]{String.valueOf(i+1),pacient.getNume(), pacient.getPrenume(), pacient.getDataNasterii(),
+                                        csvWriter.writeNext(new String[]{Integer.toString(pacient.getID()),pacient.getNume(), pacient.getPrenume(), pacient.getDataNasterii(),
                                                 String.valueOf(pacient.getVarsta()), pacient.getGen(), String.join(" ",pacient.getAfectiuni())});
                                     }
                                 }
@@ -200,6 +202,8 @@ public class Main{
                             case 3: {
                                 System.out.println("Pentru a adauga o afectiune unui pacient, intai introduceti date despre pacientul respectiv");
 
+                                System.out.println("ID: ");
+                                int id = scan.nextInt();
                                 System.out.println("Nume: ");
                                 String nume = scan.next();
                                 System.out.println("Prenume");
@@ -221,7 +225,7 @@ public class Main{
                                 }
                                 System.out.println("Introduceti afectiunea pe care doriti sa o adaugati");
                                 String afect = scan.next();
-                                Pacient p = new Pacient(nume, prenume, dataNasterii, varsta, gen, listaAfectiuni);
+                                Pacient p = new Pacient(id, nume, prenume, dataNasterii, varsta, gen, listaAfectiuni);
                                 PacientService ps = new PacientService();
                                 p = ps.adaugaAfectiune(p, afect);
                                 System.out.println();
@@ -302,7 +306,7 @@ public class Main{
                                         System.out.println("Cod parafa: " + next[9]);
                                         System.out.println("==========================");
 
-                                        Medic m = medicService.creareMedic(next[1], next[2], next[3], Integer.parseInt(next[4]), next[5], next[6], Double.parseDouble(next[7]), Double.parseDouble(next[8]), Integer.parseInt(next[9]));
+                                        Medic m = medicService.creareMedic(Integer.parseInt(next[0]),next[1], next[2], next[3], Integer.parseInt(next[4]), next[5], next[6], Double.parseDouble(next[7]), Double.parseDouble(next[8]), Integer.parseInt(next[9]));
                                         medici.add(m);
 
                                     }
@@ -319,6 +323,8 @@ public class Main{
                             }
                             case 2: {
                                 System.out.println("Pentru a adauga un medic la lista introduceti datele despre medic:");
+                                System.out.println("ID: ");
+                                int id = scan.nextInt();
                                 System.out.println("Nume: ");
                                 String nume = scan.next();
                                 System.out.println("Prenume");
@@ -339,7 +345,7 @@ public class Main{
                                 int cod = scan.nextInt();
 
                                 MedicService m = new MedicService();
-                                Medic M = m.creareMedic(nume, prenume, dataNasterii, varsta, gen, spec, start, stop, cod);
+                                Medic M = m.creareMedic(id, nume, prenume, dataNasterii, varsta, gen, spec, start, stop, cod);
                                 System.out.println("Medicul adaugat: ");
                                 System.out.println(M.toString());
 
@@ -348,6 +354,8 @@ public class Main{
                             }
                             case 3: {
                                 System.out.println("Pentru a actualiza specializarea unui medic introduceti datele despre medic:");
+                                System.out.println("ID: ");
+                                int id = scan.nextInt();
                                 System.out.println("Nume: ");
                                 String nume = scan.next();
                                 System.out.println("Prenume");
@@ -370,7 +378,7 @@ public class Main{
                                 System.out.println("Introduceti noua specializare");
                                 String newSpecializare = scan.next();
                                 MedicService m = new MedicService();
-                                Medic M = m.creareMedic(nume, prenume, dataNasterii, varsta, gen, spec, start, stop, cod);
+                                Medic M = m.creareMedic(id,nume, prenume, dataNasterii, varsta, gen, spec, start, stop, cod);
                                 M = m.updateSpecialiare(M, newSpecializare);
                                 System.out.println("Medic actualizat:");
                                 System.out.println(M.toString());
@@ -378,6 +386,8 @@ public class Main{
                             }
                             case 4: {
                                 System.out.println("Pentru a actualiza varsta unui medic introduceti datele despre medic:");
+                                System.out.println("ID: ");
+                                int id = scan.nextInt();
                                 System.out.println("Nume: ");
                                 String nume = scan.next();
                                 System.out.println("Prenume");
@@ -400,7 +410,7 @@ public class Main{
                                 System.out.println("Introduceti noua varsta");
                                 int newVarsta = scan.nextInt();
                                 MedicService m = new MedicService();
-                                Medic M = m.creareMedic(nume, prenume, dataNasterii, varsta, gen, spec, start, stop, cod);
+                                Medic M = m.creareMedic(id, nume, prenume, dataNasterii, varsta, gen, spec, start, stop, cod);
                                 M = m.updateVarsta(M, newVarsta);
                                 System.out.println("Medic actualizat:");
                                 System.out.println(M.toString());
@@ -463,7 +473,7 @@ public class Main{
 
                                         System.out.println("==========================");
 
-                                        Asistent a = asistentService.creareAsistent(next[1], next[2], next[3], Integer.parseInt(next[4]), next[5], next[6], Double.parseDouble(next[7]), Double.parseDouble(next[8]), Boolean.parseBoolean(next[9]));
+                                        Asistent a = asistentService.creareAsistent(Integer.parseInt(next[0]), next[1], next[2], next[3], Integer.parseInt(next[4]), next[5], next[6], Double.parseDouble(next[7]), Double.parseDouble(next[8]), Boolean.parseBoolean(next[9]));
                                         listaAsistenti.add(a);
 
                                     }

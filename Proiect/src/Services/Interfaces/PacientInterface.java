@@ -14,6 +14,6 @@ public interface PacientInterface {
     Pacient updateNume(Pacient pacient, String nume);
     Pacient updateVarsta(Pacient pacient, int varsta);
     List<Pacient> adaugaPacientLaLista(Pacient pacient, List<Pacient> pacienti);
-    Pacient crearePacient(String nume, String prenume, String dataNasterii, int varsta,  String gen, List<String> afectiuni);
+    Pacient crearePacient(int id, String nume, String prenume, String dataNasterii, int varsta,  String gen, List<String> afectiuni);
 
 }

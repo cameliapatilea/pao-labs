@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AsistentInterface {
     Asistent getFromListById(List<Asistent> lista, int id);
-    Asistent creareAsistent(String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, boolean ture);
+    Asistent creareAsistent(int id, String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, boolean ture);
     Asistent updateVarsta(Asistent a, int varsta);
     Asistent updateSpecializare(Asistent a, String specializare);
     Asistent updateTure(Asistent a, boolean ture);

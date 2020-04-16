@@ -2,6 +2,7 @@ package Entities;
 
 public abstract class Persoana extends GeneralEntity{
 
+    protected int ID;
     protected String nume;
     protected String prenume;
     protected String dataNasterii;
@@ -14,17 +15,20 @@ public abstract class Persoana extends GeneralEntity{
         this.varsta = 0;
         this.gen = "";
     }
-    Persoana(String nume, String prenume){
+    Persoana(int ID, String nume, String prenume){
+        this.ID = ID;
         this.nume = nume;
         this.prenume = prenume;
     }
-    Persoana(String nume, String prenume, String dataNasterii, int varsta, String gen){
+    Persoana(int ID, String nume, String prenume, String dataNasterii, int varsta, String gen){
+        this.ID = ID;
         this.nume = nume;
         this.prenume = prenume;
         this.dataNasterii = dataNasterii;
         this.varsta = varsta;
         this.gen = gen;
     }
+    public void setID(int ID){this.ID = ID;}
     public void setNume(String nume){
         this.nume = nume;
     }
@@ -40,6 +44,7 @@ public abstract class Persoana extends GeneralEntity{
     public void setGen(String gen){
         this.gen = gen;
     }
+    public int getID(){return this.ID;}
     public String getNume(){
         return this.nume;
     }
@@ -56,4 +61,5 @@ public abstract class Persoana extends GeneralEntity{
         return this.gen;
     }
     public abstract void afiseaza();
+
 }

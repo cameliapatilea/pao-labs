@@ -16,8 +16,8 @@ public class MedicService implements MedicInterface {
     }
 
     @Override
-    public Medic creareMedic(String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, int codParafa) {
-        Medic m = new Medic(nume, prenume, dataNasterii, varsta, gen, specializare, oraStart, oraEnd, codParafa);
+    public Medic creareMedic(int id, String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, int codParafa) {
+        Medic m = new Medic(id, nume, prenume, dataNasterii, varsta, gen, specializare, oraStart, oraEnd, codParafa);
 
         return m;
     }

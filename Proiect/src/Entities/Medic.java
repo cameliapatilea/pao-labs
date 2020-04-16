@@ -19,12 +19,12 @@ public class Medic extends Persoana {
 
     }
 
-    Medic(String nume, String prenume, String specializare){
-        super(nume, prenume);
+    Medic(int ID, String nume, String prenume, String specializare){
+        super(ID, nume, prenume);
         this.specializare = specializare;
     }
-   public Medic(String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, int codParafa){
-        super(nume, prenume, dataNasterii, varsta, gen);
+   public Medic(int ID ,String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, int codParafa){
+        super(ID, nume, prenume, dataNasterii, varsta, gen);
         this.specializare = specializare;
         this.oraStart = oraStart;
         this.oraEnd = oraEnd;
@@ -58,7 +58,7 @@ public class Medic extends Persoana {
 
     @Override
     public String toString(){
-        String x =  "Nume: " + this.nume + "\n" + "Prenume: " + this.prenume + "\n" + "Varsta: " + this.varsta + "\n" + "Data nasterii: " + this.dataNasterii + "\n" + "Gen: " + this.gen + "\n" + "Specializare: " +
+        String x = "ID: " + this.ID + "\n" +  "Nume: " + this.nume + "\n" + "Prenume: " + this.prenume + "\n" + "Varsta: " + this.varsta + "\n" + "Data nasterii: " + this.dataNasterii + "\n" + "Gen: " + this.gen + "\n" + "Specializare: " +
                 this.specializare + "\nInterval orar de lucru: " + this.oraStart + "-" + this.oraEnd + "\nCod parafa: " + this.codParafa;
 
         return  x;
@@ -81,5 +81,9 @@ public class Medic extends Persoana {
         else if(this.nume.compareTo(m.nume) < 0)
             return -1;
         else return 1;
+    }
+    public static String[] objectToString(Medic m){
+        return new String[]{Integer.toString(m.ID), m.nume, m.prenume, m.dataNasterii, Integer.toString(m.varsta), m.gen, m.specializare, Double.toString(m.oraStart),
+        Double.toString(m.oraEnd), Integer.toString(m.codParafa)};
     }
 }
