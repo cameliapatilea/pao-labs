@@ -1,5 +1,6 @@
-﻿ID,nume,prenume,dataNasterii,varsta,gen,afectiuni
-1,popescu,maria,2/3/1980,40,masculin,diabet
-2,popescu,andrei,5/3/1980,40,feminin,diabet reumatism
-3,andrei,vlad,2/3/1980,40,masculin,astm
-4,popescu,andrei,2/3/1980,40,masculin,diabet reumatism astm
+ID,nume,prenume,dataNasterii,varsta,gen,afectiuni
+0,andrei,vlad,2/3/1980,40,masculin,astm
+1,popescu,andrei,5/3/1980,40,feminin,diabet reumatism
+2,popescu,andrei,2/3/1980,40,masculin,diabet reumatism astm
+3,popescu,maria,2/3/1980,40,masculin,diabet
+4,popescu,popescu,5/5/1980,40,masculin,raceala
