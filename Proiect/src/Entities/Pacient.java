@@ -1,6 +1,9 @@
 package Entities;
 
+import Services.Implementations.PacientService;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Pacient extends Persoana implements Comparable<Pacient>{
@@ -70,5 +73,12 @@ public class Pacient extends Persoana implements Comparable<Pacient>{
     public static String[] returnHeader(){
         String[] header = new String[]{"ID","nume","prenume","dataNasterii","varsta","gen","afectiuni"};
         return header;
+    }
+    public static Pacient getEntityFromList(List<String> p) {
+        List<String> afectiuni = new ArrayList<>(Arrays.asList(p.get(6)));
+        Pacient pacient = new Pacient(Integer.parseInt(p.get(0)),
+                p.get(1), p.get(2), p.get(3), Integer.parseInt(p.get(4)), p.get(5), afectiuni);
+
+        return pacient;
     }
 }

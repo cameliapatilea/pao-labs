@@ -119,11 +119,12 @@ public class Main{
                             List<List<String>> matr = ReadWriteService.citire(pacientiPath);
                             for(int i = 0; i < matr.size(); i++)
                             {
+                                Pacient p = Pacient.getEntityFromList(matr.get(i));
                                 System.out.println("Pacient: ");
-                                System.out.println(matr.get(i).toString());
+                                System.out.println(p.toString());
                                 System.out.println("==================================");
                             }
-                            ReadWriteService.afisare(pacientiPath, Pacient.returnHeader(), matr);
+                            //ReadWriteService.afisare(pacientiPath, Pacient.returnHeader(), matr);
                                 break;
                             }
 
