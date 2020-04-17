@@ -45,9 +45,9 @@ public class ConcediuMedical extends Document{
         return new String[]{Integer.toString(am.id), am.pacient.nume, am.pacient.prenume, am.pacient.dataNasterii, Integer.toString(am.pacient.varsta),
                 am.pacient.gen, am.eliberatDe, am.eliberatLa, Integer.toString(am.nrZileConcediu), am.dataFinal};
     }
-    public static String returnHeader(){
-        String header;
-        header = "ID,nume,prenume,dataNasterii,varsta,gen,eliberatDe,eliberatLa,ZileConcediu,dataFinal";
+    public static String[] returnHeader(){
+        String[] header;
+        header = new String[]{"ID","nume","prenume","dataNasterii","varsta","gen","eliberatDe","eliberatLa","ZileConcediu","dataFinal"};
         return header;
     }
 }

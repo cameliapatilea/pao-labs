@@ -84,9 +84,9 @@ public class Asistent extends Persoana{
         return new String[]{Integer.toString(a.ID), a.nume, a.prenume, a.dataNasterii, Integer.toString(a.varsta), a.gen, a.specializare, Double.toString(a.oraStart),
                 Double.toString(a.oraEnd), Boolean.toString(a.ture)};
     }
-    public static String returnHeader(){
-        String header;
-        header = "ID,nume,prenume,dataNasterii,varsta,gen,specializare,oraStart,oraEnd,ture";
+    public static String[] returnHeader(){
+        String[] header;
+        header = new String[]{ "ID","nume","prenume","dataNasterii","varsta","gen","specializare","oraStart","oraEnd","ture"};
         return header;
     }
 }

@@ -52,9 +52,9 @@ public class Reteta extends Document {
         return new String[]{Integer.toString(r.id), r.pacient.nume, r.pacient.prenume, r.pacient.dataNasterii, Integer.toString(r.pacient.varsta),
                 r.pacient.gen,String.join(" ", r.pacient.getAfectiuni()), r.eliberatDe, r.eliberatLa, r.parseMapToString(r.medicamente)};
     }
-    public static String returnHeader(){
-        String header;
-        header = "ID,nume,prenume,dataNasterii,varsta,gen,eliberatDe,eliberatLa,medicamente";
+    public static String[] returnHeader(){
+        String[] header;
+        header = new String[]{"ID","nume","prenume","dataNasterii","varsta","gen","eliberatDe","eliberatLa","medicamente"};
         return header;
     }
 }

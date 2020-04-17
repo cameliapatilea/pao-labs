@@ -86,9 +86,9 @@ public class Medic extends Persoana {
         return new String[]{Integer.toString(m.ID), m.nume, m.prenume, m.dataNasterii, Integer.toString(m.varsta), m.gen, m.specializare, Double.toString(m.oraStart),
         Double.toString(m.oraEnd), Integer.toString(m.codParafa)};
     }
-    public static String returnHeader(){
-        String header;
-        header = "ID,nume,prenume,dataNasterii,varsta,gen,specializare,oraStart,oraEnd,codParafa";
+    public static String[] returnHeader(){
+        String[] header;
+        header = new String[]{"ID","nume","prenume","dataNasterii","varsta","gen","specializare","oraStart","oraEnd","codParafa"};
         return header;
     }
 }
