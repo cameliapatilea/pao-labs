@@ -81,4 +81,21 @@ public class Pacient extends Persoana implements Comparable<Pacient>{
 
         return pacient;
     }
+    public static List<Pacient> getListFromCSV(List<List<String>> matr){
+        List<Pacient> pacienti = new ArrayList<>();
+        for(int i = 0; i < matr.size(); i++){
+            Pacient p = Pacient.getEntityFromList(matr.get(i));
+            pacienti.add(p);
+        }
+        return pacienti;
+    }
+    public static List<List<String>> listToCSV(List<Pacient> pacienti){
+        List<List<String>> matrCSV = new ArrayList<>();
+        for(int i = 0;  i < pacienti.size(); i++)
+        {
+            String[] arr = pacienti.get(i).objectToString(pacienti.get(i));
+            matrCSV.add(Arrays.asList(arr));
+        }
+        return matrCSV;
+    }
 }

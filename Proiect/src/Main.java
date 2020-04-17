@@ -31,6 +31,9 @@ public class Main{
    public  static PacientService pacientService;
    public  static List<String> listapb;
 
+    public static List<List<String>> matr;
+    public static  List<Pacient> pacienti;
+
     public static MedicService medicService;
     public static List<Medic> medici;
 
@@ -42,7 +45,9 @@ public class Main{
        listaPacienti = new ArrayList<Pacient>();
        pacientService = new PacientService();
        listapb = new ArrayList<String>();
+       pacienti = new ArrayList<>();
        Collections.sort(listaPacienti);
+
    }
 
     public static void afiseazaMeniu(){
@@ -116,15 +121,15 @@ public class Main{
                         switch (y) {
                             case 1: {
                                 System.out.println("Lista de pacienti este: ");
-                            List<List<String>> matr = ReadWriteService.citire(pacientiPath);
-                            for(int i = 0; i < matr.size(); i++)
+                            matr = ReadWriteService.citireCSV(pacientiPath);
+                            pacienti = Pacient.getListFromCSV(matr);
+                            for(int i = 0; i < pacienti.size(); i++)
                             {
-                                Pacient p = Pacient.getEntityFromList(matr.get(i));
-                                System.out.println("Pacient: ");
-                                System.out.println(p.toString());
-                                System.out.println("==================================");
+                                    System.out.println("Pacient: ");
+                                    System.out.println(pacienti.get(i).toString());
+                                    System.out.println("==================================");
                             }
-                            //ReadWriteService.afisare(pacientiPath, Pacient.returnHeader(), matr);
+                            ReadWriteService.scriereCSV(pacientiPath, Pacient.returnHeader(), Pacient.listToCSV(pacienti));
                                 break;
                             }
 

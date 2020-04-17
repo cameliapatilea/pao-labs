@@ -30,7 +30,7 @@ public class ReadWriteService{
             return instance;
         }
 
-        public static List<List<String>> citire(String caleFisier) throws IOException {
+        public static List<List<String>> citireCSV(String caleFisier) throws IOException {
            List<List<String>> matrice = new ArrayList<>();
             try (Reader reader = Files.newBufferedReader(Paths.get(caleFisier));
                  CSVReader csvReader = new CSVReader(reader);) {
@@ -44,7 +44,7 @@ public class ReadWriteService{
             return matrice;
         }
 
-        public static void afisare(String caleFisier, String[] header, List<List<String>> listaObiecte)throws IOException{
+        public static void scriereCSV(String caleFisier, String[] header, List<List<String>> listaObiecte)throws IOException{
             try (
                     Writer writer = Files.newBufferedWriter(Paths.get(caleFisier));
 
