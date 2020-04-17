@@ -67,8 +67,8 @@ public class Pacient extends Persoana implements Comparable<Pacient>{
         return new String[]{Integer.toString(pacient.ID), pacient.getNume(), pacient.getPrenume(), pacient.getDataNasterii(),
                 String.valueOf(pacient.getVarsta()), pacient.getGen(), String.join(" ", pacient.getAfectiuni())};
     }
-    public static String returnHeader(){
-        String header = "ID,nume,prenume,dataNasterii,varsta,gen,afectiuni";
+    public static String[] returnHeader(){
+        String[] header = new String[]{"ID","nume","prenume","dataNasterii","varsta","gen","afectiuni"};
         return header;
     }
 }

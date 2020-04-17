@@ -1,5 +1,6 @@
 import Entities.*;
 import Helpers.FileHelper;
+import Helpers.ReadWriteService;
 import Services.Implementations.AsistentService;
 import Services.Implementations.MedicService;
 import Services.Implementations.PacientService;
@@ -114,32 +115,15 @@ public class Main{
                     while (y != 0) {
                         switch (y) {
                             case 1: {
-
-                                try (Reader reader = Files.newBufferedReader(Paths.get(pacientiPath));
-                                     CSVReader csvReader = new CSVReader(reader);) {
-                                    System.out.println("Lista de pacienti este: \n");
-                                    String[] next;
-                                    next = csvReader.readNext();
-                                    while ((next = csvReader.readNext()) != null) {
-                                        System.out.println("ID : " + next[0]);
-                                        System.out.println("Nume : " + next[1]);
-                                        System.out.println("Prenume : " + next[2]);
-                                        System.out.println("Data nasterii : " + next[3]);
-                                        System.out.println("Varsta : " + next[4]);
-                                        System.out.println("Gen: " + next[5]);
-                                        System.out.println("Afectiuni: " + next[6]);
-                                        System.out.println("==========================");
-                                        listapb = new ArrayList<>(Arrays.asList(next[6].split(" ")));
-                                        Pacient p = pacientService.crearePacient(Integer.parseInt(next[0]), next[1], next[2], next[3], Integer.parseInt(next[4]), next[5], listapb);
-                                        listaPacienti.add(p);
-
-                                    }
-                                    System.out.println("Pacientii din lista sunt: ");
-                                    for (int i = 0; i < listaPacienti.size(); i++)
-                                        System.out.println(listaPacienti.get(i).toString());
-                                }
-
-
+                                System.out.println("Lista de pacienti este: ");
+                            List<List<String>> matr = ReadWriteService.citire(pacientiPath);
+                            for(int i = 0; i < matr.size(); i++)
+                            {
+                                System.out.println("Pacient: ");
+                                System.out.println(matr.get(i).toString());
+                                System.out.println("==================================");
+                            }
+                            ReadWriteService.afisare(pacientiPath, Pacient.returnHeader(), matr);
                                 break;
                             }
 
@@ -178,7 +162,8 @@ public class Main{
                                 for (int i = 0; i < listaPacienti.size(); i++)
                                     System.out.println(listaPacienti.get(i).toString());
 
-                                try (
+
+                               /* try (
                                         Writer writer = Files.newBufferedWriter(Paths.get(pacientiPath));
 
                                         CSVWriter csvWriter = new CSVWriter(writer,
@@ -194,7 +179,7 @@ public class Main{
                                         Pacient pacient = listaPacienti.get(i);
                                         csvWriter.writeNext(pacient.objectToString(pacient));
                                     }
-                                }
+                                }*/
                                 break;
                             }
 

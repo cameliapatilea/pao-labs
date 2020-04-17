@@ -1,9 +1,9 @@
 ID,nume,prenume,dataNasterii,varsta,gen,afectiuni
 1,andrei,stefan,5/6/1960,60,masculin,reumatism artrita
 2,andrei,vlad,2/3/1980,40,masculin,astm
-10,popa,andreea,6/6/1999,21,feminin,scolioza arahnofobie
+10,popa,andreea,6/6/1999,21,feminin,arahnofobie
 3,popescu,andrei,5/3/1980,40,feminin,diabet reumatism mate
 4,popescu,andrei,2/3/1980,40,masculin,diabet reumatism astm
 5,popescu,maria,2/3/1980,40,masculin,diabet
 6,popescu,popescu,5/5/1980,40,masculin,raceala
-10,popa,andreea,6/6/1999,21,feminin,scolioza raceala arahnofobie
+10,popa,andreea,6/6/1999,21,feminin,raceala arahnofobie
