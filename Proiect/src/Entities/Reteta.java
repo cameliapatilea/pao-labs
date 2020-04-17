@@ -41,4 +41,15 @@ public class Reteta extends Document {
        }
         return x;
     }
+    public static String parseMapToString(Map<String, Integer> m) {
+        String x = "";
+        for(Map.Entry<String,Integer> entry:m.entrySet()){
+            x += entry.getKey() + " ";
+        }
+        return x;
+    }
+    public static String[] objectToString(Reteta r){
+        return new String[]{Integer.toString(r.id), r.pacient.nume, r.pacient.prenume, r.pacient.dataNasterii, Integer.toString(r.pacient.varsta),
+                r.pacient.gen,String.join(" ", r.pacient.getAfectiuni()), r.eliberatDe, r.eliberatLa, r.parseMapToString(r.medicamente)};
+    }
 }

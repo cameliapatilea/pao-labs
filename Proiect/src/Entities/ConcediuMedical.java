@@ -40,4 +40,9 @@ public class ConcediuMedical extends Document{
                 "\n Cu valabilitate pana la data de " + this.dataFinal;
         return x;
     }
+
+    public static String[] objectToString(ConcediuMedical am){
+        return new String[]{Integer.toString(am.id), am.pacient.nume, am.pacient.prenume, am.pacient.dataNasterii, Integer.toString(am.pacient.varsta),
+                am.pacient.gen, am.eliberatDe, am.eliberatLa, Integer.toString(am.nrZileConcediu), am.dataFinal};
+    }
 }

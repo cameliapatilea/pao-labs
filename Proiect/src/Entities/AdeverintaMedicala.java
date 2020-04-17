@@ -41,5 +41,9 @@ public class AdeverintaMedicala extends Document{
            x+= "nu este apt pentru scopul mentionat mai sus";
        return x;
     }
+    public static String[] objectToString(AdeverintaMedicala am){
+        return new String[]{Integer.toString(am.id), am.pacient.nume, am.pacient.prenume, am.pacient.dataNasterii, Integer.toString(am.pacient.varsta),
+        am.pacient.gen, am.eliberatDe, am.eliberatLa, am.scop,  Boolean.toString(am.apt)};
+    }
 
 }

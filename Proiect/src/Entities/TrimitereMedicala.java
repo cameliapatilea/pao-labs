@@ -49,4 +49,8 @@ public class TrimitereMedicala extends Document{
                 + "\nCatre: " + this.catre;
         return x;
     }
+    public static String[] objectToString(TrimitereMedicala tm){
+        return new String[]{Integer.toString(tm.id), tm.pacient.nume, tm.pacient.prenume, tm.pacient.dataNasterii, Integer.toString(tm.pacient.varsta),
+        tm.pacient.gen, Integer.toString(tm.valabilitate), tm.scop, tm.catre, tm.eliberatDe, tm.eliberatLa};
+    }
 }
