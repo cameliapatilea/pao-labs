@@ -33,16 +33,32 @@ public class MedicService implements MedicInterface {
     }
 
     @Override
-    public Medic updateSpecialiare(Medic m, String specializare) {
-        m.setSpecializare(specializare);
-        return m;
+    public List<Medic> updateSpecialiare(int id,List<Medic> medici, String specializare) {
+        for(int i = 0; i < medici.size(); i++)
+
+        {
+            if(medici.get(i).getID() == id)
+                medici.get(i).setSpecializare(specializare);
+        }
+
+        return medici;
     }
 
     @Override
-    public Medic updateVarsta(Medic m, int varsta) {
-        m.setVarsta(varsta);
-        return m;
+    public List<Medic> updateVarsta(int id, List<Medic> medici, int varsta, String dataNasterii) {
+        for(int i = 0; i < medici.size(); i++)
+
+        {
+            if(medici.get(i).getID() == id)
+            {
+                medici.get(i).setVarsta(varsta);
+                medici.get(i).setDataNasterii(dataNasterii);
+            }
+        }
+
+        return medici;
     }
+
 
     @Override
     public Medic updateNume(Medic m, String nume) {
@@ -70,7 +86,8 @@ public class MedicService implements MedicInterface {
             {
                 x+= medici.get(i).getOraStart();
                 y+= medici.get(i).getOraEnd();
+                break;
             }
-        return "Intervalul orar in care lucreaza medicul este" + x + "-" + y;
+        return  x + "-" + y;
     }
 }
