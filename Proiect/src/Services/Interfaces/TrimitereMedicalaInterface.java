@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface TrimitereMedicalaInterface {
     TrimitereMedicala creareTrimitere(Pacient pacient, String eliberatDe, String eliberatLa, int valabilitate, String scop, String catre);
+    void afiseazaTrimiteri(List<TrimitereMedicala> trimiteri);
     TrimitereMedicala getFromListById(List<TrimitereMedicala> lista, int id);
     List<TrimitereMedicala> getAllTrimiteri(List<TrimitereMedicala> lista);
     TrimitereMedicala updateScop(TrimitereMedicala tm, String scop);

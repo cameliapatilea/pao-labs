@@ -1,5 +1,6 @@
-﻿ID,nume,prenume,dataNasterii,varsta,gen,specializare,oraStart,oraEnd,codParafa
-1,popescu,andrei,2/3/1980,40,masculin,cardiologie,9,14,123456789
-2,iordache,stefan,4/30/1997,23,masculin,reumatologie,12,18,987654
-3,vlad,maricica,12/3/1975,45,feminin,dermatologie,13,17,456123
-4,andronache,mirela,5/5/1985,35,feminin,neurologie,10,16,741852963
+ID,nume,prenume,dataNasterii,varsta,gen,specializare,oraStart,oraEnd,codParafa
+1,popescu,andrei,2/3/1980,40,masculin,cardiologie,9.0,14.0,123456789
+2,iordache,stefan,4/30/1997,23,masculin,reumatologie,12.0,18.0,987654
+3,vlad,maricica,12/3/1975,45,feminin,dermatologie,13.0,17.0,456123
+4,andronache,mirela,5/5/1985,35,feminin,neurologie,10.0,16.0,741852963
+6,papa,noel,5/6/1960,60,masculin,radiologie,10.0,14.0,748596

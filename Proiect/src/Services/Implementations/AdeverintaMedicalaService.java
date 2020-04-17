@@ -18,6 +18,16 @@ public class AdeverintaMedicalaService implements AdeverintaMedicalaInterface {
     }
 
     @Override
+    public void afiseazaAdeverinte(List<AdeverintaMedicala> adeverinte) {
+        for(int i = 0; i < adeverinte.size(); i++)
+        {
+            System.out.println("Adeverinte medicale: ");
+            System.out.println(adeverinte.get(i).toString());
+            System.out.println("==================================");
+        }
+    }
+
+    @Override
     public AdeverintaMedicala creareAdeverinta(Pacient pacient, String eliberatDe, String eliberatLa, boolean apt, String scop) {
        AdeverintaMedicala am = new AdeverintaMedicala(pacient, eliberatDe, eliberatLa, apt, scop);
        return am;

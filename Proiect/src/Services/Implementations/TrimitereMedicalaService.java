@@ -14,6 +14,16 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     }
 
     @Override
+    public void afiseazaTrimiteri(List<TrimitereMedicala> trimiteri) {
+        for(int i = 0; i < trimiteri.size(); i++)
+        {
+            System.out.println("Trimiteri medicale: ");
+            System.out.println(trimiteri.get(i).toString());
+            System.out.println("==================================");
+        }
+    }
+
+    @Override
     public TrimitereMedicala getFromListById(List<TrimitereMedicala> lista, int id) {
         for(int i = 0; i < lista.size(); i++)
             if(lista.get(i).getId() == id)

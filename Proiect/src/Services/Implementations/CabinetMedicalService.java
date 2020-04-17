@@ -19,6 +19,16 @@ public class CabinetMedicalService implements CabinetMedicalInterface {
     }
 
     @Override
+    public void afiseazaCabinet(List<CabinetMedical> cm) {
+        for(int i = 0; i < cm.size(); i++)
+        {
+            System.out.println("Cabinet medical: ");
+            System.out.println(cm.get(i).toString());
+            System.out.println("==================================");
+        }
+    }
+
+    @Override
     public String getIntervalFunctionare(CabinetMedical cab) {
         return "Intervalul orar in care cabinetul este deschis este: " + cab.getOraInceput() + "-" + cab.getOraStop();
     }

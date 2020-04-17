@@ -7,6 +7,7 @@ import java.util.List;
 public interface PacientInterface {
     Pacient getFromListById(List<Pacient> lista, int id);
     List<Pacient> adaugaAfectiune(int id, List<Pacient> pacienti, String afectiune);
+    void afiseazaPacienti(List<Pacient> pacienti);
     Pacient adaugaAfectiuni(Pacient pacient, List<String> afectiuni);
     Pacient updateAfectiune(Pacient pacient, String afectiuneVeche, String afectiuneNoua);
     List<Pacient> stergeAfectiune(int id, List<Pacient> pacienti , String afectiune);

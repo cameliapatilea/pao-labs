@@ -16,6 +16,16 @@ public class MedicService implements MedicInterface {
     }
 
     @Override
+    public void afiseazaMedici(List<Medic> medici) {
+        for(int i = 0; i < medici.size(); i++)
+        {
+            System.out.println("Pacient: ");
+            System.out.println(medici.get(i).toString());
+            System.out.println("==================================");
+        }
+    }
+
+    @Override
     public Medic creareMedic(int id, String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, int codParafa) {
         Medic m = new Medic(id, nume, prenume, dataNasterii, varsta, gen, specializare, oraStart, oraEnd, codParafa);
 

@@ -29,6 +29,16 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     }
 
     @Override
+    public void afiseazaPacienti(List<Pacient> pacienti) {
+        for(int i = 0; i < pacienti.size(); i++)
+        {
+            System.out.println("Pacient: ");
+            System.out.println(pacienti.get(i).toString());
+            System.out.println("==================================");
+        }
+    }
+
+    @Override
     public Pacient adaugaAfectiuni(Pacient pacient, List<String> afectiuni) {
     pacient.getAfectiuni().addAll(afectiuni);
 

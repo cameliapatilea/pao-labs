@@ -1,5 +1,9 @@
 package Entities;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Medic extends Persoana {
     private String specializare;
     private double oraStart;
@@ -90,5 +94,29 @@ public class Medic extends Persoana {
         String[] header;
         header = new String[]{"ID","nume","prenume","dataNasterii","varsta","gen","specializare","oraStart","oraEnd","codParafa"};
         return header;
+    }
+    public static Medic  getEntityFromList(List<String> p) {
+
+        Medic medic = new Medic(Integer.parseInt(p.get(0)),
+                p.get(1), p.get(2), p.get(3), Integer.parseInt(p.get(4)), p.get(5), p.get(6), Double.parseDouble(p.get(7)), Double.parseDouble(p.get(8)), Integer.parseInt(p.get(9)));
+
+        return medic;
+    }
+    public static List<Medic> getListFromCSV(List<List<String>> matr){
+        List<Medic> medici = new ArrayList<>();
+        for(int i = 0; i < matr.size(); i++){
+            Medic m = Medic.getEntityFromList(matr.get(i));
+            medici.add(m);
+        }
+        return medici;
+    }
+    public static List<List<String>> listToCSV(List<Medic> medici){
+        List<List<String>> matrCSV = new ArrayList<>();
+        for(int i = 0;  i < medici.size(); i++)
+        {
+            String[] arr = medici.get(i).objectToString(medici.get(i));
+            matrCSV.add(Arrays.asList(arr));
+        }
+        return matrCSV;
     }
 }

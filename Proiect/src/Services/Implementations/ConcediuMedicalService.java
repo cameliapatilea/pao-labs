@@ -18,6 +18,16 @@ public class ConcediuMedicalService implements ConcediuMedicalInterface {
     }
 
     @Override
+    public void afiseazaConcedii(List<ConcediuMedical> concedii) {
+        for(int i = 0; i < concedii.size(); i++)
+        {
+            System.out.println("Concedii medicale: ");
+            System.out.println(concedii.get(i).toString());
+            System.out.println("==================================");
+        }
+    }
+
+    @Override
     public ConcediuMedical creareCerereConcediu(Pacient pacient, String eliberatDe, String eliberatLa, int nrZileConcediu, String dataFinal) {
         ConcediuMedical cm = new ConcediuMedical(pacient, eliberatDe, eliberatLa, nrZileConcediu, dataFinal);
         return cm;

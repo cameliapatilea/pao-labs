@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface MedicInterface {
     Medic getFromListById(List<Medic> lista, int id);
+    void afiseazaMedici(List<Medic> medici);
     Medic creareMedic(int id, String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, int codParafa);
     Medic updateSpecialiare(Medic m, String specializare);
     Medic updateVarsta(Medic m, int varsta);

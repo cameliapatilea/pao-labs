@@ -18,6 +18,16 @@ public class RetetaService implements RetetaInterface {
     }
 
     @Override
+    public void afiseazaRetete(List<Reteta> retete) {
+        for(int i = 0; i < retete.size(); i++)
+        {
+            System.out.println("Retete: ");
+            System.out.println(retete.get(i).toString());
+            System.out.println("==================================");
+        }
+    }
+
+    @Override
     public Reteta creareReteta(Pacient pacient, String eliberatDe, String eliberatLa, Map<String, Integer> medicamente) {
        Reteta r = new Reteta( pacient,eliberatDe,  eliberatLa,medicamente);
        return r;

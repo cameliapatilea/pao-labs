@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface CabinetMedicalInterface {
         CabinetMedical getFromListById(List<CabinetMedical> lista, int id);
+        void afiseazaCabinet(List<CabinetMedical> cm);
         String getIntervalFunctionare(CabinetMedical cab);
         String getAdresaCabinet(CabinetMedical cab);
         String getMedici(List<Medic> listaMedici);

@@ -16,6 +16,16 @@ public class AsistentService implements AsistentInterface {
     }
 
     @Override
+    public void afiseazaAsistenti(List<Asistent> asistenti) {
+        for(int i = 0; i < asistenti.size(); i++)
+        {
+            System.out.println("Asistenti: ");
+            System.out.println(asistenti.get(i).toString());
+            System.out.println("==================================");
+        }
+    }
+
+    @Override
     public Asistent creareAsistent(int id, String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, boolean ture) {
        Asistent a = new Asistent(id, nume, prenume, dataNasterii, varsta, gen, specializare, oraStart, oraEnd, ture);
        return a;
