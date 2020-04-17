@@ -27,7 +27,7 @@ public class Main{
     private static final String trimiteriPath = FileHelper.getFullPath("src/excel/trimiteriMedicale.csv");
     private static final String concediiPath = FileHelper.getFullPath("src/excel/concediuMedical.csv");
 
-   public  static List<Pacient> listaPacienti;
+
    public  static PacientService pacientService;
    public  static List<String> listapb;
 
@@ -42,11 +42,11 @@ public class Main{
 
 
    public static void initializeazaPacienti(){
-       listaPacienti = new ArrayList<Pacient>();
+
        pacientService = new PacientService();
        listapb = new ArrayList<String>();
        pacienti = new ArrayList<>();
-       Collections.sort(listaPacienti);
+       Collections.sort(pacienti);
 
    }
 
@@ -129,7 +129,7 @@ public class Main{
                                     System.out.println(pacienti.get(i).toString());
                                     System.out.println("==================================");
                             }
-                            ReadWriteService.scriereCSV(pacientiPath, Pacient.returnHeader(), Pacient.listToCSV(pacienti));
+
                                 break;
                             }
 
@@ -161,31 +161,11 @@ public class Main{
                                     listaAfectiuni.add(afect);
                                 }
                              p = ps.crearePacient(id, nume,prenume,dataNasterii,varsta, gen, listaAfectiuni);
-                             listaPacienti.add(p);
-                                Collections.sort(listaPacienti);
-
-                                System.out.println("Pacientii din lista dupa adaugare sunt: ");
-                                for (int i = 0; i < listaPacienti.size(); i++)
-                                    System.out.println(listaPacienti.get(i).toString());
+                             pacienti.add(p);
+                                Collections.sort(pacienti);
+                                ReadWriteService.scriereCSV(pacientiPath, Pacient.returnHeader(), Pacient.listToCSV(pacienti));
 
 
-                               /* try (
-                                        Writer writer = Files.newBufferedWriter(Paths.get(pacientiPath));
-
-                                        CSVWriter csvWriter = new CSVWriter(writer,
-                                                CSVWriter.DEFAULT_SEPARATOR,
-                                                CSVWriter.NO_QUOTE_CHARACTER,
-                                                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-                                                CSVWriter.DEFAULT_LINE_END);
-                                ){
-                                    String[] header = { "ID","nume", "prenume", "dataNasterii", "varsta", "gen", "afectiuni"};
-                                    csvWriter.writeNext(header);
-                                    for(int i = 0; i < listaPacienti.size(); i++)
-                                    {
-                                        Pacient pacient = listaPacienti.get(i);
-                                        csvWriter.writeNext(pacient.objectToString(pacient));
-                                    }
-                                }*/
                                 break;
                             }
 
@@ -203,32 +183,11 @@ public class Main{
                                 System.out.println("Introduceti afectiunea pe care doriti sa o adaugati");
                                 String afect = scan.next();
 
-                                listaPacienti = p.adaugaAfectiune(id, listaPacienti, afect);
-
-
+                                pacienti = p.adaugaAfectiune(id, pacienti, afect);
 
                                 System.out.println("====================================================");
-                                for (int i = 0; i < listaPacienti.size(); i++)
-                                    System.out.println(listaPacienti.get(i).toString());
 
-
-                                try (
-                                        Writer writer = Files.newBufferedWriter(Paths.get(pacientiPath));
-
-                                        CSVWriter csvWriter = new CSVWriter(writer,
-                                                CSVWriter.DEFAULT_SEPARATOR,
-                                                CSVWriter.NO_QUOTE_CHARACTER,
-                                                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-                                                CSVWriter.DEFAULT_LINE_END);
-                                ){
-                                    String[] header = { "ID","nume", "prenume", "dataNasterii", "varsta", "gen", "afectiuni"};
-                                    csvWriter.writeNext(header);
-                                    for(int i = 0; i < listaPacienti.size(); i++)
-                                    {
-                                        Pacient pacient = listaPacienti.get(i);
-                                        csvWriter.writeNext(pacient.objectToString(pacient));
-                                    }
-                                }
+                                ReadWriteService.scriereCSV(pacientiPath, Pacient.returnHeader(), Pacient.listToCSV(pacienti));
                                 break;
                             }
 
@@ -245,30 +204,9 @@ public class Main{
                                 System.out.println("Introduceti afectiunea pe care doriti sa o stergeti");
                                 String afect = scan.next();
                                 PacientService ps = new PacientService();
-                                listaPacienti = ps.stergeAfectiune(id, listaPacienti, afect);
+                                pacienti = ps.stergeAfectiune(id, pacienti, afect);
 
-                                for(int i = 0; i < listaPacienti.size(); i++)
-                                    System.out.println(listaPacienti.get(i).toString());
-
-
-                                try (
-                                        Writer writer = Files.newBufferedWriter(Paths.get(pacientiPath));
-
-                                        CSVWriter csvWriter = new CSVWriter(writer,
-                                                CSVWriter.DEFAULT_SEPARATOR,
-                                                CSVWriter.NO_QUOTE_CHARACTER,
-                                                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-                                                CSVWriter.DEFAULT_LINE_END);
-                                ){
-                                    String[] header = { "ID","nume", "prenume", "dataNasterii", "varsta", "gen", "afectiuni"};
-                                    csvWriter.writeNext(header);
-                                    for(int i = 0; i < listaPacienti.size(); i++)
-                                    {
-                                        Pacient pacient = listaPacienti.get(i);
-                                        csvWriter.writeNext(pacient.objectToString(pacient));
-                                    }
-                                }
-
+                                ReadWriteService.scriereCSV(pacientiPath, Pacient.returnHeader(), Pacient.listToCSV(pacienti));
 
                                 break;
                             }
