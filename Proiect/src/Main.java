@@ -442,9 +442,30 @@ public class Main{
 
                             }break;
                             case 4:{
+                                matrAsistenti = ReadWriteService.citireCSV(asistentiPath);
+                                listaAsistenti = Asistent.getListFromCSV(matrAsistenti);
 
+                                System.out.println("Pentru a afisa intervalul orar in care este asistentul la cabinet, introduceti urmatoarele date:");
+                                System.out.println("ID: ");
+                                int id = scan.nextInt();
+                                System.out.println("Nume");
+                                String nume = scan.next();
+                                System.out.println("Prenume");
+                                String prenume = scan.next();
+
+                                String intervalOrar = asistentService.afiseazaProgram(nume, prenume, listaAsistenti);
+                                System.out.println("Asistentul  " + nume + " " + prenume + " lucreaza in intervalul orar urmator");
+                                System.out.println(intervalOrar);
                             }break;
                             case 5:{
+                                matrAsistenti = ReadWriteService.citireCSV(asistentiPath);
+                                listaAsistenti = Asistent.getListFromCSV(matrAsistenti);
+
+                                System.out.println("Pentru a gasi un asistent cu o anumita specializare, introduceti numele specializarii:");
+                                String spec = scan.next();
+                                Asistent a = asistentService.getAsistentBySpecializare(listaAsistenti, spec);
+                                System.out.println("Asistentul cu specializarea " + spec + " este:");
+                                System.out.println(a.toString());
 
                             }break;
                         }

@@ -56,9 +56,15 @@ public class AsistentService implements AsistentInterface {
     }
 
     @Override
-    public String afiseazaProgram(Asistent a) {
-        return "Intervalul orar in care lucreaza asistentul este: " + a.getOraStart() + "-" + a.getOraEnd();
+    public String afiseazaProgram(String nume, String prenume, List<Asistent> asistenti) {
+        String rasp = "";
+        for(int i = 0; i <  asistenti.size(); i++)
+            if (asistenti.get(i).getNume().compareTo(nume) == 0 && asistenti.get(i).getPrenume().compareTo(prenume) == 0)
+                rasp =  asistenti.get(i).getOraStart() + "-" + asistenti.get(i).getOraEnd();
+
+            return rasp;
     }
+
 
     @Override
     public String afiseazaSpecializare(Asistent a) {
