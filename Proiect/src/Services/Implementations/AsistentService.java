@@ -38,9 +38,15 @@ public class AsistentService implements AsistentInterface {
     }
 
     @Override
-    public Asistent updateSpecializare(Asistent a, String specializare) {
-        a.setSpecializare(specializare);
-        return a;
+    public List<Asistent> updateSpecializare(int id, List<Asistent> asistenti,  String specializare) {
+        for(int i = 0; i < asistenti.size(); i++)
+
+        {
+            if(asistenti.get(i).getID() == id)
+                asistenti.get(i).setSpecializare(specializare);
+        }
+
+        return asistenti;
     }
 
     @Override

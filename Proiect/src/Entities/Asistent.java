@@ -1,5 +1,9 @@
 package Entities;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Asistent extends Persoana{
     private String specializare;
     private double oraStart;
@@ -88,5 +92,29 @@ public class Asistent extends Persoana{
         String[] header;
         header = new String[]{ "ID","nume","prenume","dataNasterii","varsta","gen","specializare","oraStart","oraEnd","ture"};
         return header;
+    }
+    public static Asistent getEntityFromList(List<String> p) {
+
+        Asistent asistent = new Asistent(Integer.parseInt(p.get(0)),
+                p.get(1), p.get(2), p.get(3), Integer.parseInt(p.get(4)), p.get(5), p.get(6), Double.parseDouble(p.get(7)), Double.parseDouble(p.get(8)), Boolean.parseBoolean(p.get(9)));
+
+        return asistent;
+    }
+    public static List<Asistent> getListFromCSV(List<List<String>> matr){
+        List<Asistent> asistenti = new ArrayList<>();
+        for(int i = 0; i < matr.size(); i++){
+            Asistent a = Asistent.getEntityFromList(matr.get(i));
+            asistenti.add(a);
+        }
+        return asistenti;
+    }
+    public static List<List<String>> listToCSV(List<Asistent> asistenti){
+        List<List<String>> matrCSV = new ArrayList<>();
+        for(int i = 0;  i < asistenti.size(); i++)
+        {
+            String[] arr = asistenti.get(i).objectToString(asistenti.get(i));
+            matrCSV.add(Arrays.asList(arr));
+        }
+        return matrCSV;
     }
 }

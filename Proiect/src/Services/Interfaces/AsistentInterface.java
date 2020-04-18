@@ -9,7 +9,7 @@ public interface AsistentInterface {
     void afiseazaAsistenti(List<Asistent> asistenti);
     Asistent creareAsistent(int id, String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, boolean ture);
     Asistent updateVarsta(Asistent a, int varsta);
-    Asistent updateSpecializare(Asistent a, String specializare);
+    List<Asistent> updateSpecializare(int id, List<Asistent> asistenti,  String specializare);
     Asistent updateTure(Asistent a, boolean ture);
     String afiseazaProgram(Asistent a);
     String afiseazaSpecializare(Asistent a);
