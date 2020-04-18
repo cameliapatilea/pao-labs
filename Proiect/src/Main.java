@@ -1,10 +1,7 @@
 import Entities.*;
 import Helpers.FileHelper;
 import Helpers.ReadWriteService;
-import Services.Implementations.AsistentService;
-import Services.Implementations.MedicService;
-import Services.Implementations.PacientService;
-import Services.Implementations.RetetaService;
+import Services.Implementations.*;
 import Services.Interfaces.PacientInterface;
 import com.opencsv.CSVWriter;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
@@ -28,9 +25,8 @@ public class Main{
     private static final String concediiPath = FileHelper.getFullPath("src/excel/concediuMedical.csv");
 
 
-   public  static PacientService pacientService;
-   public  static List<String> listapb;
-
+    public  static PacientService pacientService;
+    public  static List<String> listapb;
     public static List<List<String>> matrPacienti;
     public static  List<Pacient> pacienti;
 
@@ -38,8 +34,29 @@ public class Main{
     public static List<List<String>> matrMedici;
     public static List<Medic> medici;
 
+    public static List<List<String>> matrAsistenti;
     public static List<Asistent> listaAsistenti;
     public static AsistentService asistentService;
+
+    public static List<List<String>> matrRetete;
+    public static RetetaService retetaService;
+    public static List<Reteta> listaRetete;
+
+    public static List<List<AdeverintaMedicala>> matrAdeverinte;
+    public static List<AdeverintaMedicala> listaAdeverinte;
+    public static AdeverintaMedicalaService adeverintaService;
+
+    public static List<List<TrimitereMedicala>> matrTrimiteri;
+    public static List<TrimitereMedicala> listaTrimiteri;
+    public static TrimitereMedicalaService trimitereService;
+
+    public static List<List<ConcediuMedical>> matrConcedii;
+    public static List<ConcediuMedical> listaConcedii;
+    public static ConcediuMedicalService concediuService;
+
+    public static List<List<CabinetMedical>> matrCabinet;
+    public static List<CabinetMedical> listaCabinet;
+    public static CabinetMedicalService cabinetService;
 
 
    public static void initializeazaPacienti(){
@@ -50,6 +67,38 @@ public class Main{
        Collections.sort(pacienti);
 
    }
+    public static void initializeazaMedici(){
+        medicService = new MedicService();
+        medici = new ArrayList<>();
+
+
+    }
+    public static void initializeazaAsistenti(){
+        listaAsistenti = new ArrayList<Asistent>();
+        asistentService = new AsistentService();
+    }
+
+    public static void initializeazRetete(){
+        listaRetete = new ArrayList<Reteta>();
+        retetaService = new RetetaService();
+    }
+    public static void initializeazaAdeverinte(){
+        listaAdeverinte = new ArrayList<AdeverintaMedicala>();
+        adeverintaService = new AdeverintaMedicalaService();
+    }
+    public static void initializeazaTrimiteri(){
+       listaTrimiteri = new ArrayList<>();
+       trimitereService = new TrimitereMedicalaService();
+    }
+    public static void initializeazaConcedii(){
+       listaConcedii = new ArrayList<>();
+       concediuService = new ConcediuMedicalService();
+    }
+    public static void initializeazaCabinet(){
+       listaCabinet = new ArrayList<>();
+       cabinetService = new CabinetMedicalService();
+    }
+
 
     public static void afiseazaMeniu(){
         System.out.println("Bine ati venit. Introduceti una din comenzile de mai jos, in functie de actiunea pe care o doriti.");
@@ -63,48 +112,36 @@ public class Main{
         System.out.println("Pentru a accesa datele despre cabinetul medical, introduceti 8");
     }
 
-    public static void initializeazaMedici(){
-        medicService = new MedicService();
-
-    }
-    public static void initializeazaAsistenti(){
-        listaAsistenti = new ArrayList<Asistent>();
-         asistentService = new AsistentService();
-   }
 
 
     public static void main(String[] args) throws IOException {
         Scanner scan = new Scanner(System.in);
         afiseazaMeniu();
 
-
         //pacienti - lista locala pentru a extrage datele din csv
         initializeazaPacienti();
-
-
 
         //lista medici - pt a extrage datele din csv
         initializeazaMedici();
 
-
         //lista asistenti pt a extrage datele din csv
         initializeazaAsistenti();
 
-
-        //lista retete- date din csv
-        List<Reteta> listaRetete = new ArrayList<Reteta>();
+        //lista retete- pt extragere date din csv
+        initializeazRetete();
 
         //lista adeverinte medicale
-        List<AdeverintaMedicala> listaAdeverinte = new ArrayList<AdeverintaMedicala>();
+        initializeazaAdeverinte();
 
         //lista concedii medicale
-        List<ConcediuMedical> listaConcedii = new ArrayList<ConcediuMedical>();
+        initializeazaConcedii();
 
         //lista trimiteri medicale
-        List<TrimitereMedicala> listaTrimiteri = new ArrayList<TrimitereMedicala>();
+        initializeazaTrimiteri();
 
+        //lista cabinet- date din csv
+        initializeazaCabinet();
 
-        //citeste comanda
         int x = scan.nextInt();
         while(x!=0) {
 
@@ -121,7 +158,7 @@ public class Main{
                     while (y != 0) {
                         switch (y) {
                             case 1: {
-                                System.out.println("Lista de pacienti este: ");
+                            System.out.println("Lista de pacienti este: ");
                             matrPacienti = ReadWriteService.citireCSV(pacientiPath);
                             pacienti = Pacient.getListFromCSV(matrPacienti);
                             pacientService.afiseazaPacienti(pacienti);
@@ -129,6 +166,8 @@ public class Main{
                             }
                             case 2:
                             {
+                             matrPacienti = ReadWriteService.citireCSV(pacientiPath);
+                             pacienti = Pacient.getListFromCSV(matrPacienti);
                              PacientService ps = new PacientService();
                              Pacient p = new Pacient();
                              System.out.println("Pentru a adauga un pacient in baza de date, introduceti urmatoarele date:\n");
@@ -159,10 +198,13 @@ public class Main{
                                 Collections.sort(pacienti);
                                 ReadWriteService.scriereCSV(pacientiPath, Pacient.returnHeader(), Pacient.listToCSV(pacienti));
 
-
                                 break;
                             }
                             case 3: {
+
+                                matrPacienti = ReadWriteService.citireCSV(pacientiPath);
+                                pacienti = Pacient.getListFromCSV(matrPacienti);
+
                                 System.out.println("Pentru a adauga o afectiune unui pacient, intai introduceti id-ul si numele pacientului");
 
                                 System.out.println("ID: ");
@@ -185,6 +227,9 @@ public class Main{
                             }
                             case 4:
                             {
+                                matrPacienti = ReadWriteService.citireCSV(pacientiPath);
+                                pacienti = Pacient.getListFromCSV(matrPacienti);
+                                
                                 System.out.println("Pentru a sterge una din afectiunile unui pacient, introduceti intai datele despre pacient");
                                 System.out.println("ID: ");
                                 int id = scan.nextInt();
@@ -261,7 +306,6 @@ public class Main{
 
                                 ReadWriteService.scriereCSV(mediciPath, Medic.returnHeader(), Medic.listToCSV(medici));
 
-
                                 break;
                             }
                             case 3: {
@@ -275,7 +319,6 @@ public class Main{
                                 String nume = scan.next();
                                 System.out.println("Prenume");
                                 String prenume = scan.next();
-
 
                                 System.out.println("Introduceti noua specializare");
                                 String newSpecializare = scan.next();
@@ -297,7 +340,6 @@ public class Main{
                                 System.out.println("Prenume");
                                 String prenume = scan.next();
 
-
                                 System.out.println("Introduceti noua varsta");
                                 int newVarsta = scan.nextInt();
                                 System.out.println("Introduceti noua data de nastere");
@@ -306,12 +348,12 @@ public class Main{
                                 medici = m.updateVarsta(id, medici, newVarsta, newDataNasterii);
                                 ReadWriteService.scriereCSV(mediciPath, Medic.returnHeader(), Medic.listToCSV(medici));
 
-
                                 break;
                             }
                             case 5: {
                                 matrMedici = ReadWriteService.citireCSV(mediciPath);
                                 medici = Medic.getListFromCSV(matrMedici);
+                                MedicService m = new MedicService();
 
                                 System.out.println("Pentru a afisa intervalul orar in care este medicul la cabinet, introduceti urmatoarele date:");
                                 System.out.println("ID: ");
@@ -321,17 +363,12 @@ public class Main{
                                 System.out.println("Prenume");
                                 String prenume = scan.next();
 
-
-                                MedicService m = new MedicService();
-
                                 String intervalOrar = m.afiseazaIntervalOrar(nume, prenume, medici);
                                 System.out.println("Medicul: " + nume + " " + prenume + " lucreaza in intervalul orar urmator");
                                 System.out.println(" " + intervalOrar);
                                 break;
 
                             }
-
-
                         }
                         System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");
                         y = scan.nextInt();
@@ -352,37 +389,16 @@ public class Main{
                         switch (y) {
                             case 1: {
 
-                                try (Reader reader = Files.newBufferedReader(Paths.get(asistentiPath));
-                                     CSVReader csvReader = new CSVReader(reader);) {
-                                    System.out.println("Lista de asistenti deja existenti este: ");
-                                    String[] next;
-                                    next = csvReader.readNext();
-                                    while ((next = csvReader.readNext()) != null) {
-                                        System.out.println("ID : " + next[0]);
-                                        System.out.println("Nume : " + next[1]);
-                                        System.out.println("Prenume : " + next[2]);
-                                        System.out.println("Data nasterii : " + next[3]);
-                                        System.out.println("Varsta : " + next[4]);
-                                        System.out.println("Gen: " + next[5]);
-                                        System.out.println("Specializare: " + next[6]);
-                                        System.out.println("Ora la care incepe: " + next[7]);
-                                        System.out.println("Ora la care termina: " + next[8]);
-                                        if(next[9] == "TRUE")
-                                            System.out.println("Lucreaza in ture");
-                                        else System.out.println("Nu lucreaza in ture");
-
-                                        System.out.println("==========================");
-
-                                        Asistent a = asistentService.creareAsistent(Integer.parseInt(next[0]), next[1], next[2], next[3], Integer.parseInt(next[4]), next[5], next[6], Double.parseDouble(next[7]), Double.parseDouble(next[8]), Boolean.parseBoolean(next[9]));
-                                        listaAsistenti.add(a);
-
-                                    }
-
-                                }
-
-                                }break;
 
 
+                            }break;
+                            case 2:{
+
+                            }break;
+
+                            case 3:{
+
+                            }break;
                         }
                         System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");
                         y = scan.nextInt();
@@ -408,17 +424,9 @@ public class Main{
                         System.out.println("Bine ati venit la categoria Cabinet Medical. Introduceti una din comenzile de mai jos:");
                     }
                     break;
-
                 }
                 System.out.println("Daca doriti sa continuati interogarile, introduceti una din comenzile prezentate mai sus. In caz contrar, introduceti 0.");
                 x = scan.nextInt();
             }
         }
-
-
-
-
-
     }
-
-
