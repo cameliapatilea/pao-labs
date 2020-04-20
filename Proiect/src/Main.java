@@ -578,6 +578,9 @@ public class Main{
                         System.out.println("Bine ati venit la categoria Trimiteri Medicale. Introduceti una din comenzile de mai jos:");
                         System.out.println("Pentru a afisa lista de trimiteri, introduceti 1");
                         System.out.println("Pentru a updata scopul unei trimiteri, introduceti 2");
+                        System.out.println("Pentru a updata valabilitatea unei trimiteri, introduceti 3");
+                        System.out.println("Pentru a adauga o noua trimitere in sistem, introduceti 4");
+                        System.out.println("Pentru a obtine scopul unei trimiteri pentru un anumit pacient, introduceti 5");
                         int y = scan.nextInt();
                         while( y!= 0){
                             switch(y){
@@ -606,6 +609,77 @@ public class Main{
                                     listaTrimiteri = trimitereService.updateScop(id, listaTrimiteri, scop);
                                     ReadWriteService.scriereCSV(trimiteriPath, TrimitereMedicala.returnHeader(), TrimitereMedicala.listToCSV(listaTrimiteri));
 
+                                }break;
+                                case 3:{
+                                    System.out.println("Pentru a updata valabilitatea unei trimiteri, introduceti datele necesare");
+                                    System.out.println("ID:");
+                                    int id = scan.nextInt();
+                                    System.out.println("Nume:");
+                                    String nume = scan.next();
+                                    System.out.println("Prenume:");
+                                    String prenume = scan.next();
+
+                                    matrTrimiteri = ReadWriteService.citireCSV(trimiteriPath);
+                                    listaTrimiteri = TrimitereMedicala.getListFromCSV(matrTrimiteri);
+
+                                    System.out.println("Introduceti noua valabilitate a trimiterii:");
+                                    int val = scan.nextInt();
+
+                                    listaTrimiteri = trimitereService.updateValabilitate(id, listaTrimiteri, val);
+                                    ReadWriteService.scriereCSV(trimiteriPath, TrimitereMedicala.returnHeader(), TrimitereMedicala.listToCSV(listaTrimiteri));
+
+                                }break;
+                                case 4:{
+                                    matrTrimiteri = ReadWriteService.citireCSV(trimiteriPath);
+                                    listaTrimiteri = TrimitereMedicala.getListFromCSV(matrTrimiteri);
+
+                                    System.out.println("Pentru a adauga o noua trimitere in sistem, introduceti datele necesare");
+
+                                    System.out.println("ID: ");
+                                    int id = scan.nextInt();
+                                    System.out.println("Nume: ");
+                                    String nume = scan.next();
+                                    System.out.println("Prenume");
+                                    String prenume = scan.next();
+                                    System.out.println("Data nasterii, sub forma ll/dd/aaaa");
+                                    String dataNasterii = scan.next();
+                                    System.out.println("Varsta: ");
+                                    int varsta = scan.nextInt();
+                                    System.out.println("Gen:");
+                                    String gen = scan.next();
+                                    int nr;
+                                    System.out.println("Numarul de afectiuni pe care le are pacientul: ");
+                                    nr = scan.nextInt();
+                                    List<String> listaAfectiuni = new ArrayList<String>();
+                                    for(int i = 0;  i<  nr; i++)
+                                    {
+                                        System.out.println("Introduceti afectiunea: ");
+                                        String afect = scan.next();
+                                        listaAfectiuni.add(afect);
+                                    }
+                                    Pacient p = pacientService.crearePacient(id, nume,prenume,dataNasterii,varsta, gen, listaAfectiuni);
+                                    System.out.println("Valabilitate:");
+                                    int val = scan.nextInt();
+                                    System.out.println("Scop");
+                                    String scop = scan.next();
+                                    System.out.println("Catre");
+                                    String catre = scan.next();
+                                    System.out.println("Eliberate de catre:");
+                                    System.out.println("Nume doctor:");
+                                    String numeDoc = scan.next();
+                                    System.out.println("Prenume doctor");
+                                    String prenumeDoc = scan.next();
+                                    numeDoc += " " + prenumeDoc;
+                                    System.out.println("Eliberat la data de:");
+                                    String eliberatLa = scan.next();
+
+                                    TrimitereMedicala tm = trimitereService.creareTrimitere(p, numeDoc, eliberatLa, val, scop, catre);
+                                    listaTrimiteri.add(tm);
+                                    ReadWriteService.scriereCSV(trimiteriPath, TrimitereMedicala.returnHeader(), TrimitereMedicala.listToCSV(listaTrimiteri));
+
+                                }break;
+                                case 5:{
+                                    
                                 }break;
                             }
                             System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");

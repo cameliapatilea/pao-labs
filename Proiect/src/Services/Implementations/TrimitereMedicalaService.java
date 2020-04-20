@@ -54,7 +54,16 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
 
     @Override
     public List<TrimitereMedicala> updateValabilitate(int id, List<TrimitereMedicala> trimiteri, int valabilitate) {
-        return null;
+        for(int i = 0; i <  trimiteri.size(); i++)
+        {
+            if(trimiteri.get(i).getPacient().getId() == id)
+            {
+                trimiteri.get(i).setValabilitate(valabilitate);
+            }
+
+        }
+
+        return trimiteri;
     }
 
 
