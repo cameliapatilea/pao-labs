@@ -9,7 +9,7 @@ import java.util.List;
 public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     @Override
     public TrimitereMedicala creareTrimitere(Pacient pacient, String eliberatDe, String eliberatLa, int valabilitate, String scop, String catre) {
-        TrimitereMedicala tm =  new TrimitereMedicala(pacient, eliberatDe, eliberatLa, valabilitate, scop, catre);
+        TrimitereMedicala tm =  new TrimitereMedicala(pacient,  valabilitate, scop, catre, eliberatDe, eliberatLa);
         return tm;
     }
 
@@ -38,14 +38,24 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     }
 
     @Override
-    public TrimitereMedicala updateScop(TrimitereMedicala tm, String scop) {
-        tm.setScop(scop);
-        return tm;
+    public List<TrimitereMedicala> updateScop(int id, List<TrimitereMedicala> trimiteri, String scop) {
+        TrimitereMedicala tm = new TrimitereMedicala();
+        for(int i = 0; i <  trimiteri.size(); i++)
+        {
+            if(trimiteri.get(i).getPacient().getId() == id)
+            {
+                trimiteri.get(i).setScop(scop);
+            }
+            //tm = trimiteri.get(i);
+        }
+
+        return trimiteri;
     }
 
     @Override
-    public TrimitereMedicala updateValabilitate(TrimitereMedicala tm, int valabilitate) {
-        tm.setValabilitate(valabilitate);
-        return tm;
+    public List<TrimitereMedicala> updateValabilitate(int id, List<TrimitereMedicala> trimiteri, int valabilitate) {
+        return null;
     }
+
+
 }

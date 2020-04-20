@@ -42,19 +42,19 @@ public class Main{
     public static RetetaService retetaService;
     public static List<Reteta> listaRetete;
 
-    public static List<List<AdeverintaMedicala>> matrAdeverinte;
+    public static List<List<String>> matrAdeverinte;
     public static List<AdeverintaMedicala> listaAdeverinte;
     public static AdeverintaMedicalaService adeverintaService;
 
-    public static List<List<TrimitereMedicala>> matrTrimiteri;
+    public static List<List<String>> matrTrimiteri;
     public static List<TrimitereMedicala> listaTrimiteri;
     public static TrimitereMedicalaService trimitereService;
 
-    public static List<List<ConcediuMedical>> matrConcedii;
+    public static List<List<String>> matrConcedii;
     public static List<ConcediuMedical> listaConcedii;
     public static ConcediuMedicalService concediuService;
 
-    public static List<List<CabinetMedical>> matrCabinet;
+    public static List<List<String>> matrCabinet;
     public static List<CabinetMedical> listaCabinet;
     public static CabinetMedicalService cabinetService;
 
@@ -576,6 +576,41 @@ public class Main{
                     break;
                 case 5: {
                         System.out.println("Bine ati venit la categoria Trimiteri Medicale. Introduceti una din comenzile de mai jos:");
+                        System.out.println("Pentru a afisa lista de trimiteri, introduceti 1");
+                        System.out.println("Pentru a updata scopul unei trimiteri, introduceti 2");
+                        int y = scan.nextInt();
+                        while( y!= 0){
+                            switch(y){
+                                case 1:{
+                                    System.out.println("Lista de trimiteri medicale este:");
+                                    matrTrimiteri = ReadWriteService.citireCSV(trimiteriPath);
+                                    listaTrimiteri = TrimitereMedicala.getListFromCSV(matrTrimiteri);
+                                    trimitereService.afiseazaTrimiteri(listaTrimiteri);
+
+                                }break;
+                                case 2:{
+                                    System.out.println("Pentru a updata scopul unei trimiteri, introduceti datele necesare");
+                                    System.out.println("ID:");
+                                    int id = scan.nextInt();
+                                    System.out.println("Nume:");
+                                    String nume = scan.next();
+                                    System.out.println("Prenume:");
+                                    String prenume = scan.next();
+
+                                    matrTrimiteri = ReadWriteService.citireCSV(trimiteriPath);
+                                    listaTrimiteri = TrimitereMedicala.getListFromCSV(matrTrimiteri);
+
+                                    System.out.println("Introduceti noul scop al trimiterii:");
+                                    String scop = scan.next();
+
+                                    listaTrimiteri = trimitereService.updateScop(id, listaTrimiteri, scop);
+                                    ReadWriteService.scriereCSV(trimiteriPath, TrimitereMedicala.returnHeader(), TrimitereMedicala.listToCSV(listaTrimiteri));
+
+                                }break;
+                            }
+                            System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");
+                            y = scan.nextInt();
+                        }
 
                     }
                     break;
