@@ -66,5 +66,18 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
         return trimiteri;
     }
 
+    @Override
+    public String obtineScop(int id, List<TrimitereMedicala> trimiteri) {
+        String scop = "";
+        for(int i = 0; i < trimiteri.size(); i++)
+        {
+            if(trimiteri.get(i).getPacient().getId() == id)
+            {
+                scop = trimiteri.get(i).getScop();
+            }
+        }
+        return scop;
+    }
+
 
 }

@@ -679,7 +679,20 @@ public class Main{
 
                                 }break;
                                 case 5:{
-                                    
+                                    System.out.println("Pentru a afla scopul pentru care a fost emisa o trimitere medicala pe numele unui anumit pacien, introduceti datale despre acesta");
+                                    System.out.println("ID:");
+                                    int id = scan.nextInt();
+                                    System.out.println("Nume:");
+                                    String nume = scan.next();
+                                    System.out.println("Prenume:");
+                                    String prenume = scan.next();
+
+                                    matrTrimiteri = ReadWriteService.citireCSV(trimiteriPath);
+                                    listaTrimiteri = TrimitereMedicala.getListFromCSV(matrTrimiteri);
+
+                                    String scop = trimitereService.obtineScop(id, listaTrimiteri);
+                                    System.out.println("Trimiterea medicala pentru pacientul " + nume + " " + prenume + " este pentru: " + scop);
+
                                 }break;
                             }
                             System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");

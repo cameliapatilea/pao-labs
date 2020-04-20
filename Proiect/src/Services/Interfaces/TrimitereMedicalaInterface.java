@@ -13,4 +13,5 @@ public interface TrimitereMedicalaInterface {
     List<TrimitereMedicala> getAllTrimiteri(List<TrimitereMedicala> lista);
     List<TrimitereMedicala> updateScop(int id, List<TrimitereMedicala> trimiteri, String scop);
     List<TrimitereMedicala> updateValabilitate(int id, List<TrimitereMedicala> trimiteri, int valabilitate);
+    String obtineScop(int id, List<TrimitereMedicala> trimiteri);
 }
