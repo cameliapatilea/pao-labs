@@ -4,3 +4,4 @@ ID,nume,prenume,dataNasterii,varsta,gen,specializare,oraStart,oraEnd,ture
 3,trust,georgiana,1/25/1956,64,feminin,stomatologie,12.0,16.0,true
 4,andrei,andreea,4/4/1996,24,feminin,neurologie,12.0,16.0,true
 4,andrei,andreea,6/6/1996,24,feminin,cardiologie,10.0,16.0,true
+20,bla,bla,2/2/1998,22,feminin,cardiologie,10.0,14.0,false

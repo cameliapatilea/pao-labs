@@ -474,27 +474,124 @@ public class Main{
                     }
                 }
                     break;
-                    case 4: {
+                case 4: {
                     System.out.println("Bine ati venit la categoria Retete. Introduceti una din comenzile de mai jos:");
+                    System.out.println("Pentru a afisa lista retetelor deja existente in sistem, introduceti 1");
+                    System.out.println("Pentru a adauga o reteta introduceti 2");
+                    System.out.println("Pentru a afisa lista de medicamente a unui pacienti, introduceti 3");
+
+
+                    int y = scan.nextInt();
+                    while(y != 0){
+                        switch(y){
+                            case 1:{
+                                System.out.println("Lista de retete existenta este:");
+                                matrRetete = ReadWriteService.citireCSV(retetePath);
+                                listaRetete = Reteta.getListFromCSV(matrRetete);
+                                retetaService.afiseazaRetete(listaRetete);
+                            }break;
+                            case 2:{
+                                System.out.println("Pentru a adauga o reteta in sistem, introduceti urmatoarele date");
+                                matrRetete = ReadWriteService.citireCSV(retetePath);
+                                listaRetete = Reteta.getListFromCSV(matrRetete);
+
+                                System.out.println("Intai introduceti date despre pacient");
+
+                                System.out.println("ID:");
+                                int id = scan.nextInt();
+                                System.out.println("Nume: ");
+                                String nume = scan.next();
+                                System.out.println("Prenume");
+                                String prenume = scan.next();
+                                System.out.println("Data nasterii, sub forma ll/dd/aaaa");
+                                String dataNasterii = scan.next();
+                                System.out.println("Varsta: ");
+                                int varsta = scan.nextInt();
+                                System.out.println("Gen:");
+                                String gen = scan.next();
+                                int nr;
+                                System.out.println("Numarul de afectiuni pe care le are pacientul: ");
+                                nr = scan.nextInt();
+                                List<String> listaAfectiuni = new ArrayList<String>();
+                                for(int i = 0;  i<  nr; i++)
+                                {
+                                    System.out.println("Introduceti afectiunea: ");
+                                    String afect = scan.next();
+                                    listaAfectiuni.add(afect);
+                                }
+                                Pacient pacient = new Pacient();
+                                pacient = pacientService.crearePacient(id, nume,prenume,dataNasterii,varsta, gen, listaAfectiuni);
+                                System.out.println("Reteta a fost eliberata de ");
+                                System.out.println("Nume:");
+                                String numeDoctor = scan.next();
+                                System.out.println("Prenume:");
+                                String prenumeDoctor = scan.next();
+                                numeDoctor+= " " + prenumeDoctor;
+                                System.out.println("La data de: ");
+                                String eliberataLa = scan.next();
+                                System.out.println("Numarul de medicamente prescrise: ");
+                                int nrMed = scan.nextInt();
+                                Map<String, Integer> medicamente = new HashMap<>();
+                                List<String> listaMed = new ArrayList<>();
+                                for(int i = 0; i < nrMed; i++)
+                                {
+                                    System.out.println("Introduceti medicamentul: ");
+                                    String med = scan.next();
+                                    medicamente.put(med, i+1);
+                                    listaMed.add(med);
+                                }
+                                Reteta r = retetaService.creareReteta(pacient, numeDoctor, eliberataLa, medicamente);
+                                listaRetete.add(r);
+                                ReadWriteService.scriereCSV(retetePath, Reteta.returnHeader(), Reteta.listToCSV(listaRetete));
+
+                            } break;
+                            case 3:{
+                                matrRetete = ReadWriteService.citireCSV(retetePath);
+                                listaRetete = Reteta.getListFromCSV(matrRetete);
+                                System.out.println("Pentru a afisa lista de medicamente a unui pacient, introduceti datele despre acesta");
+                                System.out.println("ID:");
+                                int id = scan.nextInt();
+                                System.out.println("Nume: ");
+                                String nume = scan.next();
+                                System.out.println("Prenume");
+                                String prenume = scan.next();
+                                Map<String, Integer> medicamente = new HashMap<>();
+                                List<String> listaMed = new ArrayList<>();
+                                for(int i = 0; i < listaRetete.size(); i++)
+                                {
+                                    if(listaRetete.get(i).getPacient().getId() == id )
+                                        medicamente = retetaService.getMedicamente(listaRetete.get(i));
+                                    break;
+                                }
+                                System.out.println("Medicamentele pentru pacientul " + nume + " " + prenume + " sunt:");
+                                System.out.println(Reteta.parseMapToString(medicamente));
+
+                            }break;
+
+                            }
+                        System.out.println("Pentru a continua interogarile in aceasta categorie, introduceti una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");
+                        y = scan.nextInt();
+                    }
                     }
                     break;
-                    case 5: {
+                case 5: {
+                        System.out.println("Bine ati venit la categoria Trimiteri Medicale. Introduceti una din comenzile de mai jos:");
+
+                    }
+                    break;
+                case 6: {
                         System.out.println("Bine ati venit la categoria Concedii Medicale. Introduceti una din comenzile de mai jos:");
                     }
-                    break;
-                    case 6: {
-                        System.out.println("Bine ati venit la categoria Trimiteri Medicale. Introduceti una din comenzile de mai jos:");
-                    }
-                    case 7: {
+                case 7: {
                         System.out.println("Bine ati venit la categoria Adeverinte medicale. Introduceti una din comenzile de mai jos:");
                     }
                     break;
-                    case 8: {
+                case 8: {
                         System.out.println("Bine ati venit la categoria Cabinet Medical. Introduceti una din comenzile de mai jos:");
                     }
                     break;
                 }
-                System.out.println("Daca doriti sa continuati interogarile, introduceti una din comenzile prezentate mai sus. In caz contrar, introduceti 0.");
+                System.out.println("Daca doriti sa continuati interogarile cu alte categorii, introduceti una din comenzile prezentate mai sus. In caz contrar, introduceti 0.");
                 x = scan.nextInt();
             }
         }

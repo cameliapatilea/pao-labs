@@ -22,15 +22,10 @@ public class Pacient extends Persoana implements Comparable<Pacient>{
     {
         super(ID, nume,prenume, dataNasterii, varsta, gen);
         this.afectiuni = new ArrayList<String>();
-        /*for(int i = 0; i < afectiuni.size(); i++)
-        {
-            this.afectiuni.add(afectiuni.get(i));
-        }*/
         this.afectiuni.addAll(afectiuni);
     }
     public void setAfectiuni(List<String> afectiuni){
 
-        //this.afectiuni.clear();
 
         this.afectiuni.addAll(afectiuni);
     }
@@ -61,13 +56,13 @@ public class Pacient extends Persoana implements Comparable<Pacient>{
 
     @Override
     public String toString(){
-        String x = "ID: "+this.ID+ "\n"+ "Nume: " + this.nume + "\n" + "Prenume: " + this.prenume + "\n" + "Varsta: " + this.varsta + "\n" + "Data nasterii: " + this.dataNasterii + "\n" + "Gen: " + this.gen + "\n" + "Afectiuni:";
+        String x = "ID: "+this.id+ "\n"+ "Nume: " + this.nume + "\n" + "Prenume: " + this.prenume + "\n" + "Varsta: " + this.varsta + "\n" + "Data nasterii: " + this.dataNasterii + "\n" + "Gen: " + this.gen + "\n" + "Afectiuni:";
         for(int i = 0; i < this.afectiuni.size(); i++)
             x+= " "+ afectiuni.get(i) ;
         return  x;
     }
     public static String[] objectToString(Pacient pacient){
-        return new String[]{Integer.toString(pacient.ID), pacient.getNume(), pacient.getPrenume(), pacient.getDataNasterii(),
+        return new String[]{Integer.toString(pacient.id), pacient.getNume(), pacient.getPrenume(), pacient.getDataNasterii(),
                 String.valueOf(pacient.getVarsta()), pacient.getGen(), String.join(" ", pacient.getAfectiuni())};
     }
     public static String[] returnHeader(){

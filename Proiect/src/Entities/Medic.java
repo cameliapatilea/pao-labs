@@ -62,7 +62,7 @@ public class Medic extends Persoana {
 
     @Override
     public String toString(){
-        String x = "ID: " + this.ID + "\n" +  "Nume: " + this.nume + "\n" + "Prenume: " + this.prenume + "\n" + "Varsta: " + this.varsta + "\n" + "Data nasterii: " + this.dataNasterii + "\n" + "Gen: " + this.gen + "\n" + "Specializare: " +
+        String x = "ID: " + this.id + "\n" +  "Nume: " + this.nume + "\n" + "Prenume: " + this.prenume + "\n" + "Varsta: " + this.varsta + "\n" + "Data nasterii: " + this.dataNasterii + "\n" + "Gen: " + this.gen + "\n" + "Specializare: " +
                 this.specializare + "\nInterval orar de lucru: " + this.oraStart + "-" + this.oraEnd + "\nCod parafa: " + this.codParafa;
 
         return  x;
@@ -87,7 +87,7 @@ public class Medic extends Persoana {
         else return 1;
     }
     public static String[] objectToString(Medic m){
-        return new String[]{Integer.toString(m.ID), m.nume, m.prenume, m.dataNasterii, Integer.toString(m.varsta), m.gen, m.specializare, Double.toString(m.oraStart),
+        return new String[]{Integer.toString(m.id), m.nume, m.prenume, m.dataNasterii, Integer.toString(m.varsta), m.gen, m.specializare, Double.toString(m.oraStart),
         Double.toString(m.oraEnd), Integer.toString(m.codParafa)};
     }
     public static String[] returnHeader(){

@@ -1,5 +1,9 @@
-﻿ID,nume,prenume,dataNasterii,varsta,gen,afectiuni,eliberatDe,eliberatLa,listaMedicamente
-1,popescu,andrei,1/1/1980,40,masculin,diabet astm,popescu george,3/12/2020,paracetamol nurofen
-2,roman,anisoara,2/2/1986,34,feminin,diabet ,popescu george,4/12/2020,ceva
-3,mop,andreea,3/3/1990,30,feminin,raceala,manea andreea,4/16/2020,algocalmin
-4,scundu,vlad,4/4/1976,44,masculin,gripa,manea andreea,4/13/2020,dexametazona
+ID,nume,prenume,dataNasterii,varsta,gen,afectiuni,eliberatDe,eliberatLa,medicamente
+2,popescu,andrei,1/1/1980,40,masculin,diabet astm,popescu george,3/12/2020,paracetamol nurofen  
+3,roman,anisoara,2/2/1986,34,feminin,diabet ,popescu george,4/12/2020,ceva  
+4,mop,andreea,3/3/1990,30,feminin,raceala,manea andreea,4/16/2020,algocalmin  
+5,scundu,vlad,4/4/1976,44,masculin,gripa,manea andreea,4/13/2020,dexametazona  
+6,iordache,stefan,4/30/1997,23,masculin,miopie,popa marian,4/4/2020,panadol  
+7,popa,andrei,5/5/1987,33,masculin,miopie raceala,bla bla,4/4/2020,nimic  
+8,popa,andrei,2/5/1998,22,masculin,miopie,bla bla,3/3/2020,panadol  
+22,bla,bla,bla,22,bla,bla bla,bla bla,bla,bla   

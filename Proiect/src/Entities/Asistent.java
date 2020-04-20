@@ -60,7 +60,7 @@ public class Asistent extends Persoana{
 
     @Override
     public String toString(){
-        String x ="ID: " + this.ID + "\n" + "Nume: " + this.nume + "\n" + "Prenume: " + this.prenume + "\n" + "Varsta: " + this.varsta + "\n" + "Data nasterii: " + this.dataNasterii + "\n" + "Gen: " + this.gen + "\n" + "Specializare: " +
+        String x ="ID: " + this.id + "\n" + "Nume: " + this.nume + "\n" + "Prenume: " + this.prenume + "\n" + "Varsta: " + this.varsta + "\n" + "Data nasterii: " + this.dataNasterii + "\n" + "Gen: " + this.gen + "\n" + "Specializare: " +
                 this.specializare + "\nInterval orar de lucru: " + this.oraStart + "-" + this.oraEnd + "\nLucreaza in ture: " + this.ture;
 
         return  x;
@@ -85,7 +85,7 @@ public class Asistent extends Persoana{
     }
 
     public static String[] objectToString(Asistent a){
-        return new String[]{Integer.toString(a.ID), a.nume, a.prenume, a.dataNasterii, Integer.toString(a.varsta), a.gen, a.specializare, Double.toString(a.oraStart),
+        return new String[]{Integer.toString(a.id), a.nume, a.prenume, a.dataNasterii, Integer.toString(a.varsta), a.gen, a.specializare, Double.toString(a.oraStart),
                 Double.toString(a.oraEnd), Boolean.toString(a.ture)};
     }
     public static String[] returnHeader(){

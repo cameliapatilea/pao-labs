@@ -2,33 +2,34 @@ package Entities;
 
 public abstract class Persoana extends GeneralEntity{
 
-    protected int ID;
+    //protected int ID;
     protected String nume;
     protected String prenume;
     protected String dataNasterii;
     protected int varsta;
     protected String gen; // masculin sau feminin
     Persoana(){
+
         this.nume = "";
         this.prenume = "";
         this.dataNasterii = "";
         this.varsta = 0;
         this.gen = "";
     }
-    Persoana(int ID, String nume, String prenume){
-        this.ID = ID;
+    Persoana(int id, String nume, String prenume){
+        this.id = id;
         this.nume = nume;
         this.prenume = prenume;
     }
-    Persoana(int ID, String nume, String prenume, String dataNasterii, int varsta, String gen){
-        this.ID = ID;
+    Persoana(int id, String nume, String prenume, String dataNasterii, int varsta, String gen){
+        this.id = id;
         this.nume = nume;
         this.prenume = prenume;
         this.dataNasterii = dataNasterii;
         this.varsta = varsta;
         this.gen = gen;
     }
-    public void setID(int ID){this.ID = ID;}
+    public void setID(int ID){this.id = ID;}
     public void setNume(String nume){
         this.nume = nume;
     }
@@ -44,7 +45,7 @@ public abstract class Persoana extends GeneralEntity{
     public void setGen(String gen){
         this.gen = gen;
     }
-    public int getID(){return this.ID;}
+    public int getID(){return this.id;}
     public String getNume(){
         return this.nume;
     }
