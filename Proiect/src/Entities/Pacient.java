@@ -2,9 +2,16 @@ package Entities;
 
 import Services.Implementations.PacientService;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import Helpers.AuditService;
+
+import static Helpers.AuditService.scriereCSVAudit;
+
 
 public class Pacient extends Persoana implements Comparable<Pacient>{
     private List<String> afectiuni;
@@ -18,11 +25,17 @@ public class Pacient extends Persoana implements Comparable<Pacient>{
 
     }
 
-    public Pacient(int ID, String nume, String prenume, String dataNasterii, int varsta, String gen, List<String> afectiuni)
-    {
+    public Pacient(int ID, String nume, String prenume, String dataNasterii, int varsta, String gen, List<String> afectiuni){
         super(ID, nume,prenume, dataNasterii, varsta, gen);
         this.afectiuni = new ArrayList<String>();
+
         this.afectiuni.addAll(afectiuni);
+        String comanda = "addAll";
+        comanda += " ";
+        comanda +=  new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+        String[] arr = comanda.split("");
+
+
     }
     public void setAfectiuni(List<String> afectiuni){
 

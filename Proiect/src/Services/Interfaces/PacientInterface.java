@@ -5,6 +5,7 @@ import Entities.Pacient;
 import java.util.List;
 
 public interface PacientInterface {
+    void citesteScrieAudit(String comanda, String timp);
     Pacient getFromListById(List<Pacient> lista, int id);
     List<Pacient> adaugaAfectiune(int id, List<Pacient> pacienti, String afectiune);
     void afiseazaPacienti(List<Pacient> pacienti);
