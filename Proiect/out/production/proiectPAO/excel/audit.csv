@@ -5,3 +5,8 @@ crearePacient,2020/04/25,14:46.:18
 adaugaAfectiune,2020/04/25,15:02:52
 afiseazaMedici,2020/04/25,15:14:54
 creareMedic,2020/04/25,15:15:42
+afiseazaAsistenti,2020/04/25,15:23:17
+creareAsistent,2020/04/25,15:23:54
+updateSpecializare,2020/04/25,15:24:16
+afiseaazaProgram,2020/04/25,15:24:28
+getAsistentBySpecializare,2020/04/25,15:24:40
