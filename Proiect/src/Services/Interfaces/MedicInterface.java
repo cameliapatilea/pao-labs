@@ -5,6 +5,7 @@ import Entities.Medic;
 import java.util.List;
 
 public interface MedicInterface {
+    void citesteScrieAudit(String comanda, String timp);
     Medic getFromListById(List<Medic> lista, int id);
     void afiseazaMedici(List<Medic> medici);
     Medic creareMedic(int id, String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, int codParafa);
