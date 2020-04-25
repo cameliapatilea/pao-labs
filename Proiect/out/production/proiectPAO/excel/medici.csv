@@ -4,3 +4,4 @@ ID,nume,prenume,dataNasterii,varsta,gen,specializare,oraStart,oraEnd,codParafa
 3,vlad,maricica,12/3/1975,45,feminin,dermatologie,13.0,17.0,456123
 4,andronache,mirela,5/5/1985,35,feminin,neurologie,10.0,16.0,741852963
 6,papa,noel,5/6/1970,50,masculin,cardiologie,10.0,14.0,748596
+21,popa,marcela,4/4/1995,25,feminin,cardiologie,12.0,18.0,123456

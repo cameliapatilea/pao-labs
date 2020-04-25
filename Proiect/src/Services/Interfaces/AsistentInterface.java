@@ -5,6 +5,7 @@ import Entities.Asistent;
 import java.util.List;
 
 public interface AsistentInterface {
+    void citesteScrieAudit(String comanda, String timp);
     Asistent getFromListById(List<Asistent> lista, int id);
     void afiseazaAsistenti(List<Asistent> asistenti);
     Asistent creareAsistent(int id, String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, boolean ture);
