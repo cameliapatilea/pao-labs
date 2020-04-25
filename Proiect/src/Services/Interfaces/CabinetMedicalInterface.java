@@ -8,6 +8,7 @@ import Entities.Pacient;
 import java.util.List;
 
 public interface CabinetMedicalInterface {
+        void citesteScrieAudit(String comanda, String timp);
         CabinetMedical getFromListById(List<CabinetMedical> lista, int id);
         void afiseazaCabinet(List<CabinetMedical> cm);
         String getIntervalFunctionare(CabinetMedical cab);
