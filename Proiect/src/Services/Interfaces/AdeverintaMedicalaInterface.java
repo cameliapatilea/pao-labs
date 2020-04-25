@@ -6,6 +6,7 @@ import Entities.Pacient;
 import java.util.List;
 
 public interface AdeverintaMedicalaInterface {
+    void citesteScrieAudit(String comanda, String timp);
     AdeverintaMedicala getFromListById(List<AdeverintaMedicala> lista, int id);
     void afiseazaAdeverinte(List<AdeverintaMedicala> adeverinte);
     AdeverintaMedicala creareAdeverinta(Pacient pacient, String eliberatDe, String eliberatLa, boolean apt, String scop);
