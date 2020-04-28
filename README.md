@@ -52,4 +52,7 @@ Exemplu de metode implementate pentru  PacientInterface:
 In ceea ce priveste main-ul, acesta este structurat sub forma unui meniu, implementat cu ajutorul switch statement. Utilizatorului i se va pune la dispozitie o lista de comenzi pentru fiecare tip de obiect in parte, din care trebuie sa aleaga pentru a continua inteorgarile. Pentru fiecare case in parte, va exista un submeniu, bazat tot pe switch.
 Interogarile se vor termina in momentul in care utilizatorul va introduce de la tastatura numarul 0, moment in care vom iesi din instructiunea while.
 
-Din cauza faptului ca nu este legata la o baza de date, aplicatia memoreaza pentru moment datele local, la inceputul main-ului, cu ajutorul catorva colectii de date.
+# Update
+
+* Listele de pacienti, medici, asistenti, retete, trimiteri medicale, adeverinte, concedii sunt pastrate in fisiere de tip CSV(comma separated values). Astfel, ele sunt incarcate in momentul in care este apelat un anumit serviciu si la modificarea datelor, acestea sunt actualizate in timp real, iar modificarile sunt pastrate si pot fi vizualizate si ulterior.
+* A fost creata o clasa de audit, care scrie tot intr-un fisier de tip CSV ce metoda este apelata si la ce moment de timp. Astfel, se poate tine o evidenta clara a serviciilor pe care le apeleaza programul si poate fi urmarit mai usor, spre exemplu, procesul crearii unei retete, care implica, la randul ei, crearea unui nou pacient.
