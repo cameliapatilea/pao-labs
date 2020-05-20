@@ -218,35 +218,43 @@ public class Main{
                             {
                              /*matrPacienti = ReadWriteService.citireCSV(pacientiPath);
                              pacienti = Pacient.getListFromCSV(matrPacienti);*/
+                            try{
+                                stmt = connObj.createStatement();
 
-                             Pacient p = new Pacient();
-                             System.out.println("Pentru a adauga un pacient in baza de date, introduceti urmatoarele date:\n");
-                             System.out.println("ID: ");
-                             int id = scan.nextInt();
-                             System.out.println("Nume: ");
-                             String nume = scan.next();
-                             System.out.println("Prenume");
-                             String prenume = scan.next();
-                             System.out.println("Data nasterii, sub forma ll/dd/aaaa");
-                             String dataNasterii = scan.next();
-                             System.out.println("Varsta: ");
-                             int varsta = scan.nextInt();
-                             System.out.println("Gen:");
-                             String gen = scan.next();
-                             int nr;
-                             System.out.println("Numarul de afectiuni pe care le are pacientul: ");
-                             nr = scan.nextInt();
-                             List<String> listaAfectiuni = new ArrayList<String>();
-                             for(int i = 0;  i<  nr; i++)
+                                Pacient p = new Pacient();
+                                System.out.println("Pentru a adauga un pacient in baza de date, introduceti urmatoarele date:\n");
+                                System.out.println("ID: ");
+                                int id = scan.nextInt();
+                                System.out.println("Nume: ");
+                                String nume = scan.next();
+                                System.out.println("Prenume");
+                                String prenume = scan.next();
+                                System.out.println("Data nasterii, sub forma ll/dd/aaaa");
+                                String dataNasterii = scan.next();
+                                System.out.println("Varsta: ");
+                                int varsta = scan.nextInt();
+                                System.out.println("Gen:");
+                                String gen = scan.next();
+                                int nr;
+                                System.out.println("Numarul de afectiuni pe care le are pacientul: ");
+                                nr = scan.nextInt();
+                                List<String> listaAfectiuni = new ArrayList<String>();
+                                for(int i = 0;  i<  nr; i++)
                                 {
                                     System.out.println("Introduceti afectiunea: ");
                                     String afect = scan.next();
                                     listaAfectiuni.add(afect);
                                 }
-                             p = pacientService.crearePacient(id, nume,prenume,dataNasterii,varsta, gen, listaAfectiuni);
-                             pacienti.add(p);
+                                p = pacientService.crearePacient(id, nume,prenume,dataNasterii,varsta, gen, listaAfectiuni);
+                                pacienti.add(p);
                                 Collections.sort(pacienti);
-                                ReadWriteService.scriereCSV(pacientiPath, Pacient.returnHeader(), Pacient.listToCSV(pacienti));
+                                String sql  = "INSERT INTO Pacienti " + "VALUES(" + id + ",'" + nume + "','" + prenume + "','" + dataNasterii + "'," + varsta + ",'" + gen + "','" + listaAfectiuni.toString() + "')";
+                                stmt.executeUpdate(sql);
+                            }
+                           catch(SQLException se){
+                               se.printStackTrace();
+                           }
+                                //ReadWriteService.scriereCSV(pacientiPath, Pacient.returnHeader(), Pacient.listToCSV(pacienti));
 
                                 break;
                             }
