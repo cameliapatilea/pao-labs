@@ -171,6 +171,8 @@ public class Main{
                     System.out.println("Pentru a adauga un pacient in baza de date, introduceti 2");
                     System.out.println("Pentru a adauaga o afectiune unui pacienti, introduceti 3");
                     System.out.println("Pentru a sterge o afectiune a unui pacient, introdoceti 4");
+                    System.out.println("Pentru a face update la varsta unui pacient, introdoceti 5");
+                    System.out.println("Pentru a sterge un pacient, introdoceti 6");
 
 
                     int y = scan.nextInt();
@@ -260,8 +262,8 @@ public class Main{
                             }
                             case 3: {
 
-                                matrPacienti = ReadWriteService.citireCSV(pacientiPath);
-                                pacienti = Pacient.getListFromCSV(matrPacienti);
+                                /*matrPacienti = ReadWriteService.citireCSV(pacientiPath);
+                                pacienti = Pacient.getListFromCSV(matrPacienti);*/
 
                                 System.out.println("Pentru a adauga o afectiune unui pacient, intai introduceti id-ul si numele pacientului");
 
@@ -304,6 +306,45 @@ public class Main{
                                 ReadWriteService.scriereCSV(pacientiPath, Pacient.returnHeader(), Pacient.listToCSV(pacienti));
 
                                 break;
+                            }
+                            case 5:
+                            {
+                                System.out.println("Pentru a face update la varsta a unui pacient, introduceti id-ul aferent pacientului");
+                                System.out.println("Introduceti id-ul");
+                                int id = scan.nextInt();
+                                System.out.println("Introduceti data de nastere in formatul ll/dd/yyyy");
+                                String data = scan.next();
+                                System.out.println("Introduceti noua varsta");
+                                int varsta = scan.nextInt();
+                                try{
+                                    stmt = connObj.createStatement();
+                                    String sql = "UPDATE Pacienti " +
+                                            "SET Varsta =" + varsta + " where Id=" + id;
+                                    stmt.executeUpdate(sql);
+                                    sql = "UPDATE Pacienti " +
+                                            "SET DataNasterii ='" + data + "' where Id=" + id;
+                                    stmt.executeUpdate(sql);
+                                }
+                                catch(SQLException se){
+                                    se.printStackTrace();
+                                }
+                                break;
+                            }
+                            case 6:{
+                                try{
+                                    System.out.println("Pentru a sterge un pacient din baza de date, introduceti id-ul pacientului");
+                                    System.out.println("Introduceti id-ul");
+                                    int id = scan.nextInt();
+                                    stmt = connObj.createStatement();
+                                    String sql = "DELETE FROM Pacienti " +
+                                            "WHERE id = " + id;
+                                    stmt.executeUpdate(sql);
+                                }
+                                catch(SQLException se){
+                                    se.printStackTrace();
+                                }
+
+                            break;
                             }
                         }
                         System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");
