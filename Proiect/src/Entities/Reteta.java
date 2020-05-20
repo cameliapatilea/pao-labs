@@ -19,6 +19,7 @@ public class Reteta extends Document {
     }
 
      public Reteta(Pacient pacient, String eliberatDe, String eliberatLa, Map<String, Integer> medicamente){
+
         super(pacient, eliberatDe, eliberatLa);
         this.medicamente = new HashMap<String, Integer>();
         this.medicamente.putAll(medicamente);

@@ -14,7 +14,30 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+
 public class Main{
+
+    //initialize database
+    public static Connection connObj;
+    public static String JDBC_URL = "jdbc:sqlserver://javadatabaseserver.database.windows.net:1433;database=JavaProjectDatabase;user=cameliapatilea@javadatabaseserver;password={AdminServerPassword1};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+
+    public static void getDbConnection(){
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            connObj = DriverManager.getConnection(JDBC_URL);
+            if(connObj != null) {
+                DatabaseMetaData metaObj = (DatabaseMetaData) connObj.getMetaData();
+                System.out.println("Driver Name?= " + metaObj.getDriverName() + ", Driver Version?= " + metaObj.getDriverVersion() + ", Product Name?= " + metaObj.getDatabaseProductName() + ", Product Version?= " + metaObj.getDatabaseProductVersion());
+
+            }}
+            catch(Exception sqlException){
+                sqlException.printStackTrace();
+            }
+    }
+
 
     private static final String pacientiPath = FileHelper.getFullPath("src/excel/pacienti.csv");
     private static final String mediciPath = FileHelper.getFullPath("src/excel/medici.csv");
@@ -112,6 +135,7 @@ public class Main{
 
 
     public static void main(String[] args) throws IOException {
+        getDbConnection();
         Scanner scan = new Scanner(System.in);
         afiseazaMeniu();
 
