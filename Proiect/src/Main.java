@@ -12,15 +12,13 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.*;
 import java.util.*;
-
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
 
 public class Main{
 
     //initialize database
+    public static Statement stmt = null;
     public static Connection connObj;
     public static String JDBC_URL = "jdbc:sqlserver://javadatabaseserver.database.windows.net:1433;database=JavaProjectDatabase;user=cameliapatilea@javadatabaseserver;password={AdminServerPassword1};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
 
@@ -180,15 +178,46 @@ public class Main{
                         switch (y) {
                             case 1: {
                             System.out.println("Lista de pacienti este: ");
-                            matrPacienti = ReadWriteService.citireCSV(pacientiPath);
+                            /*matrPacienti = ReadWriteService.citireCSV(pacientiPath);
                             pacienti = Pacient.getListFromCSV(matrPacienti);
-                            pacientService.afiseazaPacienti(pacienti);
+                            pacientService.afiseazaPacienti(pacienti);*/
+                                try{
+                                    stmt = connObj.createStatement();
+
+                                    String sql = "SELECT Id, LastName, FirstName,DataNasterii,Varsta, Gen, Afectiuni FROM Pacienti";
+                                    ResultSet rs = stmt.executeQuery(sql);
+                                    while(rs.next()){
+                                        //Retrieve by column name
+                                        int id  = rs.getInt("Id");
+                                        String last = rs.getString("LastName");
+                                        String first = rs.getString("FirstName");
+                                        String data = rs.getString("DataNasterii");
+                                        int varsta = rs.getInt("Varsta");
+                                        String gen = rs.getString("Gen");
+                                        String afect = rs.getString("Afectiuni");
+
+                                        //Display values
+                                        System.out.println("ID: " + id);
+
+                                        System.out.println("FirstName: " + first);
+                                        System.out.println("LastName: " + last);
+                                        System.out.println("DataNasterii: " + last);
+                                        System.out.println("Varsta: " + varsta);
+                                        System.out.println("Gen: " + gen);
+                                        System.out.println("Afectiuni: " + afect);
+                                    }
+                                    rs.close();
+                                }
+                                catch(SQLException se){
+
+                                }
+
                                 break;
                             }
                             case 2:
                             {
-                             matrPacienti = ReadWriteService.citireCSV(pacientiPath);
-                             pacienti = Pacient.getListFromCSV(matrPacienti);
+                             /*matrPacienti = ReadWriteService.citireCSV(pacientiPath);
+                             pacienti = Pacient.getListFromCSV(matrPacienti);*/
 
                              Pacient p = new Pacient();
                              System.out.println("Pentru a adauga un pacient in baza de date, introduceti urmatoarele date:\n");
