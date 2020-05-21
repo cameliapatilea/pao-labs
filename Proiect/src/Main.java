@@ -373,83 +373,39 @@ public class Main{
                                 break;
                             }
                             case 4: {
-                                try{
-                                    matrMedici = ReadWriteService.citireCSV(mediciPath);
-                                    medici = Medic.getListFromCSV(matrMedici);
+                                matrMedici = ReadWriteService.citireCSV(mediciPath);
+                                medici = Medic.getListFromCSV(matrMedici);
 
-                                    System.out.println("Pentru a actualiza varsta unui medic introduceti datele despre medic:");
-                                    System.out.println("ID: ");
-                                    int id = scan.nextInt();
+                                System.out.println("Pentru a actualiza varsta unui medic introduceti datele despre medic:");
+                                System.out.println("ID: ");
+                                int id = scan.nextInt();
 
 
-                                    System.out.println("Introduceti noua varsta");
-                                    int newVarsta = scan.nextInt();
-                                    System.out.println("Introduceti noua data de nastere");
-                                    String newDataNasterii = scan.next();
-                                    medici = medicService.updateVarsta(id, medici, newVarsta, newDataNasterii);
-
-                                    stmt = connObj.createStatement();
-                                    String sql = "UPDATE Medici " +
-                                            "SET Varsta =" + newVarsta + " where Id=" + id;
-                                    stmt.executeUpdate(sql);
-                                    sql = "UPDATE Medici " +
-                                            "SET DataNasterii ='" + newDataNasterii + "' where Id=" + id;
-                                    stmt.executeUpdate(sql);
-                                    ReadWriteService.scriereCSV(mediciPath, Medic.returnHeader(), Medic.listToCSV(medici));
-                                }
-
-                                catch(SQLException se){
-
-                                }
-
+                                System.out.println("Introduceti noua varsta");
+                                int newVarsta = scan.nextInt();
+                                System.out.println("Introduceti noua data de nastere");
+                                String newDataNasterii = scan.next();
+                                medici = medicService.updateVarsta(id, medici, newVarsta, newDataNasterii);
+                                medicService.updateVarstaMedicDb(connObj, id,newVarsta, newDataNasterii);
                                 break;
                             }
                             case 5: {
-                                try{
-                                    matrMedici = ReadWriteService.citireCSV(mediciPath);
-                                    medici = Medic.getListFromCSV(matrMedici);
+                                matrMedici = ReadWriteService.citireCSV(mediciPath);
+                                medici = Medic.getListFromCSV(matrMedici);
 
-                                    System.out.println("Pentru a afisa intervalul orar in care este medicul la cabinet, introduceti urmatoarele date:");
-                                    System.out.println("ID: ");
-                                    int id = scan.nextInt();
-
-
-                                    /*String intervalOrar = medicService.afiseazaIntervalOrar(nume, prenume, medici);
-                                    System.out.println("Medicul: " + nume + " " + prenume + " lucreaza in intervalul orar urmator");
-                                    System.out.println(" " + intervalOrar);*/
-                                    stmt = connObj.createStatement();
-                                    String sql = "SELECT LastName,FirstName,OraStart, OraEnd FROM Medici" +
-                                            " WHERE id =" + id;
-                                    ResultSet rs = stmt.executeQuery(sql);
-                                    while(rs.next()){
-                                    String nume = rs.getString("LastName");
-                                    String prenume = rs.getString("FirstName");
-                                    float oraStart = rs.getFloat("OraStart");
-                                    float oraStop = rs.getFloat("OraEnd");
-                                        System.out.println("Medicul " + nume + " " + prenume + " lucreaza in intervalul orar " + oraStart + "-" + oraStop);
-                                    }
-                                }
-                                catch (SQLException se){
-                                    se.printStackTrace();
-                                }
+                                System.out.println("Pentru a afisa intervalul orar in care este medicul la cabinet, introduceti urmatoarele date:");
+                                System.out.println("ID: ");
+                                int id = scan.nextInt();
+                                medicService.getOrarDb(connObj, id);
 
                                 break;
 
                             }
                             case 6:{
-                                try{
-                                    System.out.println("Pentru a sterge un medic din baza de date, introduceti id-ul medicului");
-                                    System.out.println("Introduceti id-ul");
-                                    int id = scan.nextInt();
-                                    stmt = connObj.createStatement();
-                                    String sql = "DELETE FROM Medici " +
-                                            "WHERE id = " + id;
-                                    stmt.executeUpdate(sql);
-                                    System.out.println("Delete completed");
-                                }
-                                catch(SQLException se){
-                                    se.printStackTrace();
-                                }
+                                System.out.println("Pentru a sterge un medic din baza de date, introduceti id-ul medicului");
+                                System.out.println("Introduceti id-ul");
+                                int id = scan.nextInt();
+                               medicService.deleteMedicFromDb(connObj, id);
                                 break;
                             }
                         }

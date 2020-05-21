@@ -5,3 +5,4 @@ ID,nume,prenume,dataNasterii,varsta,gen,specializare,oraStart,oraEnd,codParafa
 4,andronache,mirela,5/6/1990,30,feminin,neurologie,10.0,16.0,741852963
 6,papa,noel,5/6/1970,50,masculin,cardiologie,10.0,14.0,748596
 21,popa,marcela,4/4/1995,25,feminin,cardiologie,12.0,18.0,123456
+7,andrei,adrian,10/10/1975,45,masculin,medicinaGenerala,13.0,19.0,645372

@@ -160,6 +160,8 @@ public class MedicService implements MedicInterface {
 
     @Override
     public void adaugaMedicDb(Connection connObj, Medic m) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("AdaugaMedicDb", timeStamp);
         try{
             Statement stmt = connObj.createStatement();
 
@@ -174,6 +176,20 @@ public class MedicService implements MedicInterface {
 
     @Override
     public void updateVarstaMedicDb(Connection connObj, int id, int varsta, String data) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("updateVarstaMedicDb", timeStamp);
+        try{
+            Statement stmt = connObj.createStatement();
+            String sql = "UPDATE Medici " +
+                    "SET Varsta ='" + varsta + "' where Id=" + id;
+            stmt.executeUpdate(sql);
+            sql = "UPDATE Pacienti " +
+                    "SET DataNasterii ='" + data + "' where Id=" + id;
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+
+        }
 
     }
 
@@ -194,11 +210,43 @@ public class MedicService implements MedicInterface {
 
     @Override
     public void getOrarDb(Connection connObj, int id) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("getOrarMedicDb", timeStamp);
+        List<Medic> listaMedici = getAllFromDb(connObj);
+        try{
+            Statement stmt = connObj.createStatement();
+            String sql = "SELECT LastName,FirstName,OraStart, OraEnd FROM Medici" +
+                    " WHERE id =" + id;
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                String nume = rs.getString("LastName");
+                String prenume = rs.getString("FirstName");
+                float oraStart = rs.getFloat("OraStart");
+                float oraStop = rs.getFloat("OraEnd");
+
+               String orar =  afiseazaIntervalOrar(nume, prenume, listaMedici);
+                System.out.println("Medicul " + nume + " " + prenume + " lucreaza in intervalul orar " + orar);
+            }
+        }
+        catch (SQLException se){
+            se.printStackTrace();
+        }
 
     }
 
     @Override
     public void deleteMedicFromDb(Connection connObj, int id) {
-
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("deleteMedicFromDb", timeStamp);
+        try{
+           Statement  stmt = connObj.createStatement();
+            String sql = "DELETE FROM Medici " +
+                    "WHERE id = " + id;
+            stmt.executeUpdate(sql);
+            System.out.println("Delete completed");
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
     }
 }
