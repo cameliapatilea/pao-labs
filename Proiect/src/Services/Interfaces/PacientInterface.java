@@ -20,4 +20,6 @@ public interface PacientInterface {
     Pacient crearePacient(int id, String nume, String prenume, String dataNasterii, int varsta,  String gen, List<String> afectiuni);
     List<Pacient> getAllFromDb( Connection connObj);
     void adaugaPacientDb(Connection connObj, Pacient p);
+    void updateVarstaPacientDb(Connection connObj, int id, int varsta, String data);
+    void deletePacientFromDb(Connection connObj, int id);
 }

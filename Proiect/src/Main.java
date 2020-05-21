@@ -279,33 +279,14 @@ public class Main{
                                 String data = scan.next();
                                 System.out.println("Introduceti noua varsta");
                                 int varsta = scan.nextInt();
-                                try{
-                                    stmt = connObj.createStatement();
-                                    String sql = "UPDATE Pacienti " +
-                                            "SET Varsta =" + varsta + " where Id=" + id;
-                                    stmt.executeUpdate(sql);
-                                    sql = "UPDATE Pacienti " +
-                                            "SET DataNasterii ='" + data + "' where Id=" + id;
-                                    stmt.executeUpdate(sql);
-                                }
-                                catch(SQLException se){
-                                    se.printStackTrace();
-                                }
+                                pacientService.updateVarstaPacientDb(connObj, id, varsta, data);
                                 break;
                             }
                             case 6:{
-                                try{
-                                    System.out.println("Pentru a sterge un pacient din baza de date, introduceti id-ul pacientului");
-                                    System.out.println("Introduceti id-ul");
-                                    int id = scan.nextInt();
-                                    stmt = connObj.createStatement();
-                                    String sql = "DELETE FROM Pacienti " +
-                                            "WHERE id = " + id;
-                                    stmt.executeUpdate(sql);
-                                }
-                                catch(SQLException se){
-                                    se.printStackTrace();
-                                }
+                                System.out.println("Pentru a sterge un pacient din baza de date, introduceti id-ul pacientului");
+                                System.out.println("Introduceti id-ul");
+                                int id = scan.nextInt();
+                                pacientService.deletePacientFromDb(connObj, id);
 
                             break;
                             }

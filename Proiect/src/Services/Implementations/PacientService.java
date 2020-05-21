@@ -220,5 +220,37 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
         }
     }
 
+    @Override
+    public void updateVarstaPacientDb(Connection connObj, int id, int varsta, String data) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("updateVarstaPacientDb", timeStamp);
+        try{
+            Statement stmt = connObj.createStatement();
+            String sql = "UPDATE Pacienti " +
+                    "SET Varsta =" + varsta + " where Id=" + id;
+            stmt.executeUpdate(sql);
+            sql = "UPDATE Pacienti " +
+                    "SET DataNasterii ='" + data + "' where Id=" + id;
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deletePacientFromDb(Connection connObj, int id) {
+        try{
+
+            Statement stmt = connObj.createStatement();
+            String sql = "DELETE FROM Pacienti " +
+                    "WHERE id = " + id;
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
+    }
+
 
 }
