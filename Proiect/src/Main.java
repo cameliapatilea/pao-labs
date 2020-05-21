@@ -536,7 +536,7 @@ public class Main{
                     System.out.println("Pentru a afisa lista retetelor deja existente in sistem, introduceti 1");
                     System.out.println("Pentru a adauga o reteta introduceti 2");
                     System.out.println("Pentru a afisa lista de medicamente a unui pacienti, introduceti 3");
-                    System.out.println("Pentru a modifica data eliberarii unei etete, introduceti 4");
+                    System.out.println("Pentru a modifica data eliberarii unei retete, introduceti 4");
                     System.out.println("Pentru a sterge o reteta din baza de date, introduceti 5");
 
 
@@ -547,7 +547,8 @@ public class Main{
                                 System.out.println("Lista de retete existenta este:");
                                 matrRetete = ReadWriteService.citireCSV(retetePath);
                                 listaRetete = Reteta.getListFromCSV(matrRetete);
-                                retetaService.afiseazaRetete(listaRetete);
+                                retetaService.afiseazaRetete(retetaService.getAllFromDb(connObj));
+
                             }break;
                             case 2:{
                                 System.out.println("Pentru a adauga o reteta in sistem, introduceti urmatoarele date");

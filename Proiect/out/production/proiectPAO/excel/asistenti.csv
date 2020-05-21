@@ -3,7 +3,7 @@ ID,nume,prenume,dataNasterii,varsta,gen,specializare,oraStart,oraEnd,ture
 2,andrei,george,1/30/1987,33,masculin,cardiologie,13.0,19.0,true
 3,trust,georgiana,1/25/1956,64,feminin,stomatologie,12.0,16.0,true
 4,andrei,andreea,4/4/1996,24,feminin,neurologie,12.0,16.0,true
-5,bla,bla,2/2/1998,22,feminin,radiologie,10.0,14.0,false
+5,bla,bla,2/2/1998,22,feminin,medicinaInterna,10.0,14.0,false
 6,metre,sisi,4/5/1980,40,feminin,radiologie,8.0,14.0,false
 7,popescu,razvan,2/2/1956,64,masculin,neurochirugie,8.0,16.0,true
 7,popescu,marius,2/2/1960,60,masculin,neurochirurgie,8.0,16.0,true

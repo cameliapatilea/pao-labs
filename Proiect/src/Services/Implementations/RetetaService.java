@@ -1,13 +1,17 @@
 package Services.Implementations;
 
+import Entities.Asistent;
 import Entities.Pacient;
 import Entities.Reteta;
 import Helpers.AuditService;
 import Services.Interfaces.RetetaInterface;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class RetetaService implements RetetaInterface {
     @Override
@@ -65,6 +69,61 @@ public class RetetaService implements RetetaInterface {
         return r;
     }
 
+    @Override
+    public List<Reteta> getAllFromDb(Connection connObj) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("getAllReteteFromDb", timeStamp);
+        List<Reteta> listaRetete = new ArrayList<>();
+        try {
+            Statement stmt = connObj.createStatement();
+
+            String sql = "SELECT Id, LastName, FirstName,DataNasterii,Varsta, Gen, Afectiuni, EliberatDe, EliberatLa, Medicamente FROM Retete";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                //Retrieve by column name
+                int id = rs.getInt("Id");
+                String last = rs.getString("LastName");
+                String first = rs.getString("FirstName");
+                String data = rs.getString("DataNasterii");
+                int varsta = rs.getInt("Varsta");
+                String gen = rs.getString("Gen");
+                String afec = rs.getString("Afectiuni");
+                List<String> afectiuni = Arrays.asList(afec.split(" "));
+                String eliberatDe = rs.getString("EliberatDe");
+                String eliberatLa = rs.getString("EliberatLa");
+                Pacient p = new Pacient(id, last, first, data, varsta, gen, afectiuni);
+                String medic = rs.getString("Medicamente");
+                List<String> stringuriMedicamente = Arrays.asList(medic.split(" "));
+                Map< String, Integer> medicamente = new HashMap<>();
+                for(int i = 0; i < stringuriMedicamente.size(); i++)
+                    medicamente.put(stringuriMedicamente.get(i), i+1);
+                //int idPacient = rs.getInt("IdPacient");
+                Reteta r = creareReteta( p,eliberatDe, eliberatLa, medicamente);
+                listaRetete.add(r);
+            }
+        }
+
+        catch(SQLException se){
+            se.printStackTrace();
+        }
+        return listaRetete;
+    }
+
+    @Override
+    public void createRetetaForDb(Connection connObj, Reteta r) {
+
+    }
+
+    @Override
+    public void deleteRetetaFromDb(Connection connObj, int id) {
+
+    }
+
+    @Override
+    public void modificaEliberareRetetaDb(Connection connObj, int id, String data) {
+
+    }
 
 
 }
