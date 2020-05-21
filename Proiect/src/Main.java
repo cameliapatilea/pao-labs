@@ -431,7 +431,9 @@ public class Main{
                             System.out.println("Lista asistentilor deja existenti in sistem este:");
                             matrAsistenti = ReadWriteService.citireCSV(asistentiPath);
                             listaAsistenti = Asistent.getListFromCSV(matrAsistenti);
-                            asistentService.afiseazaAsistenti(listaAsistenti);
+                            asistentService.afiseazaAsistenti(asistentService.getAllFromDb(connObj));
+
+
 
                             }break;
                             case 2:{

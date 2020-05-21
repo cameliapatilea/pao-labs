@@ -1,7 +1,9 @@
 package Services.Interfaces;
 
 import Entities.Asistent;
+import Entities.Medic;
 
+import java.sql.Connection;
 import java.util.List;
 
 public interface AsistentInterface {
@@ -16,4 +18,13 @@ public interface AsistentInterface {
     String afiseazaSpecializare(Asistent a);
     List<Asistent> adaugaAsistentInLista(Asistent a, List<Asistent> lista);
     Asistent  getAsistentBySpecializare(List<Asistent> lista, String specializare);
+
+
+    List<Asistent> getAllFromDb(Connection connObj);
+    void adaugaAsistentcDb(Connection connObj, Asistent m);
+    void updateVarstaAsistentDb(Connection connObj, int id, int varsta, String data);
+    void updateSpecializareAsistentDb(Connection connObj, int id, String specializare);
+    void getOrarAsistentDb(Connection connObj, int id);
+    Asistent getAsistentBySpecializareDb(Connection connObj, int specializare);
+    void deleteAsistentFromDb(Connection connObj, int id);
 }

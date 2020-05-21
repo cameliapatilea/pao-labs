@@ -1,10 +1,17 @@
 package Services.Implementations;
 
 import Entities.Asistent;
+import Entities.Medic;
 import Helpers.AuditService;
 import Services.Interfaces.AsistentInterface;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AsistentService implements AsistentInterface {
@@ -117,5 +124,75 @@ public class AsistentService implements AsistentInterface {
                 break;
             }
         return x;
+    }
+
+    @Override
+    public List<Asistent> getAllFromDb(Connection connObj) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("getAllFromDbAsistenti", timeStamp);
+        List<Asistent> listaAsistenti= new ArrayList<>() ;
+        try{
+
+            Statement stmt = connObj.createStatement();
+
+            String sql = "SELECT Id, LastName, FirstName,DataNasterii,Varsta, Gen, Specializare, OraStart,OraEnd, Ture FROM Asistenti";
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                //Retrieve by column name
+                int id  = rs.getInt("Id");
+                String last = rs.getString("LastName");
+                String first = rs.getString("FirstName");
+                String data = rs.getString("DataNasterii");
+                int varsta = rs.getInt("Varsta");
+                String gen = rs.getString("Gen");
+                String specializare = rs.getString("Specializare");
+                Double oraStart = rs.getDouble("OraStart");
+                Double oraEnd = rs.getDouble("OraEnd");
+                int ture = rs.getInt("Ture");
+                boolean tura;
+                if(ture ==1)
+                    tura = true;
+                else tura = false;
+
+                Asistent a = creareAsistent(id, last, first, data, varsta, gen, specializare, oraStart, oraEnd, tura);
+                listaAsistenti.add(a);
+            }
+            rs.close();
+
+        }
+        catch(SQLException se){
+
+        }
+        return listaAsistenti;
+    }
+
+    @Override
+    public void adaugaAsistentcDb(Connection connObj, Asistent m) {
+
+    }
+
+    @Override
+    public void updateVarstaAsistentDb(Connection connObj, int id, int varsta, String data) {
+
+    }
+
+    @Override
+    public void updateSpecializareAsistentDb(Connection connObj, int id, String specializare) {
+
+    }
+
+    @Override
+    public void getOrarAsistentDb(Connection connObj, int id) {
+
+    }
+
+    @Override
+    public Asistent getAsistentBySpecializareDb(Connection connObj, int specializare) {
+        return null;
+    }
+
+    @Override
+    public void deleteAsistentFromDb(Connection connObj, int id) {
+
     }
 }
