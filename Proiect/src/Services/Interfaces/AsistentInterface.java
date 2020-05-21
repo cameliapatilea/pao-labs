@@ -25,6 +25,6 @@ public interface AsistentInterface {
     void updateVarstaAsistentDb(Connection connObj, int id, int varsta, String data);
     void updateSpecializareAsistentDb(Connection connObj, int id, String specializare);
     void getOrarAsistentDb(Connection connObj, int id);
-    Asistent getAsistentBySpecializareDb(Connection connObj, int specializare);
+    Asistent getAsistentBySpecializareDb(Connection connObj, String specializare);
     void deleteAsistentFromDb(Connection connObj, int id);
 }

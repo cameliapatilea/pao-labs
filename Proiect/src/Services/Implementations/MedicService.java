@@ -153,7 +153,7 @@ public class MedicService implements MedicInterface {
 
         }
         catch(SQLException se){
-
+            se.printStackTrace();
         }
     return listaMedici;
     }
@@ -170,7 +170,7 @@ public class MedicService implements MedicInterface {
             stmt.executeUpdate(sql);
         }
         catch(SQLException se){
-
+            se.printStackTrace();
         }
     }
 
@@ -183,12 +183,12 @@ public class MedicService implements MedicInterface {
             String sql = "UPDATE Medici " +
                     "SET Varsta ='" + varsta + "' where Id=" + id;
             stmt.executeUpdate(sql);
-            sql = "UPDATE Pacienti " +
+            sql = "UPDATE Medici " +
                     "SET DataNasterii ='" + data + "' where Id=" + id;
             stmt.executeUpdate(sql);
         }
         catch(SQLException se){
-
+            se.printStackTrace();
         }
 
     }
@@ -204,7 +204,7 @@ public class MedicService implements MedicInterface {
             stmt.executeUpdate(sql);
         }
         catch(SQLException se){
-
+            se.printStackTrace();
         }
     }
 

@@ -150,7 +150,7 @@ public class AsistentService implements AsistentInterface {
                 Double oraEnd = rs.getDouble("OraEnd");
                 int ture = rs.getInt("Ture");
                 boolean tura;
-                if(ture ==1)
+                if(ture == 1)
                     tura = true;
                 else tura = false;
 
@@ -161,7 +161,7 @@ public class AsistentService implements AsistentInterface {
 
         }
         catch(SQLException se){
-
+            se.printStackTrace();
         }
         return listaAsistenti;
     }
@@ -181,29 +181,76 @@ public class AsistentService implements AsistentInterface {
             stmt.executeUpdate(sql);
         }
         catch(SQLException se){
-
+            se.printStackTrace();
         }
 
     }
 
     @Override
     public void updateVarstaAsistentDb(Connection connObj, int id, int varsta, String data) {
-
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("updateVarstaAsistentDb", timeStamp);
+        try{
+            Statement stmt = connObj.createStatement();
+            String sql = "UPDATE Asistenti " +
+                    "SET Varsta ='" + varsta + "' where Id=" + id;
+            stmt.executeUpdate(sql);
+            sql = "UPDATE Asistenti " +
+                    "SET DataNasterii ='" + data + "' where Id=" + id;
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
     }
 
     @Override
     public void updateSpecializareAsistentDb(Connection connObj, int id, String specializare) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("updateSpecializareAsistentDb", timeStamp);
+        try{
+            Statement stmt = connObj.createStatement();
+            String sql = "UPDATE Asistenti " +
+                    "SET Specializare ='" + specializare + "' where Id=" + id;
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+            se.printStackTrace();
 
+        }
     }
 
     @Override
     public void getOrarAsistentDb(Connection connObj, int id) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("getOrarMedicDb", timeStamp);
+        List<Asistent> listaAsistenti = getAllFromDb(connObj);
+        try{
+            Statement stmt = connObj.createStatement();
+            String sql = "SELECT LastName,FirstName,OraStart, OraEnd FROM Asistenti" +
+                    " WHERE id =" + id;
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                String nume = rs.getString("LastName");
+                String prenume = rs.getString("FirstName");
+                float oraStart = rs.getFloat("OraStart");
+                float oraStop = rs.getFloat("OraEnd");
 
+                String orar =  afiseazaProgram(nume, prenume, listaAsistenti);
+                System.out.println("Asistentul " + nume + " " + prenume + " lucreaza in intervalul orar " + orar);
+            }
+        }
+        catch (SQLException se){
+            se.printStackTrace();
+        }
     }
 
     @Override
-    public Asistent getAsistentBySpecializareDb(Connection connObj, int specializare) {
-        return null;
+    public Asistent getAsistentBySpecializareDb(Connection connObj, String specializare) {
+        List<Asistent> listaAsistenti = getAllFromDb(connObj);
+        Asistent cautat = getAsistentBySpecializare(listaAsistenti, specializare);
+       return cautat;
+
     }
 
     @Override

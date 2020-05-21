@@ -487,6 +487,7 @@ public class Main{
 
                                 listaAsistenti = asistentService.updateSpecializare(id, listaAsistenti, newSpecializare);
                                 ReadWriteService.scriereCSV(asistentiPath, Asistent.returnHeader(), Asistent.listToCSV(listaAsistenti));
+                                asistentService.updateSpecializareAsistentDb(connObj, id, newSpecializare);
 
 
                             }break;
@@ -502,9 +503,7 @@ public class Main{
                                 System.out.println("Prenume");
                                 String prenume = scan.next();
 
-                                String intervalOrar = asistentService.afiseazaProgram(nume, prenume, listaAsistenti);
-                                System.out.println("Asistentul  " + nume + " " + prenume + " lucreaza in intervalul orar urmator");
-                                System.out.println(intervalOrar);
+                                asistentService.getOrarAsistentDb(connObj, id);
                             }break;
                             case 5:{
                                 matrAsistenti = ReadWriteService.citireCSV(asistentiPath);
@@ -512,9 +511,11 @@ public class Main{
 
                                 System.out.println("Pentru a gasi un asistent cu o anumita specializare, introduceti numele specializarii:");
                                 String spec = scan.next();
-                                Asistent a = asistentService.getAsistentBySpecializare(listaAsistenti, spec);
+                                //Asistent a = asistentService.getAsistentBySpecializare(listaAsistenti, spec);
+                                Asistent a = asistentService.getAsistentBySpecializareDb(connObj, spec);
                                 System.out.println("Asistentul cu specializarea " + spec + " este:");
                                 System.out.println(a.toString());
+
 
                             }break;
                             case 6:{
@@ -767,6 +768,27 @@ public class Main{
                     System.out.println("Pentru a modifica valabilitatea unui concediu medical, introduceti 3");
 
                     System.out.println("Pentru a sterge un concediu medical din baza de date, introduceti 4");
+
+                    int y = scan.nextInt();
+                    while( y!= 0) {
+                        switch (y) {
+                            case 1:{
+                                break;
+                            }
+                            case 2:{
+                                break;
+                            }
+                            case 3:{
+                                break;
+                            }
+                            case 4:{
+                                break;
+                            }
+
+                        }
+                        System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");
+                        y = scan.nextInt();
+                    }
                     }
                 case 7: {
                         System.out.println("Bine ati venit la categoria Adeverinte medicale. Introduceti una din comenzile de mai jos:");
@@ -775,12 +797,48 @@ public class Main{
                         System.out.println("Pentru a adauga o noua adeverinta medicala, introduceti 3");
                         System.out.println("Pentru a modifica scopul unei adeverinte, introduceti 4");
                         System.out.println("Pentru a sterge o adeverinta medicala din baza de date, introduceti 5");
+                    int y = scan.nextInt();
+                    while( y!= 0) {
+                        switch (y) {
+                            case 1:{
+                                break;
+                            }
+                            case 2:{
+                                break;
+                            }
+                            case 3:{
+                                break;
+                            }
+                            case 4:{
+                                break;
+                            }
+                            case 5:{
+                                break;
+                            }
+                        }
+                        System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");
+                        y = scan.nextInt();
+                    }
                     }
                     break;
                 case 8: {
                         System.out.println("Bine ati venit la categoria Cabinet Medical. Introduceti una din comenzile de mai jos:");
                         System.out.println("Pentru a vizualiza datele despre cabinetul medical, introduceti 1");
                         System.out.println("Pentru a modifica adresa la care se gaseste cabinetul medical, introduceti 2");
+                    int y = scan.nextInt();
+                    while( y!= 0) {
+                        switch (y) {
+                            case 1:{
+                                break;
+                            }
+                            case 2:{
+                                break;
+                            }
+                        }
+                        System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");
+                        y = scan.nextInt();
+                    }
+
                     }
                     break;
                 }
