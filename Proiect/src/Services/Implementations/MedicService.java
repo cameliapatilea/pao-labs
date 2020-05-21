@@ -1,10 +1,16 @@
 package Services.Implementations;
 
 import Entities.Medic;
+import Entities.Pacient;
 import Helpers.AuditService;
 import Services.Interfaces.MedicInterface;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MedicService implements MedicInterface {
@@ -115,5 +121,84 @@ public class MedicService implements MedicInterface {
                 break;
             }
         return  x + "-" + y;
+    }
+
+    @Override
+    public List<Medic> getAllFromDb(Connection connObj) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("getAllFromDbMedici", timeStamp);
+        List<Medic> listaMedici= new ArrayList<>() ;
+        try{
+
+            Statement stmt = connObj.createStatement();
+
+            String sql = "SELECT Id, LastName, FirstName,DataNasterii,Varsta, Gen, Specializare, OraStart,OraEnd, CodParafa FROM Medici";
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                //Retrieve by column name
+                int id  = rs.getInt("Id");
+                String last = rs.getString("LastName");
+                String first = rs.getString("FirstName");
+                String data = rs.getString("DataNasterii");
+                int varsta = rs.getInt("Varsta");
+                String gen = rs.getString("Gen");
+                String specializare = rs.getString("Specializare");
+                Double oraStart = rs.getDouble("OraStart");
+                Double oraEnd = rs.getDouble("OraEnd");
+                int CodParafa = rs.getInt("CodParafa");
+                Medic m = creareMedic(id, last, first, data, varsta, gen, specializare, oraStart, oraEnd, CodParafa);
+                listaMedici.add(m);
+            }
+            rs.close();
+
+        }
+        catch(SQLException se){
+
+        }
+    return listaMedici;
+    }
+
+    @Override
+    public void adaugaMedicDb(Connection connObj, Medic m) {
+        try{
+            Statement stmt = connObj.createStatement();
+
+            String sql  = "INSERT INTO Medici " + "VALUES(" + m.getID() + ",'" + m.getNume() + "','" + m.getPrenume() + "','" + m.getDataNasterii() +
+                    "'," + m.getVarsta() + ",'" + m.getGen() + "','" + m.getSpecializare() + "'," + m.getOraStart() + ","  + m.getOraEnd() + "," + m.getCodParafa() +")";
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+
+        }
+    }
+
+    @Override
+    public void updateVarstaMedicDb(Connection connObj, int id, int varsta, String data) {
+
+    }
+
+    @Override
+    public void updateSpecializareMedicDb(Connection connObj, int id, String specializare) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("updateSpecializareMedicDb", timeStamp);
+        try{
+            Statement stmt = connObj.createStatement();
+            String sql = "UPDATE Medici " +
+                    "SET Specializare ='" + specializare + "' where Id=" + id;
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+
+        }
+    }
+
+    @Override
+    public void getOrarDb(Connection connObj, int id) {
+
+    }
+
+    @Override
+    public void deleteMedicFromDb(Connection connObj, int id) {
+
     }
 }

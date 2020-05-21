@@ -1,7 +1,9 @@
 package Services.Interfaces;
 
 import Entities.Medic;
+import Entities.Pacient;
 
+import java.sql.Connection;
 import java.util.List;
 
 public interface MedicInterface {
@@ -14,4 +16,11 @@ public interface MedicInterface {
     Medic updateNume(Medic m, String nume);
     String afiseazaSpecializare(String nume, String prenume, List<Medic> medici);
     String afiseazaIntervalOrar(String nume, String prenume, List<Medic> medici);
+
+    List<Medic> getAllFromDb(Connection connObj);
+    void adaugaMedicDb(Connection connObj, Medic m);
+    void updateVarstaMedicDb(Connection connObj, int id, int varsta, String data);
+    void updateSpecializareMedicDb(Connection connObj, int id, String specializare);
+    void getOrarDb(Connection connObj, int id);
+    void deleteMedicFromDb(Connection connObj, int id);
 }

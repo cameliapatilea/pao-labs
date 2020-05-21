@@ -174,7 +174,7 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()){
 
-                //Retrieve by column name
+
                 int id  = rs.getInt("Id");
                 String last = rs.getString("LastName");
                 String first = rs.getString("FirstName");
@@ -183,17 +183,9 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
                 String gen = rs.getString("Gen");
                 String afect = rs.getString("Afectiuni");
                 List<String> afectiuni = Arrays.asList(afect.split(" "));
-                //Pacient p =new Pacient(id, last,first, data,varsta,gen, afectiuni);
-                Pacient p = crearePacient(id, last,first, data,varsta,gen, afectiuni);
-                //Display values
-                /*System.out.println("ID: " + id);
 
-                System.out.println("FirstName: " + first);
-                System.out.println("LastName: " + last);
-                System.out.println("DataNasterii: " + data);
-                System.out.println("Varsta: " + varsta);
-                System.out.println("Gen: " + gen);
-                System.out.println("Afectiuni: " + afect);*/
+                Pacient p = crearePacient(id, last,first, data,varsta,gen, afectiuni);
+
                 listaPacienti.add(p);
             }
             rs.close();
