@@ -580,6 +580,7 @@ public class Main{
                     System.out.println("Pentru a modifica specializarea unui asistent, introduceti 3.");
                     System.out.println("Pentru a afla programul de lucru al unui asistent, introduceti 4");
                     System.out.println("Pentru a gasi un asistent cu o anumita specializare, introduceti 5.");
+                    System.out.println("Pentru a sterge un asistent din baza de date, introduceti 6.");
 
                     int y = scan.nextInt();
                     while (y != 0) {
@@ -682,6 +683,8 @@ public class Main{
                     System.out.println("Pentru a afisa lista retetelor deja existente in sistem, introduceti 1");
                     System.out.println("Pentru a adauga o reteta introduceti 2");
                     System.out.println("Pentru a afisa lista de medicamente a unui pacienti, introduceti 3");
+                    System.out.println("Pentru a modifica data eliberarii unei etete, introduceti 4");
+                    System.out.println("Pentru a sterge o reteta din baza de date, introduceti 5");
 
 
                     int y = scan.nextInt();
@@ -780,10 +783,11 @@ public class Main{
                 case 5: {
                         System.out.println("Bine ati venit la categoria Trimiteri Medicale. Introduceti una din comenzile de mai jos:");
                         System.out.println("Pentru a afisa lista de trimiteri, introduceti 1");
-                        System.out.println("Pentru a updata scopul unei trimiteri, introduceti 2");
-                        System.out.println("Pentru a updata valabilitatea unei trimiteri, introduceti 3");
+                        System.out.println("Pentru a modifica scopul unei trimiteri, introduceti 2");
+                        System.out.println("Pentru a modifica valabilitatea unei trimiteri, introduceti 3");
                         System.out.println("Pentru a adauga o noua trimitere in sistem, introduceti 4");
                         System.out.println("Pentru a obtine scopul unei trimiteri pentru un anumit pacient, introduceti 5");
+                        System.out.println("Pentru a sterge o trimitere medicala din baza de date, introduceti 6");
                         int y = scan.nextInt();
                         while( y!= 0){
                             switch(y){
@@ -906,13 +910,25 @@ public class Main{
                     break;
                 case 6: {
                         System.out.println("Bine ati venit la categoria Concedii Medicale. Introduceti una din comenzile de mai jos:");
+                    System.out.println("Pentru a afisa lista de concedii medicale, introduceti 1");
+                    System.out.println("Pentru a adauga un nou concediu, introduceti 2");
+                    System.out.println("Pentru a modifica valabilitatea unui concediu medical, introduceti 3");
+
+                    System.out.println("Pentru a sterge un concediu medical din baza de date, introduceti 4");
                     }
                 case 7: {
                         System.out.println("Bine ati venit la categoria Adeverinte medicale. Introduceti una din comenzile de mai jos:");
+                        System.out.println("Pentru a vizualiza adeverintele medicale din baza de date, introduceti 1");
+                        System.out.println("Pentru a modifica daca pacientul figureaza apt sau nu, introduceti 2");
+                        System.out.println("Pentru a adauga o noua adeverinta medicala, introduceti 3");
+                        System.out.println("Pentru a modifica scopul unei adeverinte, introduceti 4");
+                        System.out.println("Pentru a sterge o adeverinta medicala din baza de date, introduceti 5");
                     }
                     break;
                 case 8: {
                         System.out.println("Bine ati venit la categoria Cabinet Medical. Introduceti una din comenzile de mai jos:");
+                        System.out.println("Pentru a vizualiza datele despre cabinetul medical, introduceti 1");
+                        System.out.println("Pentru a modifica adresa la care se gaseste cabinetul medical, introduceti 2");
                     }
                     break;
                 }
