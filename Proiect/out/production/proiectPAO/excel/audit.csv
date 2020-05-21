@@ -1,4 +1,4 @@
-Comanda,Data,Ora
+Comanda,Data,Ora,ThreadName
 afiseazaPacienti,2020.04.25,14.36.13
 afiseazaPacienti,2020.04.25,14.40.52
 crearePacient,2020/04/25,14:46.:18
@@ -26,3 +26,17 @@ creareMedic,2020/05/20,21:31:29
 updateSpecializare,2020/05/20,21:36:20
 updateVarsta,2020/05/20,21:37:02
 updateSpecializare,2020/05/20,21:38:38
+afiseazaPacienti,2020/05/21,11:30:06
+getAllFromDb,2020/05/21,11:33:06
+crearePacient,2020/05/21,11:33:06
+crearePacient,2020/05/21,11:33:06
+crearePacient,2020/05/21,11:33:06
+crearePacient,2020/05/21,11:33:06
+crearePacient,2020/05/21,11:33:06
+crearePacient,2020/05/21,11:33:06
+crearePacient,2020/05/21,11:33:06
+crearePacient,2020/05/21,11:33:06
+crearePacient,2020/05/21,11:33:06
+crearePacient,2020/05/21,11:33:06
+crearePacient,2020/05/21,11:33:06
+afiseazaPacienti,2020/05/21,11:33:06

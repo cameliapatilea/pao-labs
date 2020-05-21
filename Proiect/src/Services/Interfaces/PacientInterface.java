@@ -2,6 +2,7 @@ package Services.Interfaces;
 
 import Entities.Pacient;
 
+import java.sql.Connection;
 import java.util.List;
 
 public interface PacientInterface {
@@ -17,5 +18,6 @@ public interface PacientInterface {
     Pacient updateVarsta(Pacient pacient, int varsta);
     List<Pacient> adaugaPacientLaLista(Pacient pacient, List<Pacient> pacienti);
     Pacient crearePacient(int id, String nume, String prenume, String dataNasterii, int varsta,  String gen, List<String> afectiuni);
-
+    List<Pacient> getAllFromDb( Connection connObj);
+    void adaugaPacientDb(Connection connObj, Pacient p);
 }

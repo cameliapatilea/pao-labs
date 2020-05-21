@@ -183,36 +183,7 @@ public class Main{
                             /*matrPacienti = ReadWriteService.citireCSV(pacientiPath);
                             pacienti = Pacient.getListFromCSV(matrPacienti);
                             pacientService.afiseazaPacienti(pacienti);*/
-                                try{
-                                    stmt = connObj.createStatement();
-
-                                    String sql = "SELECT Id, LastName, FirstName,DataNasterii,Varsta, Gen, Afectiuni FROM Pacienti";
-                                    ResultSet rs = stmt.executeQuery(sql);
-                                    while(rs.next()){
-                                        //Retrieve by column name
-                                        int id  = rs.getInt("Id");
-                                        String last = rs.getString("LastName");
-                                        String first = rs.getString("FirstName");
-                                        String data = rs.getString("DataNasterii");
-                                        int varsta = rs.getInt("Varsta");
-                                        String gen = rs.getString("Gen");
-                                        String afect = rs.getString("Afectiuni");
-
-                                        //Display values
-                                        System.out.println("ID: " + id);
-
-                                        System.out.println("FirstName: " + first);
-                                        System.out.println("LastName: " + last);
-                                        System.out.println("DataNasterii: " + data);
-                                        System.out.println("Varsta: " + varsta);
-                                        System.out.println("Gen: " + gen);
-                                        System.out.println("Afectiuni: " + afect);
-                                    }
-                                    rs.close();
-                                }
-                                catch(SQLException se){
-                                    se.printStackTrace();
-                                }
+                            pacientService.afiseazaPacienti(pacientService.getAllFromDb(connObj));
 
                                 break;
                             }
@@ -220,9 +191,6 @@ public class Main{
                             {
                              /*matrPacienti = ReadWriteService.citireCSV(pacientiPath);
                              pacienti = Pacient.getListFromCSV(matrPacienti);*/
-                            try{
-                                stmt = connObj.createStatement();
-
                                 Pacient p = new Pacient();
                                 System.out.println("Pentru a adauga un pacient in baza de date, introduceti urmatoarele date:\n");
                                 System.out.println("ID: ");
@@ -250,12 +218,7 @@ public class Main{
                                 p = pacientService.crearePacient(id, nume,prenume,dataNasterii,varsta, gen, listaAfectiuni);
                                 pacienti.add(p);
                                 Collections.sort(pacienti);
-                                String sql  = "INSERT INTO Pacienti " + "VALUES(" + id + ",'" + nume + "','" + prenume + "','" + dataNasterii + "'," + varsta + ",'" + gen + "','" + listaAfectiuni.toString() + "')";
-                                stmt.executeUpdate(sql);
-                            }
-                           catch(SQLException se){
-                               se.printStackTrace();
-                           }
+                                pacientService.adaugaPacientDb(connObj, p);
                                 //ReadWriteService.scriereCSV(pacientiPath, Pacient.returnHeader(), Pacient.listToCSV(pacienti));
 
                                 break;

@@ -5,8 +5,14 @@ import Helpers.AuditService;
 import Services.Interfaces.PacientInterface;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class PacientService extends GeneralService<Pacient> implements PacientInterface {
@@ -15,7 +21,7 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
             List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
             comanda += " " + timp;
             matrice.add(comanda);
-            AuditService.scriereCSVAudit("src/excel/audit.csv", new String[]{"Comanda","Data", "Ora"}, matrice);
+            AuditService.scriereCSVAudit("src/excel/audit.csv", new String[]{"Comanda","Data", "Ora", "ThreadName"}, matrice);
     }
 
     @Override
@@ -153,6 +159,65 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
         citesteScrieAudit("crearePacient", timeStamp);
         Pacient p = new Pacient(id, nume, prenume, dataNasterii, varsta, gen, afectiuni);
         return p;
+    }
+
+    @Override
+    public List<Pacient> getAllFromDb(Connection connObj) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("getAllFromDb", timeStamp);
+        List<Pacient> listaPacienti = new ArrayList<>() ;
+        try{
+            Statement stmt = null;
+            stmt = connObj.createStatement();
+
+            String sql = "SELECT Id, LastName, FirstName,DataNasterii,Varsta, Gen, Afectiuni FROM Pacienti";
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+
+                //Retrieve by column name
+                int id  = rs.getInt("Id");
+                String last = rs.getString("LastName");
+                String first = rs.getString("FirstName");
+                String data = rs.getString("DataNasterii");
+                int varsta = rs.getInt("Varsta");
+                String gen = rs.getString("Gen");
+                String afect = rs.getString("Afectiuni");
+                List<String> afectiuni = Arrays.asList(afect.split(" "));
+                //Pacient p =new Pacient(id, last,first, data,varsta,gen, afectiuni);
+                Pacient p = crearePacient(id, last,first, data,varsta,gen, afectiuni);
+                //Display values
+                /*System.out.println("ID: " + id);
+
+                System.out.println("FirstName: " + first);
+                System.out.println("LastName: " + last);
+                System.out.println("DataNasterii: " + data);
+                System.out.println("Varsta: " + varsta);
+                System.out.println("Gen: " + gen);
+                System.out.println("Afectiuni: " + afect);*/
+                listaPacienti.add(p);
+            }
+            rs.close();
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
+        return listaPacienti;
+    }
+
+    @Override
+    public void adaugaPacientDb(Connection connObj, Pacient p) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("adaugaPacientDb", timeStamp);
+        try{
+            Statement stmt = connObj.createStatement();
+
+
+            String sql  = "INSERT INTO Pacienti " + "VALUES(" + p.getID() + ",'" + p.getNume() + "','" + p.getPrenume() + "','" + p.getDataNasterii()+ "'," + p.getVarsta() + ",'" + p.getGen() + "','" + p.getAfectiuni().toString() + "')";
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
     }
 
 
