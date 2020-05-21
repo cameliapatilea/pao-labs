@@ -467,6 +467,7 @@ public class Main{
                                 listaAsistenti.add(a);
 
                                 ReadWriteService.scriereCSV(asistentiPath, Asistent.returnHeader(), Asistent.listToCSV(listaAsistenti));
+                                asistentService.adaugaAsistentcDb(connObj, a);
 
                             }break;
 
@@ -516,6 +517,13 @@ public class Main{
                                 System.out.println(a.toString());
 
                             }break;
+                            case 6:{
+                                System.out.println("Pentru a sterge un asistent din baza de date introduceti id-ul aferent asistentului");
+                                System.out.println("ID: ");
+                                int id = scan.nextInt();
+                                medicService.deleteMedicFromDb(connObj, id);
+                                break;
+                            }
                         }
                         System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");
                         y = scan.nextInt();

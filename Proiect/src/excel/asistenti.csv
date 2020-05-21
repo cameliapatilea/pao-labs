@@ -5,3 +5,6 @@ ID,nume,prenume,dataNasterii,varsta,gen,specializare,oraStart,oraEnd,ture
 4,andrei,andreea,4/4/1996,24,feminin,neurologie,12.0,16.0,true
 5,bla,bla,2/2/1998,22,feminin,radiologie,10.0,14.0,false
 6,metre,sisi,4/5/1980,40,feminin,radiologie,8.0,14.0,false
+7,popescu,razvan,2/2/1956,64,masculin,neurochirugie,8.0,16.0,true
+7,popescu,marius,2/2/1960,60,masculin,neurochirurgie,8.0,16.0,true
+7,popescu,marius,2/2/1970,50,masculin,neuochirurgie,8.0,14.0,true

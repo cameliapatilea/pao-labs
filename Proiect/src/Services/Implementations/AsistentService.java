@@ -167,7 +167,22 @@ public class AsistentService implements AsistentInterface {
     }
 
     @Override
-    public void adaugaAsistentcDb(Connection connObj, Asistent m) {
+    public void adaugaAsistentcDb(Connection connObj, Asistent a) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("AdaugaAsistentDb", timeStamp);
+        try{
+            Statement stmt = connObj.createStatement();
+            int tura;
+            if(a.getTure() == true)
+                tura = 1;
+            else tura = 0;
+            String sql  = "INSERT INTO Asistenti " + "VALUES(" + a.getID() + ",'" + a.getNume() + "','" + a.getPrenume() + "','" + a.getDataNasterii() +
+                    "'," + a.getVarsta() + ",'" + a.getGen() + "','" + a.getSpecializare() + "'," + a.getOraStart() + ","  + a.getOraEnd() + "," +tura +")";
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+
+        }
 
     }
 
@@ -193,6 +208,17 @@ public class AsistentService implements AsistentInterface {
 
     @Override
     public void deleteAsistentFromDb(Connection connObj, int id) {
-
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("deleteAsistentFromDb", timeStamp);
+        try{
+            Statement  stmt = connObj.createStatement();
+            String sql = "DELETE FROM Asistenti " +
+                    "WHERE id = " + id;
+            stmt.executeUpdate(sql);
+            System.out.println("Delete completed");
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
     }
 }
