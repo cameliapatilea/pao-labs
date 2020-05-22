@@ -792,25 +792,70 @@ public class Main{
                         switch (y) {
                             case 1:{
                                 System.out.println("Lista de concedii medicale este:");
-
                                 concediuService.afiseazaConcedii(concediuService.getConcediiFromDb(connObj));
-
                                 break;
                             }
                             case 2:{
+                                System.out.println("Pentru a adauga un nu concediu medical in sistem, introduceti datele necesare");
+
+                                System.out.println("ID: ");
+                                int id = scan.nextInt();
+                                System.out.println("Nume: ");
+                                String nume = scan.next();
+                                System.out.println("Prenume");
+                                String prenume = scan.next();
+                                System.out.println("Data nasterii, sub forma ll/dd/aaaa");
+                                String dataNasterii = scan.next();
+                                System.out.println("Varsta: ");
+                                int varsta = scan.nextInt();
+                                System.out.println("Gen:");
+                                String gen = scan.next();
+                                int nr;
+                                System.out.println("Numarul de afectiuni pe care le are pacientul: ");
+                                nr = scan.nextInt();
+                                List<String> listaAfectiuni = new ArrayList<String>();
+                                for(int i = 0;  i<  nr; i++)
+                                {
+                                    System.out.println("Introduceti afectiunea: ");
+                                    String afect = scan.next();
+                                    listaAfectiuni.add(afect);
+                                }
+                                Pacient p = pacientService.crearePacient(id, nume,prenume,dataNasterii,varsta, gen, listaAfectiuni);
+
+
+                                System.out.println("Eliberate de catre:");
+                                System.out.println("Nume doctor:");
+                                String numeDoc = scan.next();
+                                System.out.println("Prenume doctor");
+                                String prenumeDoc = scan.next();
+                                numeDoc += " " + prenumeDoc;
+                                System.out.println("Eliberat la data de:");
+                                String eliberatLa = scan.next();
+                                System.out.println("Nr zile concediu:");
+                                int nrZile = scan.nextInt();
+                                System.out.println("Data de final");
+                                String DataFinal = scan.next();
+
+                                ConcediuMedical cm = concediuService.creareCerereConcediu(p,numeDoc, eliberatLa, nrZile, DataFinal);
+                                concediuService.createConcediuDb(connObj, cm);
+
                                 break;
                             }
                             case 3:{
+                                System.out.println("");
                                 break;
                             }
                             case 4:{
+                                System.out.println("Pentru a sterge un concediu din baza de date, introduceti id-ul concediului");
+                                int id = scan.nextInt();
+                                concediuService.deleteConcediuDb(connObj, id);
                                 break;
                             }
 
                         }
                         System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");
                         y = scan.nextInt();
-                    }
+                    }break;
                     }
                 case 7: {
                         System.out.println("Bine ati venit la categoria Adeverinte medicale. Introduceti una din comenzile de mai jos:");

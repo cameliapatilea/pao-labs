@@ -117,6 +117,20 @@ public class ConcediuMedicalService implements ConcediuMedicalInterface {
 
     @Override
     public void createConcediuDb(Connection connObj, ConcediuMedical cm) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("createConcediuDb", timeStamp);
+        try{
+            Statement stmt = connObj.createStatement();
+
+
+            String sql  = "INSERT INTO ConcediiMedicale " + "VALUES(" + cm.getPacient().getID()+ ",'" + cm.getPacient().getNume()+ "','" + cm.getPacient().getPrenume() +
+                    "','" +  cm.getPacient().getDataNasterii()+ "'," +  cm.getPacient().getVarsta() + ",'" +  cm.getPacient().getGen() + "','"
+                     + cm.getEliberatDe() + "','" +cm.getEliberatLa() + "'," + cm.getNrZileConcediu() + ",'"+cm.getDataFinal()+"'," + cm.getPacient().getID()+ ",'"+ cm.getPacient().getAfectiuni().toString()+ "')";
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
 
     }
 
