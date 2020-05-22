@@ -870,26 +870,75 @@ public class Main{
                         System.out.println("Pentru a vizualiza adeverintele medicale din baza de date, introduceti 1");
                         System.out.println("Pentru a modifica daca pacientul figureaza apt sau nu, introduceti 2");
                         System.out.println("Pentru a adauga o noua adeverinta medicala, introduceti 3");
-                        System.out.println("Pentru a modifica scopul unei adeverinte, introduceti 4");
-                        System.out.println("Pentru a sterge o adeverinta medicala din baza de date, introduceti 5");
+
+                        System.out.println("Pentru a sterge o adeverinta medicala din baza de date, introduceti 4");
                     int y = scan.nextInt();
                     while( y!= 0) {
                         switch (y) {
                             case 1:{
+                                System.out.println("Adeverintele medicale din baza de date sunt:");
+                                adeverintaService.afiseazaAdeverinte(adeverintaService.getAdeverinteFromDb(connObj));
                                 break;
                             }
                             case 2:{
+                                System.out.println("Pentru a adauga o adeverinta medicala in baza de date, introduceti datele necesare:");
+                                System.out.println("ID: ");
+                                int id = scan.nextInt();
+                                System.out.println("Nume: ");
+                                String nume = scan.next();
+                                System.out.println("Prenume");
+                                String prenume = scan.next();
+                                System.out.println("Data nasterii, sub forma ll/dd/aaaa");
+                                String dataNasterii = scan.next();
+                                System.out.println("Varsta: ");
+                                int varsta = scan.nextInt();
+                                System.out.println("Gen:");
+                                String gen = scan.next();
+                                int nr;
+                                System.out.println("Numarul de afectiuni pe care le are pacientul: ");
+                                nr = scan.nextInt();
+                                List<String> listaAfectiuni = new ArrayList<String>();
+                                for(int i = 0;  i<  nr; i++)
+                                {
+                                    System.out.println("Introduceti afectiunea: ");
+                                    String afect = scan.next();
+                                    listaAfectiuni.add(afect);
+                                }
+                                Pacient p = pacientService.crearePacient(id, nume,prenume,dataNasterii,varsta, gen, listaAfectiuni);
+
+
+                                System.out.println("Eliberate de catre:");
+                                System.out.println("Nume doctor:");
+                                String numeDoc = scan.next();
+                                System.out.println("Prenume doctor");
+                                String prenumeDoc = scan.next();
+                                numeDoc += " " + prenumeDoc;
+                                System.out.println("Eliberat la data de:");
+                                String eliberatLa = scan.next();
+                                System.out.println("Scop");
+                                String scop = scan.next();
+                                System.out.println("Apt sau nu, se va completa cu true sau false");
+                                boolean apt = scan.nextBoolean();
+
+                                AdeverintaMedicala am = adeverintaService.creareAdeverinta(p, numeDoc, eliberatLa, apt, scop);
+                                adeverintaService.createAdeverintaDb(connObj, am);
                                 break;
                             }
                             case 3:{
+                                System.out.println("Pentru a modifica daca pacientul este apt sau nu pt un anumit scop, introduceti id-ul si daca e apt sau nu");
+                                int id = scan.nextInt();
+                                System.out.println("Apt sau nu, se va completa cu true sau false");
+                                boolean apt = scan.nextBoolean();
+                                adeverintaService.modificaAptDb(connObj, id, apt);
                                 break;
                             }
                             case 4:{
+                                System.out.println("Pentru a strge o adeverinta medicala din baza de date, introduceti id-ul adeverintei:");
+                                int id = scan.nextInt();
+                                adeverintaService.deleteAdeverintaDb(connObj, id);
                                 break;
                             }
-                            case 5:{
-                                break;
-                            }
+
                         }
                         System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");
                         y = scan.nextInt();
