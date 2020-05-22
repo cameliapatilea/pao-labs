@@ -785,13 +785,16 @@ public class Main{
                     System.out.println("Pentru a afisa lista de concedii medicale, introduceti 1");
                     System.out.println("Pentru a adauga un nou concediu, introduceti 2");
                     System.out.println("Pentru a modifica valabilitatea unui concediu medical, introduceti 3");
-
                     System.out.println("Pentru a sterge un concediu medical din baza de date, introduceti 4");
 
                     int y = scan.nextInt();
                     while( y!= 0) {
                         switch (y) {
                             case 1:{
+                                System.out.println("Lista de concedii medicale este:");
+
+                                concediuService.afiseazaConcedii(concediuService.getConcediiFromDb(connObj));
+
                                 break;
                             }
                             case 2:{

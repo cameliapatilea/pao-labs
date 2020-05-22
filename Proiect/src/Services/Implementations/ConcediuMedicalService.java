@@ -2,11 +2,18 @@ package Services.Implementations;
 
 import Entities.ConcediuMedical;
 import Entities.Pacient;
+import Entities.TrimitereMedicala;
 import Helpers.AuditService;
 import Services.Interfaces.ConcediuMedicalInterface;
 import com.sun.java.browser.plugin2.liveconnect.v1.ConversionDelegate;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ConcediuMedicalService implements ConcediuMedicalInterface {
@@ -67,5 +74,70 @@ public class ConcediuMedicalService implements ConcediuMedicalInterface {
                lista.remove(i);
            }
        return lista;
+    }
+
+    @Override
+    public List<ConcediuMedical> getConcediiFromDb(Connection connObj) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("getConcediiFromDb", timeStamp);
+        List<ConcediuMedical> listaConcedii = new ArrayList<>();
+        try {
+            Statement stmt = connObj.createStatement();
+
+            String sql = "SELECT Id, LastName, FirstName,DataNasterii,Varsta, Gen, Afectiuni,EliberatDe, EliberatLa,ZileConcediu, DataFinal, IdPacient  FROM ConcediiMedicale";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                //Retrieve by column name
+                int id = rs.getInt("Id");
+                String last = rs.getString("LastName");
+                String first = rs.getString("FirstName");
+                String data = rs.getString("DataNasterii");
+                int varsta = rs.getInt("Varsta");
+                String gen = rs.getString("Gen");
+
+
+                String eliberatDe = rs.getString("EliberatDe");
+                String eliberatLa = rs.getString("EliberatLa");
+                int zileCncediu = rs.getInt("ZileConcediu");
+                String dataFinal = rs.getString("DataFinal");
+                String afec = rs.getString("Afectiuni");
+                List<String> afectiuni = Arrays.asList(afec.split(" "));
+                Pacient p = new Pacient(id, last, first, data, varsta, gen, afectiuni);
+                ConcediuMedical cm  = creareCerereConcediu(p, eliberatDe, eliberatLa, zileCncediu, dataFinal);
+                listaConcedii.add(cm);
+            }
+        }
+
+        catch(SQLException se){
+            se.printStackTrace();
+        }
+        return listaConcedii;
+    }
+
+    @Override
+    public void createConcediuDb(Connection connObj, ConcediuMedical cm) {
+
+    }
+
+    @Override
+    public void modificaValabilitateDb(Connection connObj, int id, int val, String dataFinal) {
+
+    }
+
+    @Override
+    public void deleteConcediuDb(Connection connObj, int id) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("deleteConcediuDb", timeStamp);
+        try{
+            Statement  stmt = connObj.createStatement();
+            String sql = "DELETE FROM ConcediiMedicale " +
+                    "WHERE id = " + id;
+            stmt.executeUpdate(sql);
+            System.out.println("Delete completed");
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
     }
 }
