@@ -953,9 +953,14 @@ public class Main{
                     while( y!= 0) {
                         switch (y) {
                             case 1:{
+                                System.out.println("Datele despre cabinetul medical:");
+                                cabinetService.getDetaliiCabinetFromDb(connObj);
                                 break;
                             }
                             case 2:{
+                                System.out.println("Pentru a modifica adresa la care se gaseste cabinetul medical, introduceti numele strazii");
+                                String strada = scan.next();
+
                                 break;
                             }
                         }

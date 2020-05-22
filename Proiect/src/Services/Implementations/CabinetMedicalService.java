@@ -1,13 +1,16 @@
 package Services.Implementations;
 
-import Entities.Asistent;
-import Entities.CabinetMedical;
-import Entities.Medic;
-import Entities.Pacient;
+import Entities.*;
 import Helpers.AuditService;
 import Services.Interfaces.CabinetMedicalInterface;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CabinetMedicalService implements CabinetMedicalInterface {
@@ -85,5 +88,42 @@ public class CabinetMedicalService implements CabinetMedicalInterface {
         for(int i = 0; i <  listaPacienti.size(); i++)
             x+=listaPacienti.get(i).toString() + "\n";
         return x;
+    }
+
+    @Override
+    public void getDetaliiCabinetFromDb(Connection connObj) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("getDetaliiCabinetFromDb", timeStamp);
+
+        try {
+            Statement stmt = connObj.createStatement();
+
+            String sql = "SELECT Id,NumarPacienti, NumarMedici, NumarAsistenti, AdresaCabinet, OraInceput, OraStop   FROM CabinetMedical";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                //Retrieve by column name
+                int id = rs.getInt("Id");
+                int pacienti = rs.getInt("NumarPacienti");
+                int medici = rs.getInt("NumarMedici");
+                int asistenti = rs.getInt("NumarAsistenti");
+                String adresa = rs.getString("AdresaCabinet");
+                int oraInceput = rs.getInt("OraInceput");
+                int oraSfarsit = rs.getInt("OraStop");
+
+                System.out.println("Cabinetul medical are " + pacienti + " pacienti, " + medici + " medici, " + asistenti + " asistenti.");
+                System.out.println("Adresa la care se afla este " + adresa);
+                System.out.println("Intervalul orar in care activeaza este " + oraInceput +"-" + oraSfarsit);
+            }
+        }
+
+        catch(SQLException se){
+            se.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateStradaDb(Connection connObj, String strada) {
+
     }
 }

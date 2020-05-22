@@ -5,6 +5,7 @@ import Entities.CabinetMedical;
 import Entities.Medic;
 import Entities.Pacient;
 
+import java.sql.Connection;
 import java.util.List;
 
 public interface CabinetMedicalInterface {
@@ -16,6 +17,9 @@ public interface CabinetMedicalInterface {
         String getMedici(List<Medic> listaMedici);
         String getAsistenti(List<Asistent> listaAsistenti);
         String getPacienti(List<Pacient> listaPacienti);
+
+        void getDetaliiCabinetFromDb(Connection connObj);
+        void updateStradaDb(Connection connObj, String strada);
 
 
 }
