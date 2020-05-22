@@ -4,6 +4,7 @@ import Entities.Medic;
 import Entities.Pacient;
 import Entities.TrimitereMedicala;
 
+import java.sql.Connection;
 import java.util.List;
 
 public interface TrimitereMedicalaInterface {
@@ -11,8 +12,13 @@ public interface TrimitereMedicalaInterface {
     TrimitereMedicala creareTrimitere(Pacient pacient, String eliberatDe, String eliberatLa, int valabilitate, String scop, String catre);
     void afiseazaTrimiteri(List<TrimitereMedicala> trimiteri);
     TrimitereMedicala getFromListById(List<TrimitereMedicala> lista, int id);
-    List<TrimitereMedicala> getAllTrimiteri(List<TrimitereMedicala> lista);
+    List<TrimitereMedicala> getAllTrimiteriFromDb(Connection connObj, List<TrimitereMedicala> lista);
     List<TrimitereMedicala> updateScop(int id, List<TrimitereMedicala> trimiteri, String scop);
     List<TrimitereMedicala> updateValabilitate(int id, List<TrimitereMedicala> trimiteri, int valabilitate);
     String obtineScop(int id, List<TrimitereMedicala> trimiteri);
+    void creareTrimitereDb(Connection connObj, TrimitereMedicala tm);
+    void modificareScopDb(Connection connObj, int id, String scop);
+    void modificareValabilitateDb(Connection connObj, int id, int val);
+    void selectScopDb(Connection connObj, int id);
+    void deleteTrimitereMedicalaDb(Connection connObj, int id);
 }

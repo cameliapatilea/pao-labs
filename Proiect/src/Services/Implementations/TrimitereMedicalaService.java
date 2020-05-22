@@ -5,6 +5,7 @@ import Entities.TrimitereMedicala;
 import Helpers.AuditService;
 import Services.Interfaces.TrimitereMedicalaInterface;
 
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -49,12 +50,10 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     }
 
     @Override
-    public List<TrimitereMedicala> getAllTrimiteri(List<TrimitereMedicala> lista)
-    {
-        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getFromListById", timeStamp);
-        return lista;
+    public List<TrimitereMedicala> getAllTrimiteriFromDb(Connection connObj, List<TrimitereMedicala> lista) {
+        return null;
     }
+    
 
     @Override
     public List<TrimitereMedicala> updateScop(int id, List<TrimitereMedicala> trimiteri, String scop) {
@@ -102,6 +101,31 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
             }
         }
         return scop;
+    }
+
+    @Override
+    public void creareTrimitereDb(Connection connObj, TrimitereMedicala tm) {
+
+    }
+
+    @Override
+    public void modificareScopDb(Connection connObj, int id, String scop) {
+
+    }
+
+    @Override
+    public void modificareValabilitateDb(Connection connObj, int id, int val) {
+
+    }
+
+    @Override
+    public void selectScopDb(Connection connObj, int id) {
+
+    }
+
+    @Override
+    public void deleteTrimitereMedicalaDb(Connection connObj, int id) {
+
     }
 
 
