@@ -581,7 +581,7 @@ public class Main{
                                 }
                                 Pacient pacient = new Pacient();
                                 pacient = pacientService.crearePacient(id, nume,prenume,dataNasterii,varsta, gen, listaAfectiuni);
-                                System.out.println("Reteta a fost eliberata de ");
+                                System.out.println("Reteta a fost eliberata de: ");
                                 System.out.println("Nume:");
                                 String numeDoctor = scan.next();
                                 System.out.println("Prenume:");
@@ -603,6 +603,7 @@ public class Main{
                                 Reteta r = retetaService.creareReteta(pacient, numeDoctor, eliberataLa, medicamente);
                                 listaRetete.add(r);
                                 ReadWriteService.scriereCSV(retetePath, Reteta.returnHeader(), Reteta.listToCSV(listaRetete));
+                                retetaService.createRetetaForDb(connObj, r);
 
                             } break;
                             case 3:{
@@ -627,6 +628,21 @@ public class Main{
                                 System.out.println(Reteta.parseMapToString(medicamente));
 
                             }break;
+                            case 4:{
+                                System.out.println("Pentru a modifica data eliberarii unei retete, introduceti id-ul reteti si noua data de eliberare:");
+                                System.out.println("ID:");
+                                int id = scan.nextInt();
+                                System.out.println("Noua data de eliberare, sub forma mm/dd/yyyy");
+                                String data = scan.next();
+                                retetaService.modificaEliberareRetetaDb(connObj, id, data);
+                                break;
+                            }
+                            case 5:{
+                                System.out.println("Pentru a sterge o reteta din baza de date, introduceti id-ul retetei respective:");
+                                int id = scan.nextInt();
+                                retetaService.deleteRetetaFromDb(connObj, id);
+                                break;
+                            }
 
                             }
                         System.out.println("Pentru a continua interogarile in aceasta categorie, introduceti una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");

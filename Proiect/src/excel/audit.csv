@@ -109,3 +109,5 @@ getAllAsistentiFromDb,2020/05/21,17:18:08
 creareReteta,2020/05/21,17:18:08
 creareReteta,2020/05/21,17:18:08
 afiseazaRetete,2020/05/21,17:18:08
+deleteRetetaFromDb,2020/05/22,12:18:53
+modificaEliberareRetetaDb,2020/05/22,12:26:51

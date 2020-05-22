@@ -112,17 +112,54 @@ public class RetetaService implements RetetaInterface {
 
     @Override
     public void createRetetaForDb(Connection connObj, Reteta r) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("createRetetaForDb", timeStamp);
+        try{
+            Statement stmt = connObj.createStatement();
+
+
+            String sql  = "INSERT INTO Retete " + "VALUES(" + r.getId() + ",'" + r.getPacient().getPrenume()+ "','" + r.getPacient().getPrenume() +
+                    "','" +  r.getPacient().getDataNasterii()+ "'," +  r.getPacient().getVarsta() + ",'" +  r.getPacient().getGen() + "','" +
+                    r.getPacient().getAfectiuni().toString() + "','" +r.getEliberatDe() + "'," +r.getEliberatLa() + ",'" + r.parseMapToString(r.getMedicamente())+" '," + r.getPacient().getID()+ ")";
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
 
     }
 
     @Override
     public void deleteRetetaFromDb(Connection connObj, int id) {
-
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("deleteRetetaFromDb", timeStamp);
+        try{
+            Statement  stmt = connObj.createStatement();
+            String sql = "DELETE FROM Retete " +
+                    "WHERE id = " + id;
+            stmt.executeUpdate(sql);
+            System.out.println("Delete completed");
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
     }
 
     @Override
     public void modificaEliberareRetetaDb(Connection connObj, int id, String data) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("modificaEliberareRetetaDb", timeStamp);
 
+        try{
+            Statement stmt = connObj.createStatement();
+            String sql = "UPDATE Retete " +
+                    "SET EliberatLa ='" + data + "' where Id=" + id;
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+
+        }
     }
 
 
