@@ -144,6 +144,20 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
 
     @Override
     public void creareTrimitereDb(Connection connObj, TrimitereMedicala tm) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("creareTrimitereDb", timeStamp);
+        try{
+            Statement stmt = connObj.createStatement();
+
+
+            String sql  = "INSERT INTO TrimiteriMedicale " + "VALUES(" + tm.getPacient().getID()+ ",'" + tm.getPacient().getNume()+ "','" + tm.getPacient().getPrenume() +
+                    "','" +  tm.getPacient().getDataNasterii()+ "'," +  tm.getPacient().getVarsta() + ",'" +  tm.getPacient().getGen() + "','" +
+                    tm.getPacient().getAfectiuni().toString() + "'," +tm.getValabilitate() +",'" +tm.getScop() +"','" + tm.getCatre() +"','" + tm.getEliberatDe() + "','" +tm.getEliberatLa() + "'," +  + tm.getPacient().getID()+ ")";
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
 
     }
 

@@ -750,10 +750,11 @@ public class Main{
                                     System.out.println("Eliberat la data de:");
                                     String eliberatLa = scan.next();
 
-                                    TrimitereMedicala tm = trimitereService.creareTrimitere(p, numeDoc, eliberatLa, val, scop, catre);
+                                    TrimitereMedicala tm = trimitereService.creareTrimitere( p, numeDoc, eliberatLa, val, scop, catre);
                                     listaTrimiteri.add(tm);
                                     ReadWriteService.scriereCSV(trimiteriPath, TrimitereMedicala.returnHeader(), TrimitereMedicala.listToCSV(listaTrimiteri));
 
+                                    trimitereService.creareTrimitereDb(connObj, tm);
                                 }break;
                                 case 5:{
                                     System.out.println("Pentru a afla scopul pentru care a fost emisa o trimitere medicala pe numele unui anumit pacien, introduceti datale despre acesta");
