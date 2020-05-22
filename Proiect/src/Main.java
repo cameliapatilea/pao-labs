@@ -842,7 +842,15 @@ public class Main{
                                 break;
                             }
                             case 3:{
-                                System.out.println("");
+                                System.out.println("Pentru a modifica valabilitatea unui concediu, introduceti datele necesare:");
+                                System.out.println("ID:");
+                                int id = scan.nextInt();
+                                System.out.println("Numar zile concediu");
+                                int nrZile = scan.nextInt();
+                                System.out.println("Introduceti noua data de incheiere a concediului");
+                                String data = scan.next();
+
+                                concediuService.modificaValabilitateDb(connObj, id, nrZile, data);
                                 break;
                             }
                             case 4:{

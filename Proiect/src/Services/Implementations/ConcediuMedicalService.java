@@ -136,7 +136,22 @@ public class ConcediuMedicalService implements ConcediuMedicalInterface {
 
     @Override
     public void modificaValabilitateDb(Connection connObj, int id, int val, String dataFinal) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("modificaValabilitateDb", timeStamp);
 
+        try{
+            Statement stmt = connObj.createStatement();
+            String sql = "UPDATE ConcediiMedicale " +
+                    "SET ZileConcediu =" + val + " where Id=" + id;
+            stmt.executeUpdate(sql);
+            sql = "UPDATE ConcediiMedicale " +
+                    "SET DataFinal ='" + dataFinal + "' where Id=" + id;
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+
+        }
     }
 
     @Override
