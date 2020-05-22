@@ -163,3 +163,7 @@ crearePacient,2020/05/22,21:56:01
 creareAdeverinte,2020/05/22,21:56:17
 createAdeverintaDb,2020/05/22,21:56:17
 deleteAdeverintaDb,2020/05/22,21:56:29
+getDetaliiCabinetFromDb,2020/05/22,22:10:14
+updateStradaDb,2020/05/22,22:12:58
+updateStradaDb,2020/05/22,22:13:29
+updateStradaDb,2020/05/22,22:14:19

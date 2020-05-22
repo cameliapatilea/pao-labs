@@ -124,6 +124,20 @@ public class CabinetMedicalService implements CabinetMedicalInterface {
 
     @Override
     public void updateStradaDb(Connection connObj, String strada) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("updateStradaDb", timeStamp);
 
+        try{
+
+            Statement stmt = connObj.createStatement();
+            String sql = "UPDATE CabinetMedical " +
+                    "SET AdresaCabinet ='" + strada + "'";
+            stmt.executeUpdate(sql);
+
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+
+        }
     }
 }

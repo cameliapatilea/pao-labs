@@ -960,7 +960,7 @@ public class Main{
                             case 2:{
                                 System.out.println("Pentru a modifica adresa la care se gaseste cabinetul medical, introduceti numele strazii");
                                 String strada = scan.next();
-
+                                cabinetService.updateStradaDb(connObj, strada);
                                 break;
                             }
                         }
