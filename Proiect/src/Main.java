@@ -665,7 +665,7 @@ public class Main{
                                     System.out.println("Lista de trimiteri medicale este:");
                                     matrTrimiteri = ReadWriteService.citireCSV(trimiteriPath);
                                     listaTrimiteri = TrimitereMedicala.getListFromCSV(matrTrimiteri);
-                                    trimitereService.afiseazaTrimiteri(listaTrimiteri);
+                                    trimitereService.afiseazaTrimiteri(trimitereService.getAllTrimiteriFromDb(connObj));
 
                                 }break;
                                 case 2:{

@@ -12,7 +12,7 @@ public interface TrimitereMedicalaInterface {
     TrimitereMedicala creareTrimitere(Pacient pacient, String eliberatDe, String eliberatLa, int valabilitate, String scop, String catre);
     void afiseazaTrimiteri(List<TrimitereMedicala> trimiteri);
     TrimitereMedicala getFromListById(List<TrimitereMedicala> lista, int id);
-    List<TrimitereMedicala> getAllTrimiteriFromDb(Connection connObj, List<TrimitereMedicala> lista);
+    List<TrimitereMedicala> getAllTrimiteriFromDb(Connection connObj);
     List<TrimitereMedicala> updateScop(int id, List<TrimitereMedicala> trimiteri, String scop);
     List<TrimitereMedicala> updateValabilitate(int id, List<TrimitereMedicala> trimiteri, int valabilitate);
     String obtineScop(int id, List<TrimitereMedicala> trimiteri);

@@ -1,13 +1,17 @@
 package Services.Implementations;
 
 import Entities.Pacient;
+import Entities.Reteta;
 import Entities.TrimitereMedicala;
 import Helpers.AuditService;
 import Services.Interfaces.TrimitereMedicalaInterface;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.List;
+import java.util.*;
 
 public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     @Override
@@ -49,11 +53,7 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
         return null;
     }
 
-    @Override
-    public List<TrimitereMedicala> getAllTrimiteriFromDb(Connection connObj, List<TrimitereMedicala> lista) {
-        return null;
-    }
-    
+
 
     @Override
     public List<TrimitereMedicala> updateScop(int id, List<TrimitereMedicala> trimiteri, String scop) {
@@ -66,7 +66,7 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
             {
                 trimiteri.get(i).setScop(scop);
             }
-            //tm = trimiteri.get(i);
+
         }
 
         return trimiteri;
@@ -101,6 +101,45 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
             }
         }
         return scop;
+    }
+
+    @Override
+    public List<TrimitereMedicala> getAllTrimiteriFromDb(Connection connObj) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("getAllTrimiteriFromDb", timeStamp);
+        List<TrimitereMedicala> listaTrimiteri = new ArrayList<>();
+        try {
+            Statement stmt = connObj.createStatement();
+
+            String sql = "SELECT Id, LastName, FirstName,DataNasterii,Varsta, Gen, Afectiuni,Valabilitate,Scop, Catre, EliberatDe, EliberatLa, IdPacient  FROM TrimiteriMedicale";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                //Retrieve by column name
+                int id = rs.getInt("Id");
+                String last = rs.getString("LastName");
+                String first = rs.getString("FirstName");
+                String data = rs.getString("DataNasterii");
+                int varsta = rs.getInt("Varsta");
+                String gen = rs.getString("Gen");
+                String afec = rs.getString("Afectiuni");
+                List<String> afectiuni = Arrays.asList(afec.split(" "));
+
+                Pacient p = new Pacient(id, last, first, data, varsta, gen, afectiuni);
+                int valabilitate = rs.getInt("Valabilitate");
+                String scop = rs.getString("Scop");
+                String catre = rs.getString("Catre");
+                String eliberatDe = rs.getString("EliberatDe");
+                String eliberatLa = rs.getString("EliberatLa");
+                TrimitereMedicala r = creareTrimitere( p,eliberatDe, eliberatLa,valabilitate, scop, catre);
+                listaTrimiteri.add(r);
+            }
+        }
+
+        catch(SQLException se){
+            se.printStackTrace();
+        }
+        return listaTrimiteri;
     }
 
     @Override
