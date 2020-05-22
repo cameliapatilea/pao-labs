@@ -1,6 +1,6 @@
 ID,nume,prenume,dataNasterii,varsta,gen,afectiuni,valabilitate,scop,catre,eliberatDe,eliberatLa
 1,popescu,andrei,1/1/1980,40,masculin,cardiac,15,recuperare,fizioterapie, popescu maricia,5/5/2019
-2,roman,anisoara,2/2/1986,34,feminin,rupturaMenisc,30,analize,cabinet,popescu pavel,3/3/2020
+2,roman,anisoara,2/2/1986,34,feminin,rupturaMenisc,25,analize,cabinet,popescu pavel,3/3/2020
 3,mop,andreea,3/3/1990,30,feminin,hipermetropie,25,consult,fizioterapie,andrei andrei,4/4/2020
 4,scundu,vlad,4/4/1976,44,masculin,scolioza,30,consult,ortopedie,andrei mariana,1/1/2020
 7,popa,maricic,4/4/1990,30,feminin,scolioza,15,recuperare,ortopedie,pop mariana,4/5/2020

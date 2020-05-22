@@ -1,5 +1,6 @@
 package Services.Implementations;
 
+import Entities.Medic;
 import Entities.Pacient;
 import Entities.Reteta;
 import Entities.TrimitereMedicala;
@@ -163,22 +164,75 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
 
     @Override
     public void modificareScopDb(Connection connObj, int id, String scop) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("modificareScopDb", timeStamp);
 
+        try{
+            Statement stmt = connObj.createStatement();
+            String sql = "UPDATE TrimiteriMedicale " +
+                    "SET scop ='" + scop + "' where Id=" + id;
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+
+        }
     }
 
     @Override
     public void modificareValabilitateDb(Connection connObj, int id, int val) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("modificareValabilitateDb", timeStamp);
 
+        try{
+            Statement stmt = connObj.createStatement();
+            String sql = "UPDATE TrimiteriMedicale " +
+                    "SET Valabilitate ='" + val + "' where Id=" + id;
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+
+        }
     }
 
     @Override
     public void selectScopDb(Connection connObj, int id) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("selectScopDb", timeStamp);
+        List<TrimitereMedicala> listaTrimiteri= getAllTrimiteriFromDb(connObj);
+        try{
+            Statement stmt = connObj.createStatement();
+            String sql = "SELECT LastName,FirstName,Scop FROM TrimiteriMedicale" +
+                    " WHERE id =" + id;
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                String nume = rs.getString("LastName");
+                String prenume = rs.getString("FirstName");
+                String scop = rs.getString("Scop");
 
+               System.out.println("Trimiterea medicala pentru pacientul " + nume +" "+ prenume + " a fost emisa cu scopul "+scop);
+            }
+        }
+        catch (SQLException se){
+            se.printStackTrace();
+        }
     }
 
     @Override
     public void deleteTrimitereMedicalaDb(Connection connObj, int id) {
-
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        citesteScrieAudit("deleteTrimitereMedicalaDb", timeStamp);
+        try{
+            Statement  stmt = connObj.createStatement();
+            String sql = "DELETE FROM TrimiteriMedicale " +
+                    "WHERE id = " + id;
+            stmt.executeUpdate(sql);
+            System.out.println("Delete completed");
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
     }
 
 

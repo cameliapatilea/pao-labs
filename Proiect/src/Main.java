@@ -672,10 +672,7 @@ public class Main{
                                     System.out.println("Pentru a updata scopul unei trimiteri, introduceti datele necesare");
                                     System.out.println("ID:");
                                     int id = scan.nextInt();
-                                    System.out.println("Nume:");
-                                    String nume = scan.next();
-                                    System.out.println("Prenume:");
-                                    String prenume = scan.next();
+
 
                                     matrTrimiteri = ReadWriteService.citireCSV(trimiteriPath);
                                     listaTrimiteri = TrimitereMedicala.getListFromCSV(matrTrimiteri);
@@ -686,15 +683,14 @@ public class Main{
                                     listaTrimiteri = trimitereService.updateScop(id, listaTrimiteri, scop);
                                     ReadWriteService.scriereCSV(trimiteriPath, TrimitereMedicala.returnHeader(), TrimitereMedicala.listToCSV(listaTrimiteri));
 
+                                    trimitereService.modificareScopDb(connObj, id, scop);
+
                                 }break;
                                 case 3:{
                                     System.out.println("Pentru a updata valabilitatea unei trimiteri, introduceti datele necesare");
                                     System.out.println("ID:");
                                     int id = scan.nextInt();
-                                    System.out.println("Nume:");
-                                    String nume = scan.next();
-                                    System.out.println("Prenume:");
-                                    String prenume = scan.next();
+
 
                                     matrTrimiteri = ReadWriteService.citireCSV(trimiteriPath);
                                     listaTrimiteri = TrimitereMedicala.getListFromCSV(matrTrimiteri);
@@ -704,6 +700,8 @@ public class Main{
 
                                     listaTrimiteri = trimitereService.updateValabilitate(id, listaTrimiteri, val);
                                     ReadWriteService.scriereCSV(trimiteriPath, TrimitereMedicala.returnHeader(), TrimitereMedicala.listToCSV(listaTrimiteri));
+
+                                    trimitereService.modificareValabilitateDb(connObj, id, val);
 
                                 }break;
                                 case 4:{
@@ -755,23 +753,26 @@ public class Main{
                                     ReadWriteService.scriereCSV(trimiteriPath, TrimitereMedicala.returnHeader(), TrimitereMedicala.listToCSV(listaTrimiteri));
 
                                     trimitereService.creareTrimitereDb(connObj, tm);
+
                                 }break;
                                 case 5:{
                                     System.out.println("Pentru a afla scopul pentru care a fost emisa o trimitere medicala pe numele unui anumit pacien, introduceti datale despre acesta");
                                     System.out.println("ID:");
                                     int id = scan.nextInt();
-                                    System.out.println("Nume:");
-                                    String nume = scan.next();
-                                    System.out.println("Prenume:");
-                                    String prenume = scan.next();
 
                                     matrTrimiteri = ReadWriteService.citireCSV(trimiteriPath);
                                     listaTrimiteri = TrimitereMedicala.getListFromCSV(matrTrimiteri);
 
-                                    String scop = trimitereService.obtineScop(id, listaTrimiteri);
-                                    System.out.println("Trimiterea medicala pentru pacientul " + nume + " " + prenume + " este pentru: " + scop);
+                                    trimitereService.selectScopDb(connObj, id);
+
 
                                 }break;
+                                case 6:{
+                                    System.out.println("Pentru a sterge o trimitere medicala din baza de date, introduceti id-ul trimiterii");
+                                    int id = scan.nextInt();
+                                    trimitereService.deleteTrimitereMedicalaDb(connObj, id);
+                                    break;
+                                }
                             }
                             System.out.println("Pentru a continua interogarile, introduceri una din comenzile mai sus. Daca doriti sa iesiti din aceasta sectiune, introduceti 0.");
                             y = scan.nextInt();
