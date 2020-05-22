@@ -868,9 +868,9 @@ public class Main{
                 case 7: {
                         System.out.println("Bine ati venit la categoria Adeverinte medicale. Introduceti una din comenzile de mai jos:");
                         System.out.println("Pentru a vizualiza adeverintele medicale din baza de date, introduceti 1");
-                        System.out.println("Pentru a modifica daca pacientul figureaza apt sau nu, introduceti 2");
-                        System.out.println("Pentru a adauga o noua adeverinta medicala, introduceti 3");
 
+                        System.out.println("Pentru a adauga o noua adeverinta medicala, introduceti 2");
+                        System.out.println("Pentru a modifica daca pacientul figureaza apt sau nu, introduceti 3");
                         System.out.println("Pentru a sterge o adeverinta medicala din baza de date, introduceti 4");
                     int y = scan.nextInt();
                     while( y!= 0) {
