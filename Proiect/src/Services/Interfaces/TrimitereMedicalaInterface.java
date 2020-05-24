@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.util.List;
 
 public interface TrimitereMedicalaInterface {
-    void citesteScrieAudit(String comanda, String timp);
+    void citesteScrieAudit(String comanda, String timp, String threadName);
     TrimitereMedicala creareTrimitere(Pacient pacient, String eliberatDe, String eliberatLa, int valabilitate, String scop, String catre);
     void afiseazaTrimiteri(List<TrimitereMedicala> trimiteri);
     TrimitereMedicala getFromListById(List<TrimitereMedicala> lista, int id);
