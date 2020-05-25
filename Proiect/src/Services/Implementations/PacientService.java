@@ -16,6 +16,27 @@ import java.util.Collections;
 import java.util.List;
 
 public class PacientService extends GeneralService<Pacient> implements PacientInterface {
+    private class RunnableAudit implements Runnable{
+        private  String comanda;
+        private  String timp;
+
+        public RunnableAudit(String comanda, String timp){
+            this.comanda = comanda;
+            this.timp = timp;
+
+
+        }
+        public void run()
+        {
+            Thread.currentThread().setName(comanda);
+            String threadName = Thread.currentThread().getName();
+            List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
+            comanda += " " + timp;
+            comanda += " " + threadName;
+            matrice.add(comanda);
+            AuditService.scriereCSVAudit("src/excel/audit.csv", new String[]{"Comanda","Data", "Ora", "ThreadName"}, matrice);
+        }
+    }
     @Override
     public void citesteScrieAudit(String comanda, String timp) {
             List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
@@ -28,7 +49,10 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     public Pacient getFromListById(List<Pacient> lista, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
 
-        citesteScrieAudit("getFromListById", timeStamp);
+        //citesteScrieAudit("getFromListById", timeStamp);
+        Runnable rr = new PacientService.RunnableAudit("getFromListById", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
 
         for(int i = 0; i < lista.size(); i++)
             if(lista.get(i).getId() == id)
@@ -42,7 +66,10 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     @Override
     public List<Pacient> adaugaAfectiune(int id, List<Pacient> pacienti, String afectiune) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("adaugaAfectiune", timeStamp);
+        //citesteScrieAudit("adaugaAfectiune", timeStamp);
+        Runnable rr = new PacientService.RunnableAudit("adaugaAfectiune", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
     for(int i = 0; i < pacienti.size(); i++)
     {
         if(pacienti.get(i).getID() == id)
@@ -56,7 +83,11 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     @Override
     public void afiseazaPacienti(List<Pacient> pacienti) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("afiseazaPacienti", timeStamp);
+        //citesteScrieAudit("afiseazaPacienti", timeStamp);
+        Runnable rr = new PacientService.RunnableAudit("afiseazaPacienti", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+
         for(int i = 0; i < pacienti.size(); i++)
         {
             System.out.println("Pacient: ");
@@ -68,7 +99,10 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     @Override
     public Pacient adaugaAfectiuni(Pacient pacient, List<String> afectiuni) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm.:ss").format(new java.util.Date());
-        citesteScrieAudit("adaugaAfectiune", timeStamp);
+       // citesteScrieAudit("adaugaAfectiune", timeStamp);
+        Runnable rr = new PacientService.RunnableAudit("adaugaAfectiuni", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         pacient.getAfectiuni().addAll(afectiuni);
 
 
@@ -78,7 +112,10 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     @Override
     public Pacient updateAfectiune(Pacient pacient, String afectiuneVeche, String afectiuneNoua) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm.:ss").format(new java.util.Date());
-        citesteScrieAudit("updateAfectiune", timeStamp);
+        //citesteScrieAudit("updateAfectiune", timeStamp);
+        Runnable rr = new PacientService.RunnableAudit("updateAfectiune", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         List<String> afectiuni =  pacient.getAfectiuni();
         for(int i = 0; i < afectiuni.size(); i++)
             if(afectiuni.get(i).toLowerCase().compareTo(afectiuneVeche.toLowerCase()) == 0)
@@ -94,7 +131,10 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     @Override
     public List<Pacient> stergeAfectiune(int id, List<Pacient> pacienti, String afectiune) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm.:ss").format(new java.util.Date());
-        citesteScrieAudit("stergeAfectiune", timeStamp);
+        Runnable rr = new PacientService.RunnableAudit("stergeAfectiune", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+       // citesteScrieAudit("stergeAfectiune", timeStamp);
         for(int i = 0; i < pacienti.size(); i++)
         {
             if(pacienti.get(i).getID() == id)
@@ -111,7 +151,10 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     @Override
     public Pacient stergeAfectiuni(Pacient pacient, List<String> afectiuni, boolean stergeTot) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm.:ss").format(new java.util.Date());
-        citesteScrieAudit("adaugaAfectiuni", timeStamp);
+
+        Runnable rr = new PacientService.RunnableAudit("stergeAfectiuni", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
        if(stergeTot == true)
            pacient.setAfectiuni(new ArrayList<String>());
        else
@@ -128,7 +171,10 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     @Override
     public Pacient updateNume(Pacient pacient, String nume) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm.:ss").format(new java.util.Date());
-        citesteScrieAudit("updateNume", timeStamp);
+        //citesteScrieAudit("updateNume", timeStamp);
+        Runnable rr = new PacientService.RunnableAudit("updateNume", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         pacient.setNume(nume);
 
         return pacient;
@@ -137,7 +183,10 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     @Override
     public Pacient updateVarsta(Pacient pacient, int varsta) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm.:ss").format(new java.util.Date());
-        citesteScrieAudit("updateVarsta", timeStamp);
+        //citesteScrieAudit("updateVarsta", timeStamp);
+        Runnable rr = new PacientService.RunnableAudit("updateVarsta", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         pacient.setVarsta(varsta);
 
         return pacient;
@@ -146,7 +195,10 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     @Override
     public List<Pacient> adaugaPacientLaLista(Pacient pacient, List<Pacient> pacienti) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm.:ss").format(new java.util.Date());
-        citesteScrieAudit("adaugaPacientLaLista", timeStamp);
+        //citesteScrieAudit("adaugaPacientLaLista", timeStamp);
+        Runnable rr = new PacientService.RunnableAudit("adaugaPacientLaLista", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         pacienti.add(pacient);
 
         return pacienti;
@@ -156,7 +208,10 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     @Override
     public Pacient crearePacient(int id, String nume, String prenume, String dataNasterii,int varsta, String gen, List<String> afectiuni) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("crearePacient", timeStamp);
+        //citesteScrieAudit("crearePacient", timeStamp);
+        Runnable rr = new PacientService.RunnableAudit("crearePacient", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         Pacient p = new Pacient(id, nume, prenume, dataNasterii, varsta, gen, afectiuni);
         return p;
     }
@@ -164,8 +219,11 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     @Override
     public List<Pacient> getAllFromDb(Connection connObj) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getAllFromDb", timeStamp);
+        //citesteScrieAudit("getAllFromDb", timeStamp);
         List<Pacient> listaPacienti = new ArrayList<>() ;
+        Runnable rr = new PacientService.RunnableAudit("getAllFromDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = null;
             stmt = connObj.createStatement();
@@ -199,7 +257,10 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     @Override
     public void adaugaPacientDb(Connection connObj, Pacient p) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("adaugaPacientDb", timeStamp);
+        //citesteScrieAudit("adaugaPacientDb", timeStamp);
+        Runnable rr = new PacientService.RunnableAudit("adaugaPacientDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = connObj.createStatement();
 
@@ -215,7 +276,10 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
     @Override
     public void updateVarstaPacientDb(Connection connObj, int id, int varsta, String data) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("updateVarstaPacientDb", timeStamp);
+        //citesteScrieAudit("updateVarstaPacientDb", timeStamp);
+        Runnable rr = new PacientService.RunnableAudit("updateVarstaPacientDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = connObj.createStatement();
             String sql = "UPDATE Pacienti " +
@@ -232,6 +296,10 @@ public class PacientService extends GeneralService<Pacient> implements PacientIn
 
     @Override
     public void deletePacientFromDb(Connection connObj, int id) {
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+        Runnable rr = new PacientService.RunnableAudit("deletePacientFromDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
 
             Statement stmt = connObj.createStatement();

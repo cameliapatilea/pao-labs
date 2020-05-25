@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AuditService {
+public class AuditService implements Runnable{
     private static AuditService instance = null;
 
     private AuditService(){
@@ -66,5 +66,10 @@ public class AuditService {
         catch (IOException e){
 
         }
+    }
+
+    @Override
+    public void run() {
+
     }
 }

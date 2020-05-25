@@ -21,4 +21,5 @@ public interface TrimitereMedicalaInterface {
     void modificareValabilitateDb(Connection connObj, int id, int val);
     void selectScopDb(Connection connObj, int id);
     void deleteTrimitereMedicalaDb(Connection connObj, int id);
+
 }

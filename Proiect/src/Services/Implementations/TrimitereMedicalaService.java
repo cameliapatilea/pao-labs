@@ -17,6 +17,7 @@ import java.util.*;
 public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     @Override
     public void citesteScrieAudit(String comanda, String timp, String threadName) {
+
         List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
         comanda += " " + timp;
         comanda += " " + threadName;
@@ -27,8 +28,10 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     @Override
     public TrimitereMedicala creareTrimitere(Pacient pacient, String eliberatDe, String eliberatLa, int valabilitate, String scop, String catre) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        String thread = Thread.currentThread().getName();
-        citesteScrieAudit("creareTrimitere", timeStamp, thread);
+
+        Runnable rr = new RunnableAudit("creareTrimitere", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         TrimitereMedicala tm =  new TrimitereMedicala(pacient,  valabilitate, scop, catre, eliberatDe, eliberatLa);
         return tm;
     }
@@ -37,7 +40,10 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     public void afiseazaTrimiteri(List<TrimitereMedicala> trimiteri) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
         String thread = Thread.currentThread().getName();
-        citesteScrieAudit("afiseazaTrimiteri", timeStamp, thread);
+        //citesteScrieAudit("afiseazaTrimiteri", timeStamp, thread);
+        Runnable rr = new RunnableAudit("afiseazaTrimiteri", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         for(int i = 0; i < trimiteri.size(); i++)
         {
             System.out.println("Trimiteri medicale: ");
@@ -50,7 +56,10 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     public TrimitereMedicala getFromListById(List<TrimitereMedicala> lista, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
         String thread = Thread.currentThread().getName();
-        citesteScrieAudit("getFromListById", timeStamp, thread);
+        //citesteScrieAudit("getFromListById", timeStamp, thread);
+        Runnable rr = new RunnableAudit("getFromListById", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         for(int i = 0; i < lista.size(); i++)
             if(lista.get(i).getId() == id)
                 return lista.get(i);
@@ -64,7 +73,10 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     public List<TrimitereMedicala> updateScop(int id, List<TrimitereMedicala> trimiteri, String scop) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
         String thread = Thread.currentThread().getName();
-        citesteScrieAudit("updateScop", timeStamp, thread);
+       // citesteScrieAudit("updateScop", timeStamp, thread);
+        Runnable rr = new RunnableAudit("updateScop", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         TrimitereMedicala tm = new TrimitereMedicala();
         for(int i = 0; i <  trimiteri.size(); i++)
         {
@@ -82,7 +94,10 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     public List<TrimitereMedicala> updateValabilitate(int id, List<TrimitereMedicala> trimiteri, int valabilitate) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
         String thread = Thread.currentThread().getName();
-        citesteScrieAudit("updateValabilitate", timeStamp, thread);
+        //citesteScrieAudit("updateValabilitate", timeStamp, thread);
+        Runnable rr = new RunnableAudit("updateValabilitate", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         for(int i = 0; i <  trimiteri.size(); i++)
         {
             if(trimiteri.get(i).getPacient().getId() == id)
@@ -99,7 +114,10 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     public String obtineScop(int id, List<TrimitereMedicala> trimiteri) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
         String thread = Thread.currentThread().getName();
-        citesteScrieAudit("obtineScop", timeStamp, thread);
+        //citesteScrieAudit("obtineScop", timeStamp, thread);
+        Runnable rr = new RunnableAudit("obtineScop", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         String scop = "";
         for(int i = 0; i < trimiteri.size(); i++)
         {
@@ -113,9 +131,13 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
 
     @Override
     public List<TrimitereMedicala> getAllTrimiteriFromDb(Connection connObj) {
+
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        String thread = Thread.currentThread().getName();
-        citesteScrieAudit("getAllTrimiteriFromDb", timeStamp, thread);
+
+        Runnable rr = new RunnableAudit("getAllTrimiteriFromDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+        //citesteScrieAudit("getAllTrimiteriFromDb", timeStamp, thread);
         List<TrimitereMedicala> listaTrimiteri = new ArrayList<>();
         try {
             Statement stmt = connObj.createStatement();
@@ -155,7 +177,11 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     public void creareTrimitereDb(Connection connObj, TrimitereMedicala tm) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
         String thread = Thread.currentThread().getName();
-        citesteScrieAudit("creareTrimitereDb", timeStamp, thread);
+        //citesteScrieAudit("creareTrimitereDb", timeStamp, thread);
+        Runnable rr = new RunnableAudit("creareTrimitereDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+
         try{
             Statement stmt = connObj.createStatement();
 
@@ -175,8 +201,10 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     public void modificareScopDb(Connection connObj, int id, String scop) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
         String thread = Thread.currentThread().getName();
-        citesteScrieAudit("modificareScopDb", timeStamp, thread);
-
+        //citesteScrieAudit("modificareScopDb", timeStamp, thread);
+        Runnable rr = new RunnableAudit("modificareScopDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = connObj.createStatement();
             String sql = "UPDATE TrimiteriMedicale " +
@@ -193,8 +221,10 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     public void modificareValabilitateDb(Connection connObj, int id, int val) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
         String thread = Thread.currentThread().getName();
-        citesteScrieAudit("modificareValabilitateDb", timeStamp, thread);
-
+        //citesteScrieAudit("modificareValabilitateDb", timeStamp, thread);
+        Runnable rr = new RunnableAudit("modificareValabilitateDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = connObj.createStatement();
             String sql = "UPDATE TrimiteriMedicale " +
@@ -211,8 +241,11 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     public void selectScopDb(Connection connObj, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
         String thread = Thread.currentThread().getName();
-        citesteScrieAudit("selectScopDb", timeStamp, thread);
+        //citesteScrieAudit("selectScopDb", timeStamp, thread);
         List<TrimitereMedicala> listaTrimiteri= getAllTrimiteriFromDb(connObj);
+        Runnable rr = new RunnableAudit("selectScopDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = connObj.createStatement();
             String sql = "SELECT LastName,FirstName,Scop FROM TrimiteriMedicale" +
@@ -235,7 +268,10 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
     public void deleteTrimitereMedicalaDb(Connection connObj, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
         String thread = Thread.currentThread().getName();
-        citesteScrieAudit("deleteTrimitereMedicalaDb", timeStamp, thread);
+       // citesteScrieAudit("deleteTrimitereMedicalaDb", timeStamp, thread);
+        Runnable rr = new RunnableAudit("deleteTrimitereMedicalaDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement  stmt = connObj.createStatement();
             String sql = "DELETE FROM TrimiteriMedicale " +
@@ -246,7 +282,28 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
         catch(SQLException se){
             se.printStackTrace();
         }
+
     }
 
+    private class RunnableAudit implements Runnable{
+        private  String comanda;
+        private  String timp;
 
+        public RunnableAudit(String comanda, String timp){
+            this.comanda = comanda;
+            this.timp = timp;
+
+
+        }
+        public void run()
+        {
+                    Thread.currentThread().setName(comanda);
+                    String threadName = Thread.currentThread().getName();
+                    List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
+                    comanda += " " + timp;
+                    comanda += " " + threadName;
+                    matrice.add(comanda);
+                    AuditService.scriereCSVAudit("src/excel/audit.csv", new String[]{"Comanda","Data", "Ora", "ThreadName"}, matrice);
+        }
+    }
 }
