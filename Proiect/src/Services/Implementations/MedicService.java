@@ -14,6 +14,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MedicService implements MedicInterface {
+    private class RunnableAudit implements Runnable{
+        private  String comanda;
+        private  String timp;
+
+        public RunnableAudit(String comanda, String timp){
+            this.comanda = comanda;
+            this.timp = timp;
+        }
+        public void run()
+        {
+
+                Thread.currentThread().setName(comanda);
+                String threadName = Thread.currentThread().getName();
+                List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
+                comanda += " " + timp;
+                comanda += " " + threadName;
+                matrice.add(comanda);
+                AuditService.scriereCSVAudit("src/excel/audit.csv", new String[]{"Comanda","Data", "Ora", "ThreadName"}, matrice);
+
+
+        }
+    }
     @Override
     public void citesteScrieAudit(String comanda, String timp) {
         List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
@@ -25,7 +47,10 @@ public class MedicService implements MedicInterface {
     @Override
     public Medic getFromListById(List<Medic> lista, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getFromListById", timeStamp);
+        //citesteScrieAudit("getFromListById", timeStamp);
+        Runnable rr = new MedicService.RunnableAudit("getFromListById", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         for(int i = 0; i < lista.size(); i++)
             if(lista.get(i).getId() == id)
                 return lista.get(i);
@@ -36,7 +61,10 @@ public class MedicService implements MedicInterface {
     @Override
     public void afiseazaMedici(List<Medic> medici) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("afiseazaMedici", timeStamp);
+        //citesteScrieAudit("afiseazaMedici", timeStamp);
+        Runnable rr = new MedicService.RunnableAudit("afiseazaMedici", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         for(int i = 0; i < medici.size(); i++)
         {
             System.out.println("Pacient: ");
@@ -48,7 +76,10 @@ public class MedicService implements MedicInterface {
     @Override
     public Medic creareMedic(int id, String nume, String prenume, String dataNasterii, int varsta, String gen, String specializare, double oraStart, double oraEnd, int codParafa) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("creareMedic", timeStamp);
+        //citesteScrieAudit("creareMedic", timeStamp);
+        Runnable rr = new MedicService.RunnableAudit("creareMedic", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         Medic m = new Medic(id, nume, prenume, dataNasterii, varsta, gen, specializare, oraStart, oraEnd, codParafa);
 
         return m;
@@ -57,7 +88,10 @@ public class MedicService implements MedicInterface {
     @Override
     public List<Medic> updateSpecialiare(int id,List<Medic> medici, String specializare) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("updateSpecializare", timeStamp);
+        //citesteScrieAudit("updateSpecializare", timeStamp);
+        Runnable rr = new MedicService.RunnableAudit("updateSpecialiare", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         for(int i = 0; i < medici.size(); i++)
 
         {
@@ -71,7 +105,10 @@ public class MedicService implements MedicInterface {
     @Override
     public List<Medic> updateVarsta(int id, List<Medic> medici, int varsta, String dataNasterii) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("updateVarsta", timeStamp);
+        //citesteScrieAudit("updateVarsta", timeStamp);
+        Runnable rr = new MedicService.RunnableAudit("updateVarsta", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         for(int i = 0; i < medici.size(); i++)
 
         {
@@ -89,7 +126,10 @@ public class MedicService implements MedicInterface {
     @Override
     public Medic updateNume(Medic m, String nume) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("updateNume", timeStamp);
+        //citesteScrieAudit("updateNume", timeStamp);
+        Runnable rr = new MedicService.RunnableAudit("updateNume", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         m.setNume(nume);
         return m;
     }
@@ -97,8 +137,11 @@ public class MedicService implements MedicInterface {
     @Override
     public String afiseazaSpecializare(String nume, String prenume, List<Medic> medici) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("afiseazaSpecializare", timeStamp);
+        //citesteScrieAudit("afiseazaSpecializare", timeStamp);
         String x = "";
+        Runnable rr = new MedicService.RunnableAudit("afiseazaSpecializare", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
 
         for(int i = 0; i <  medici.size(); i++)
             if(medici.get(i).getNume().compareTo(nume) == 0 && medici.get(i).getPrenume().compareTo(prenume) == 0)
@@ -109,7 +152,10 @@ public class MedicService implements MedicInterface {
     @Override
     public String afiseazaIntervalOrar(String nume, String prenume, List<Medic> medici) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("afiseazaIntervalOrar", timeStamp);
+        //citesteScrieAudit("afiseazaIntervalOrar", timeStamp);
+        Runnable rr = new MedicService.RunnableAudit("afiseazaIntervalOrar", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         String x = "";
         String y = "";
 
@@ -126,8 +172,11 @@ public class MedicService implements MedicInterface {
     @Override
     public List<Medic> getAllFromDb(Connection connObj) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getAllFromDbMedici", timeStamp);
+        //citesteScrieAudit("getAllFromDbMedici", timeStamp);
         List<Medic> listaMedici= new ArrayList<>() ;
+        Runnable rr = new MedicService.RunnableAudit("getAllFromDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
 
             Statement stmt = connObj.createStatement();
@@ -161,7 +210,10 @@ public class MedicService implements MedicInterface {
     @Override
     public void adaugaMedicDb(Connection connObj, Medic m) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("AdaugaMedicDb", timeStamp);
+        //citesteScrieAudit("AdaugaMedicDb", timeStamp);
+        Runnable rr = new MedicService.RunnableAudit("adaugaMedicDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = connObj.createStatement();
 
@@ -177,7 +229,10 @@ public class MedicService implements MedicInterface {
     @Override
     public void updateVarstaMedicDb(Connection connObj, int id, int varsta, String data) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("updateVarstaMedicDb", timeStamp);
+        //citesteScrieAudit("updateVarstaMedicDb", timeStamp);
+        Runnable rr = new MedicService.RunnableAudit("updateVarstaMedicDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = connObj.createStatement();
             String sql = "UPDATE Medici " +
@@ -196,7 +251,10 @@ public class MedicService implements MedicInterface {
     @Override
     public void updateSpecializareMedicDb(Connection connObj, int id, String specializare) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("updateSpecializareMedicDb", timeStamp);
+        //citesteScrieAudit("updateSpecializareMedicDb", timeStamp);
+        Runnable rr = new MedicService.RunnableAudit("updateSpecializareMedicDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = connObj.createStatement();
             String sql = "UPDATE Medici " +
@@ -211,8 +269,11 @@ public class MedicService implements MedicInterface {
     @Override
     public void getOrarDb(Connection connObj, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getOrarMedicDb", timeStamp);
+        //citesteScrieAudit("getOrarMedicDb", timeStamp);
         List<Medic> listaMedici = getAllFromDb(connObj);
+        Runnable rr = new MedicService.RunnableAudit("getOrarDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = connObj.createStatement();
             String sql = "SELECT LastName,FirstName,OraStart, OraEnd FROM Medici" +
@@ -237,7 +298,10 @@ public class MedicService implements MedicInterface {
     @Override
     public void deleteMedicFromDb(Connection connObj, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("deleteMedicFromDb", timeStamp);
+        //citesteScrieAudit("deleteMedicFromDb", timeStamp);
+        Runnable rr = new MedicService.RunnableAudit("deleteMedicFromDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
            Statement  stmt = connObj.createStatement();
             String sql = "DELETE FROM Medici " +

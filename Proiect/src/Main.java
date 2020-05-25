@@ -390,8 +390,8 @@ public class Main{
                                 break;
                             }
                             case 5: {
-                                matrMedici = ReadWriteService.citireCSV(mediciPath);
-                                medici = Medic.getListFromCSV(matrMedici);
+                                //matrMedici = ReadWriteService.citireCSV(mediciPath);
+                                //medici = Medic.getListFromCSV(matrMedici);
 
                                 System.out.println("Pentru a afisa intervalul orar in care este medicul la cabinet, introduceti urmatoarele date:");
                                 System.out.println("ID: ");
