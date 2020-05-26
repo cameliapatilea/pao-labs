@@ -16,6 +16,30 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AdeverintaMedicalaService implements AdeverintaMedicalaInterface {
+    private class RunnableAudit implements Runnable{
+        private  String comanda;
+        private  String timp;
+
+        public RunnableAudit(String comanda, String timp){
+            this.comanda = comanda;
+            this.timp = timp;
+
+
+        }
+        public void run()
+        {
+            List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
+
+            Thread.currentThread().setName(comanda);
+            String threadName = Thread.currentThread().getName();
+            threadName += "Thread";
+
+            comanda += " " + timp;
+            comanda += " " + threadName;
+            matrice.add(comanda);
+            AuditService.scriereCSVAudit("src/excel/audit.csv", new String[]{"Comanda","Data", "Ora", "ThreadName"}, matrice);
+        }
+    }
     @Override
     public void citesteScrieAudit(String comanda, String timp) {
         List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
@@ -27,7 +51,10 @@ public class AdeverintaMedicalaService implements AdeverintaMedicalaInterface {
     @Override
     public AdeverintaMedicala getFromListById(List<AdeverintaMedicala> lista, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getFromListById", timeStamp);
+       // citesteScrieAudit("getFromListById", timeStamp);
+        Runnable rr = new AdeverintaMedicalaService.RunnableAudit("getFromListById", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         for(int i = 0; i < lista.size(); i++)
             if(lista.get(i).getId() == id)
                 return lista.get(i);
@@ -38,7 +65,10 @@ public class AdeverintaMedicalaService implements AdeverintaMedicalaInterface {
     @Override
     public void afiseazaAdeverinte(List<AdeverintaMedicala> adeverinte) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("afiseazaAdeverinte", timeStamp);
+        //citesteScrieAudit("afiseazaAdeverinte", timeStamp);
+        Runnable rr = new AdeverintaMedicalaService.RunnableAudit("afiseazaAdeverinte", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         for(int i = 0; i < adeverinte.size(); i++)
         {
             System.out.println("Adeverinte medicale: ");
@@ -50,7 +80,10 @@ public class AdeverintaMedicalaService implements AdeverintaMedicalaInterface {
     @Override
     public AdeverintaMedicala creareAdeverinta(Pacient pacient, String eliberatDe, String eliberatLa, boolean apt, String scop) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("creareAdeverinte", timeStamp);
+        Runnable rr = new AdeverintaMedicalaService.RunnableAudit("creareAdeverinta", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+       // citesteScrieAudit("creareAdeverinte", timeStamp);
        AdeverintaMedicala am = new AdeverintaMedicala(pacient, eliberatDe, eliberatLa, apt, scop);
        return am;
     }
@@ -58,7 +91,10 @@ public class AdeverintaMedicalaService implements AdeverintaMedicalaInterface {
     @Override
     public AdeverintaMedicala updateScop(AdeverintaMedicala am, String scop) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("updateScop", timeStamp);
+        Runnable rr = new AdeverintaMedicalaService.RunnableAudit("updateScop", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+        //citesteScrieAudit("updateScop", timeStamp);
         am.setScop(scop);
         return am;
     }
@@ -66,7 +102,10 @@ public class AdeverintaMedicalaService implements AdeverintaMedicalaInterface {
     @Override
     public String getAdeverinteEliberateLaDataX(List<AdeverintaMedicala> lista, String data) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getAdeverinteEliberateLaDataX", timeStamp);
+        Runnable rr = new AdeverintaMedicalaService.RunnableAudit("getAdeverinteEliberateLaDataX", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+      //  citesteScrieAudit("getAdeverinteEliberateLaDataX", timeStamp);
         List<AdeverintaMedicala> newList = new ArrayList<>();
         for(int i = 0; i <  lista.size(); i++)
         {
@@ -84,7 +123,10 @@ public class AdeverintaMedicalaService implements AdeverintaMedicalaInterface {
     @Override
     public List<AdeverintaMedicala> getAdeverinteFromDb(Connection connObj) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getAdeverinteFromDb", timeStamp);
+        Runnable rr = new AdeverintaMedicalaService.RunnableAudit("getAdeverinteFromDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+       // citesteScrieAudit("getAdeverinteFromDb", timeStamp);
         List<AdeverintaMedicala> listaAdeverinte = new ArrayList<>();
         try {
             Statement stmt = connObj.createStatement();
@@ -128,7 +170,10 @@ public class AdeverintaMedicalaService implements AdeverintaMedicalaInterface {
     @Override
     public void createAdeverintaDb(Connection connObj, AdeverintaMedicala am) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("createAdeverintaDb", timeStamp);
+        //citesteScrieAudit("createAdeverintaDb", timeStamp);
+        Runnable rr = new AdeverintaMedicalaService.RunnableAudit("createAdeverintaDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = connObj.createStatement();
             int APT;
@@ -149,8 +194,10 @@ public class AdeverintaMedicalaService implements AdeverintaMedicalaInterface {
     @Override
     public void modificaAptDb(Connection connObj,int id, boolean apt) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("modificaAptDb", timeStamp);
-
+      //  citesteScrieAudit("modificaAptDb", timeStamp);
+        Runnable rr = new AdeverintaMedicalaService.RunnableAudit("modificaAptDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             int APT;
             if(apt == true)
@@ -171,7 +218,10 @@ public class AdeverintaMedicalaService implements AdeverintaMedicalaInterface {
     @Override
     public void deleteAdeverintaDb(Connection connObj, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("deleteAdeverintaDb", timeStamp);
+        Runnable rr = new AdeverintaMedicalaService.RunnableAudit("deleteAdeverintaDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+       // citesteScrieAudit("deleteAdeverintaDb", timeStamp);
         try{
             Statement  stmt = connObj.createStatement();
             String sql = "DELETE FROM AdeverinteMedicale " +
