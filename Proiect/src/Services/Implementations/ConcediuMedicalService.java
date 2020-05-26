@@ -17,6 +17,30 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ConcediuMedicalService implements ConcediuMedicalInterface {
+    private class RunnableAudit implements Runnable{
+        private  String comanda;
+        private  String timp;
+
+        public RunnableAudit(String comanda, String timp){
+            this.comanda = comanda;
+            this.timp = timp;
+
+
+        }
+        public void run()
+        {
+            List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
+
+            Thread.currentThread().setName(comanda);
+            String threadName = Thread.currentThread().getName();
+            threadName += "Thread";
+
+            comanda += " " + timp;
+            comanda += " " + threadName;
+            matrice.add(comanda);
+            AuditService.scriereCSVAudit("src/excel/audit.csv", new String[]{"Comanda","Data", "Ora", "ThreadName"}, matrice);
+        }
+    }
     @Override
     public void citesteScrieAudit(String comanda, String timp) {
         List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
@@ -28,7 +52,10 @@ public class ConcediuMedicalService implements ConcediuMedicalInterface {
     @Override
     public ConcediuMedical getFromListById(List<ConcediuMedical> lista, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getFromListById", timeStamp);
+        Runnable rr = new ConcediuMedicalService.RunnableAudit("getFromListById", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+        //citesteScrieAudit("getFromListById", timeStamp);
         for(int i = 0; i < lista.size(); i++)
             if(lista.get(i).getId() == id)
                 return lista.get(i);
@@ -39,7 +66,10 @@ public class ConcediuMedicalService implements ConcediuMedicalInterface {
     @Override
     public void afiseazaConcedii(List<ConcediuMedical> concedii) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("afiseazConcedii", timeStamp);
+       // citesteScrieAudit("afiseazConcedii", timeStamp);
+        Runnable rr = new ConcediuMedicalService.RunnableAudit("afiseazaConcedii", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         for(int i = 0; i < concedii.size(); i++)
         {
             System.out.println("Concedii medicale: ");
@@ -51,7 +81,10 @@ public class ConcediuMedicalService implements ConcediuMedicalInterface {
     @Override
     public ConcediuMedical creareCerereConcediu(Pacient pacient, String eliberatDe, String eliberatLa, int nrZileConcediu, String dataFinal) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("creareCerereConcediu", timeStamp);
+        Runnable rr = new ConcediuMedicalService.RunnableAudit("creareCerereConcediu", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+        //citesteScrieAudit("creareCerereConcediu", timeStamp);
         ConcediuMedical cm = new ConcediuMedical(pacient, eliberatDe, eliberatLa, nrZileConcediu, dataFinal);
         return cm;
     }
@@ -59,7 +92,10 @@ public class ConcediuMedicalService implements ConcediuMedicalInterface {
     @Override
     public ConcediuMedical updateNrZile(ConcediuMedical cm, int nrZile, String dataFinal) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("updateNrZile", timeStamp);
+        //citesteScrieAudit("updateNrZile", timeStamp);
+        Runnable rr = new ConcediuMedicalService.RunnableAudit("updateNrZile", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         cm.setNrZileConcediu(nrZile);
         cm.setDataFinal(dataFinal);
         return cm;
@@ -68,7 +104,10 @@ public class ConcediuMedicalService implements ConcediuMedicalInterface {
     @Override
     public List<ConcediuMedical> stergereConcediu(List<ConcediuMedical> lista, int indx) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("stergereConcediu", timeStamp);
+        //citesteScrieAudit("stergereConcediu", timeStamp);
+        Runnable rr = new ConcediuMedicalService.RunnableAudit("stergereConcediu", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
        for(int i = 0; i < lista.size(); i++)
            if(i == indx){
                lista.remove(i);
@@ -79,7 +118,10 @@ public class ConcediuMedicalService implements ConcediuMedicalInterface {
     @Override
     public List<ConcediuMedical> getConcediiFromDb(Connection connObj) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getConcediiFromDb", timeStamp);
+        Runnable rr = new ConcediuMedicalService.RunnableAudit("getConcediiFromDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+       // citesteScrieAudit("getConcediiFromDb", timeStamp);
         List<ConcediuMedical> listaConcedii = new ArrayList<>();
         try {
             Statement stmt = connObj.createStatement();
@@ -118,7 +160,10 @@ public class ConcediuMedicalService implements ConcediuMedicalInterface {
     @Override
     public void createConcediuDb(Connection connObj, ConcediuMedical cm) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("createConcediuDb", timeStamp);
+        Runnable rr = new ConcediuMedicalService.RunnableAudit("createConcediuDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+       // citesteScrieAudit("createConcediuDb", timeStamp);
         try{
             Statement stmt = connObj.createStatement();
 
@@ -137,8 +182,10 @@ public class ConcediuMedicalService implements ConcediuMedicalInterface {
     @Override
     public void modificaValabilitateDb(Connection connObj, int id, int val, String dataFinal) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("modificaValabilitateDb", timeStamp);
-
+       // citesteScrieAudit("modificaValabilitateDb", timeStamp);
+        Runnable rr = new ConcediuMedicalService.RunnableAudit("modificaValabilitateDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = connObj.createStatement();
             String sql = "UPDATE ConcediiMedicale " +
@@ -157,7 +204,10 @@ public class ConcediuMedicalService implements ConcediuMedicalInterface {
     @Override
     public void deleteConcediuDb(Connection connObj, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("deleteConcediuDb", timeStamp);
+        //citesteScrieAudit("deleteConcediuDb", timeStamp);
+        Runnable rr = new ConcediuMedicalService.RunnableAudit("deleteConcediuDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement  stmt = connObj.createStatement();
             String sql = "DELETE FROM ConcediiMedicale " +
