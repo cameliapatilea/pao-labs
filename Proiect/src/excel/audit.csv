@@ -41,3 +41,8 @@ getConcediiFromDb,2020/05/26,12:01:07,getConcediiFromDbThread
 creareCerereConcediu,2020/05/26,12:01:07,creareCerereConcediuThread
 afiseazaConcedii,2020/05/26,12:01:07,afiseazaConcediiThread
 modificaValabilitateDb,2020/05/26,12:02:24,modificaValabilitateDbThread
+getAllFromDb,2020/05/26,12:12:05,getAllFromDbThread
+creareReteta,2020/05/26,12:12:05,creareRetetaThread
+creareReteta,2020/05/26,12:12:05,creareRetetaThread
+afiseazaRetete,2020/05/26,12:12:05,afiseazaReteteThread
+deleteRetetaFromDb,2020/05/26,12:12:34,deleteRetetaFromDbThread

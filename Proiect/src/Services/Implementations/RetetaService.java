@@ -14,6 +14,30 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class RetetaService implements RetetaInterface {
+    private class RunnableAudit implements Runnable{
+        private  String comanda;
+        private  String timp;
+
+        public RunnableAudit(String comanda, String timp){
+            this.comanda = comanda;
+            this.timp = timp;
+
+
+        }
+        public void run()
+        {
+            List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
+
+            Thread.currentThread().setName(comanda);
+            String threadName = Thread.currentThread().getName();
+            threadName += "Thread";
+
+            comanda += " " + timp;
+            comanda += " " + threadName;
+            matrice.add(comanda);
+            AuditService.scriereCSVAudit("src/excel/audit.csv", new String[]{"Comanda","Data", "Ora", "ThreadName"}, matrice);
+        }
+    }
     @Override
     public void citesteScrieAudit(String comanda, String timp) {
         List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
@@ -25,7 +49,10 @@ public class RetetaService implements RetetaInterface {
     @Override
     public Reteta getFromListById(List<Reteta> lista, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getFromListById", timeStamp);
+        Runnable rr = new RetetaService.RunnableAudit("getFromListById", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+        //citesteScrieAudit("getFromListById", timeStamp);
         for(int i = 0; i < lista.size(); i++)
             if(lista.get(i).getId() == id)
                 return lista.get(i);
@@ -36,7 +63,10 @@ public class RetetaService implements RetetaInterface {
     @Override
     public void afiseazaRetete(List<Reteta> retete) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("afiseazaRetete", timeStamp);
+        //citesteScrieAudit("afiseazaRetete", timeStamp);
+        Runnable rr = new RetetaService.RunnableAudit("afiseazaRetete", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         for(int i = 0; i < retete.size(); i++)
         {
             System.out.println("Retete: ");
@@ -48,7 +78,10 @@ public class RetetaService implements RetetaInterface {
     @Override
     public Reteta creareReteta(Pacient pacient, String eliberatDe, String eliberatLa, Map<String, Integer> medicamente) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("creareReteta", timeStamp);
+        //citesteScrieAudit("creareReteta", timeStamp);
+        Runnable rr = new RetetaService.RunnableAudit("creareReteta", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
        Reteta r = new Reteta( pacient,eliberatDe,  eliberatLa,medicamente);
        return r;
     }
@@ -57,14 +90,20 @@ public class RetetaService implements RetetaInterface {
     public Map<String, Integer> getMedicamente(Reteta r)
     {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getMedicamente", timeStamp);
+        Runnable rr = new RetetaService.RunnableAudit("getMedicamente", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+       // citesteScrieAudit("getMedicamente", timeStamp);
         return r.getMedicamente();
     }
 
     @Override
     public Reteta adaugaMedicament(Reteta r,String medicament, int oriZi) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("adaugaMedicament", timeStamp);
+        Runnable rr = new RetetaService.RunnableAudit("adaugaMedicament", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+       // citesteScrieAudit("adaugaMedicament", timeStamp);
         r.getMedicamente().put(medicament, oriZi);
         return r;
     }
@@ -72,7 +111,10 @@ public class RetetaService implements RetetaInterface {
     @Override
     public List<Reteta> getAllFromDb(Connection connObj) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getAllReteteFromDb", timeStamp);
+        //citesteScrieAudit("getAllReteteFromDb", timeStamp);
+        Runnable rr = new RetetaService.RunnableAudit("getAllFromDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         List<Reteta> listaRetete = new ArrayList<>();
         try {
             Statement stmt = connObj.createStatement();
@@ -113,7 +155,10 @@ public class RetetaService implements RetetaInterface {
     @Override
     public void createRetetaForDb(Connection connObj, Reteta r) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("createRetetaForDb", timeStamp);
+        //citesteScrieAudit("createRetetaForDb", timeStamp);
+        Runnable rr = new RetetaService.RunnableAudit("createRetetaForDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = connObj.createStatement();
 
@@ -132,7 +177,10 @@ public class RetetaService implements RetetaInterface {
     @Override
     public void deleteRetetaFromDb(Connection connObj, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("deleteRetetaFromDb", timeStamp);
+        Runnable rr = new RetetaService.RunnableAudit("deleteRetetaFromDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+       // citesteScrieAudit("deleteRetetaFromDb", timeStamp);
         try{
             Statement  stmt = connObj.createStatement();
             String sql = "DELETE FROM Retete " +
@@ -148,8 +196,10 @@ public class RetetaService implements RetetaInterface {
     @Override
     public void modificaEliberareRetetaDb(Connection connObj, int id, String data) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("modificaEliberareRetetaDb", timeStamp);
-
+       // citesteScrieAudit("modificaEliberareRetetaDb", timeStamp);
+        Runnable rr = new RetetaService.RunnableAudit("modificaEliberareRetetaDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try{
             Statement stmt = connObj.createStatement();
             String sql = "UPDATE Retete " +
