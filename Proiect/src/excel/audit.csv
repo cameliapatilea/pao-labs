@@ -28,3 +28,10 @@ creareAdeverinta,2020/05/26,11:31:37,creareAdeverintaThread
 creareAdeverinta,2020/05/26,11:31:37,creareAdeverintaThread
 afiseazaAdeverinte,2020/05/26,11:31:37,afiseazaAdeverinteThread
 modificaAptDb,2020/05/26,11:32:25,modificaAptDbThread
+getAsistentBySpecializareDb,2020/05/26,11:46:20,getAsistentBySpecializareDbThread
+creareAsistent,2020/05/26,11:46:20,creareAsistentThread
+creareAsistent,2020/05/26,11:46:20,creareAsistentThread
+getAllFromDb,2020/05/26,11:48:18,getAllFromDbThread
+creareAsistent,2020/05/26,11:48:18,creareAsistentThread
+creareAsistent,2020/05/26,11:48:18,creareAsistentThread
+afiseazaProgram,2020/05/26,11:48:18,afiseazaProgramThread
