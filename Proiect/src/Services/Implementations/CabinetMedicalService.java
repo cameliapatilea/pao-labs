@@ -14,6 +14,30 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CabinetMedicalService implements CabinetMedicalInterface {
+    private class RunnableAudit implements Runnable{
+        private  String comanda;
+        private  String timp;
+
+        public RunnableAudit(String comanda, String timp){
+            this.comanda = comanda;
+            this.timp = timp;
+
+
+        }
+        public void run()
+        {
+            List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
+
+            Thread.currentThread().setName(comanda);
+            String threadName = Thread.currentThread().getName();
+            threadName += "Thread";
+
+            comanda += " " + timp;
+            comanda += " " + threadName;
+            matrice.add(comanda);
+            AuditService.scriereCSVAudit("src/excel/audit.csv", new String[]{"Comanda","Data", "Ora", "ThreadName"}, matrice);
+        }
+    }
     @Override
     public void citesteScrieAudit(String comanda, String timp) {
         List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
@@ -25,7 +49,10 @@ public class CabinetMedicalService implements CabinetMedicalInterface {
     @Override
     public CabinetMedical getFromListById(List<CabinetMedical> lista, int id) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getFromListById", timeStamp);
+        Runnable rr = new CabinetMedicalService.RunnableAudit("getFromListById", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+        //citesteScrieAudit("getFromListById", timeStamp);
         for(int i = 0; i < lista.size(); i++)
             if(lista.get(i).getId() == id)
                 return lista.get(i);
@@ -36,7 +63,10 @@ public class CabinetMedicalService implements CabinetMedicalInterface {
     @Override
     public void afiseazaCabinet(List<CabinetMedical> cm) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("afisezaCabinet", timeStamp);
+        //citesteScrieAudit("afisezaCabinet", timeStamp);
+        Runnable rr = new CabinetMedicalService.RunnableAudit("afiseazaCabinet", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         for(int i = 0; i < cm.size(); i++)
         {
             System.out.println("Cabinet medical: ");
@@ -48,7 +78,10 @@ public class CabinetMedicalService implements CabinetMedicalInterface {
     @Override
     public String getIntervalFunctionare(CabinetMedical cab) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getIntervaFunctionare", timeStamp);
+        //citesteScrieAudit("getIntervaFunctionare", timeStamp);
+        Runnable rr = new CabinetMedicalService.RunnableAudit("getIntervalFunctionare", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         return "Intervalul orar in care cabinetul este deschis este: " + cab.getOraInceput() + "-" + cab.getOraStop();
     }
 
@@ -56,14 +89,20 @@ public class CabinetMedicalService implements CabinetMedicalInterface {
     public String getAdresaCabinet(CabinetMedical cab)
     {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getAdresaCabinet", timeStamp);
+        //citesteScrieAudit("getAdresaCabinet", timeStamp);
+        Runnable rr = new CabinetMedicalService.RunnableAudit("getAdresaCabinet", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         return cab.getAdresa();
     }
 
     @Override
     public String getMedici(List<Medic> listaMedici) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getMedici", timeStamp);
+        //citesteScrieAudit("getMedici", timeStamp);
+        Runnable rr = new CabinetMedicalService.RunnableAudit("getMedici", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         String  x = "Lista de medici din cabinet este: \n";
         for(int i = 0; i <  listaMedici.size(); i++)
             x+=listaMedici.get(i).toString() + "\n";
@@ -73,7 +112,10 @@ public class CabinetMedicalService implements CabinetMedicalInterface {
     @Override
     public String getAsistenti(List<Asistent> listaAsistenti) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getAsistenti", timeStamp);
+        Runnable rr = new CabinetMedicalService.RunnableAudit("getAsistenti", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+        //citesteScrieAudit("getAsistenti", timeStamp);
         String  x = "Lista de asistenti din cabinet este: \n";
         for(int i = 0; i <  listaAsistenti.size(); i++)
             x+=listaAsistenti.get(i).toString() + "\n";
@@ -83,7 +125,10 @@ public class CabinetMedicalService implements CabinetMedicalInterface {
     @Override
     public String getPacienti(List<Pacient> listaPacienti) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getPacienti", timeStamp);
+        //citesteScrieAudit("getPacienti", timeStamp);
+        Runnable rr = new CabinetMedicalService.RunnableAudit("getPacienti", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         String  x = "Lista de pacienti din cabinet este: \n";
         for(int i = 0; i <  listaPacienti.size(); i++)
             x+=listaPacienti.get(i).toString() + "\n";
@@ -93,8 +138,10 @@ public class CabinetMedicalService implements CabinetMedicalInterface {
     @Override
     public void getDetaliiCabinetFromDb(Connection connObj) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("getDetaliiCabinetFromDb", timeStamp);
-
+        //citesteScrieAudit("getDetaliiCabinetFromDb", timeStamp);
+        Runnable rr = new CabinetMedicalService.RunnableAudit("getDetaliiCabinetFromDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
         try {
             Statement stmt = connObj.createStatement();
 
@@ -125,7 +172,10 @@ public class CabinetMedicalService implements CabinetMedicalInterface {
     @Override
     public void updateStradaDb(Connection connObj, String strada) {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-        citesteScrieAudit("updateStradaDb", timeStamp);
+        Runnable rr = new CabinetMedicalService.RunnableAudit("updateStradaDb", timeStamp);
+        Thread t = new Thread(rr);
+        t.start();
+        //citesteScrieAudit("updateStradaDb", timeStamp);
 
         try{
 

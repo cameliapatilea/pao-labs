@@ -35,3 +35,5 @@ getAllFromDb,2020/05/26,11:48:18,getAllFromDbThread
 creareAsistent,2020/05/26,11:48:18,creareAsistentThread
 creareAsistent,2020/05/26,11:48:18,creareAsistentThread
 afiseazaProgram,2020/05/26,11:48:18,afiseazaProgramThread
+getDetaliiCabinetFromDb,2020/05/26,11:52:43,getDetaliiCabinetFromDbThread
+updateStradaDb,2020/05/26,11:53:23,updateStradaDbThread
