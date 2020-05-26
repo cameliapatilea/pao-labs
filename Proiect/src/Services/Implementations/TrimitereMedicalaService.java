@@ -299,6 +299,7 @@ public class TrimitereMedicalaService implements TrimitereMedicalaInterface {
         {
                     Thread.currentThread().setName(comanda);
                     String threadName = Thread.currentThread().getName();
+            threadName += "Thread";
                     List<String> matrice = AuditService.citireCSVAudit("src/excel/audit.csv");
                     comanda += " " + timp;
                     comanda += " " + threadName;
