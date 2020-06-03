@@ -5,6 +5,7 @@ import Services.Implementations.*;
 import Services.Interfaces.PacientInterface;
 import com.opencsv.CSVWriter;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -24,7 +25,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.List;
 
-public class Main extends Application {
+public class Main extends Application implements EventHandler<ActionEvent> {
 
     //initialize database
     public static Statement stmt = null;
@@ -986,16 +987,18 @@ public class Main extends Application {
             }
         }
     Button button;
-   Button button2;
+    Button button2;
     Button button3;
     Button button4;
     Button button5;
     Button button6;
     Button button7;
     Button button8;
+    Button buttonP;
+    Button buttonP2;
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Cabinet medical");
+        Stage window;
         button  = new Button();
         button.setText("Pacienti");
         StackPane layout = new StackPane();
@@ -1019,9 +1022,37 @@ public class Main extends Application {
         button8 = new Button();
         button8.setText("Cabinet Medical");
         HBox hbox = new HBox(button, button2, button3, button4, button5, button6, button7, button8);
+        buttonP = new Button();
+        buttonP.setText("Show all pacienti");
 
+        buttonP2 = new Button();
+        buttonP2.setText("Add pacient in the database");
+        Button backToMeniu = new Button();
+        backToMeniu.setText("Back to Main Menu");
+        HBox hbox2 = new HBox(backToMeniu, buttonP, buttonP2);
+
+
+        window =  primaryStage;
         Scene scene = new Scene(hbox, 1000,200);
+        Scene scene2 = new Scene(hbox2, 1000, 200);
+        button.setOnAction(e -> window.setScene(scene2));
+
+        backToMeniu.setOnAction(e->window.setScene(scene));
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    @Override
+    public void handle(ActionEvent event) {
+        if(event.getSource() == button){
+            System.out.println("Bine ati venit la categoria pacienti");
+            System.out.println("Pentru a vedea pacientii deja existenti, introduceti 1");
+            System.out.println("Pentru a adauga un pacient in baza de date, introduceti 2");
+            System.out.println("Pentru a adauaga o afectiune unui pacienti, introduceti 3");
+            System.out.println("Pentru a sterge o afectiune a unui pacient, introdoceti 4");
+            System.out.println("Pentru a face update la varsta unui pacient, introdoceti 5");
+            System.out.println("Pentru a sterge un pacient, introdoceti 6");
+
+        }
     }
 }
