@@ -4,9 +4,17 @@ import Helpers.ReadWriteService;
 import Services.Implementations.*;
 import Services.Interfaces.PacientInterface;
 import com.opencsv.CSVWriter;
+import javafx.application.Application;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import com.opencsv.CSVReader;
 
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.scene.*;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -14,8 +22,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.*;
+import java.util.List;
 
-public class Main{
+public class Main extends Application {
 
     //initialize database
     public static Statement stmt = null;
@@ -132,8 +141,9 @@ public class Main{
 
 
 
-    public static void main(String[] args) throws IOException {
-        getDbConnection();
+    public static void main(String[] args) throws IOException  {
+
+       getDbConnection();
         Scanner scan = new Scanner(System.in);
         afiseazaMeniu();
 
@@ -160,7 +170,7 @@ public class Main{
 
         //lista cabinet- date din csv
         initializeazaCabinet();
-
+        launch(args);
         int x = scan.nextInt();
         while(x!=0) {
 
@@ -975,4 +985,43 @@ public class Main{
                 x = scan.nextInt();
             }
         }
+    Button button;
+   Button button2;
+    Button button3;
+    Button button4;
+    Button button5;
+    Button button6;
+    Button button7;
+    Button button8;
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Cabinet medical");
+        button  = new Button();
+        button.setText("Pacienti");
+        StackPane layout = new StackPane();
+        //layout.getChildren().add(button);
+
+
+        button2 = new Button();
+        button2.setText("Medici");
+        //layout.getChildren().add(button2);
+
+        button3 = new Button();
+        button3.setText("Asistenti");
+        button4 = new Button();
+        button4.setText("Retete");
+        button5 = new Button();
+        button5.setText("Trimiteri Medicale");
+        button6 = new Button();
+        button6.setText("Concedii Medicale");
+        button7 = new Button();
+        button7.setText("Adeverinte Medicale");
+        button8 = new Button();
+        button8.setText("Cabinet Medical");
+        HBox hbox = new HBox(button, button2, button3, button4, button5, button6, button7, button8);
+
+        Scene scene = new Scene(hbox, 1000,200);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
+}

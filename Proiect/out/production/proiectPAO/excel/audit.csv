@@ -1,6 +1,6 @@
 Comanda,Data,Ora,ThreadName
-getAllFromDb,2020/05/25,22:36:44,getAllFromDb
-crearePacient,2020/05/25,22:36:44,crearePacient
+crearePacient,2020/06/03,23:37:16,crearePacientThread
+cient,2020/05/25,22:36:44,crearePacient
 deletePacientFromDb,2020/05/25,22:41:42,deletePacientFromDb
 adaugaPacientDb,2020/05/25,22:42:36,adaugaPacientDb
 getAllFromDb,2020/05/25,22:59:45,getAllFromDb
@@ -45,3 +45,10 @@ getAllFromDb,2020/05/26,12:12:05,getAllFromDbThread
 creareReteta,2020/05/26,12:12:05,creareRetetaThread
 creareReteta,2020/05/26,12:12:05,creareRetetaThread
 afiseazaRetete,2020/05/26,12:12:05,afiseazaReteteThread
+deleteRetetaFromDb,2020/05/26,12:12:34,deleteRetetaFromDbThread
+getAllFromDb,2020/06/03,23:37:15,getAllFromDbThread
+crearePacient,2020/06/03,23:37:16,crearePacientThread
+crearePacient,2020/06/03,23:37:16,crearePacientThread
+crearePacient,2020/06/03,23:37:16,crearePacientThread
+crearePacient,2020/06/03,23:37:16,crearePacientThread
+afiseazaPacienti,2020/06/03,23:37:16,afiseazaPacientiThread
