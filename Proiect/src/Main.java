@@ -996,6 +996,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Button button8;
     Button buttonP;
     Button buttonP2;
+    Button buttonP3;
+    Button buttonM;
+    Button buttonM1;
+    Button buttonM2;
     @Override
     public void start(Stage primaryStage) throws Exception {
         Stage window;
@@ -1029,14 +1033,31 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         buttonP2.setText("Add pacient in the database");
         Button backToMeniu = new Button();
         backToMeniu.setText("Back to Main Menu");
-        HBox hbox2 = new HBox(backToMeniu, buttonP, buttonP2);
+        buttonP3 = new Button();
+        buttonP3.setText("Delete Pacient");
+        HBox hbox2 = new HBox(backToMeniu, buttonP, buttonP2, buttonP3);
+
+
+
+        buttonM = new Button();
+        buttonM.setText("Show all doctors");
+        buttonM1 = new Button();
+        buttonM1.setText("Update doctor's age");
+        buttonM2 = new Button();
+        buttonM2.setText("Show working hours");
+
+        HBox hbox3 = new HBox(backToMeniu, buttonM, buttonM1, buttonM2);
 
 
         window =  primaryStage;
         Scene scene = new Scene(hbox, 1000,200);
         Scene scene2 = new Scene(hbox2, 1000, 200);
+        Scene scene3 = new Scene(hbox3, 1000, 200);
         button.setOnAction(e -> window.setScene(scene2));
 
+
+        backToMeniu.setOnAction(e->window.setScene(scene));
+        button2.setOnAction(e->window.setScene(scene3));
         backToMeniu.setOnAction(e->window.setScene(scene));
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -1053,6 +1074,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             System.out.println("Pentru a face update la varsta unui pacient, introdoceti 5");
             System.out.println("Pentru a sterge un pacient, introdoceti 6");
 
+        }
+        if(event.getSource() == buttonP){
+            
         }
     }
 }
