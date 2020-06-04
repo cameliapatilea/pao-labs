@@ -6,7 +6,9 @@ import Services.Interfaces.PacientInterface;
 import com.opencsv.CSVWriter;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -24,6 +26,10 @@ import java.nio.file.Paths;
 import java.sql.*;
 import java.util.*;
 import java.util.List;
+
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 
 public class Main extends Application implements EventHandler<ActionEvent> {
 
@@ -1000,6 +1006,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Button buttonM;
     Button buttonM1;
     Button buttonM2;
+    private TableView table = new TableView();
     @Override
     public void start(Stage primaryStage) throws Exception {
         Stage window;
@@ -1059,6 +1066,32 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         backToMeniu.setOnAction(e->window.setScene(scene));
         button2.setOnAction(e->window.setScene(scene3));
         backToMeniu.setOnAction(e->window.setScene(scene));
+
+
+
+        table.setEditable(true);
+
+        TableColumn firstNameCol = new TableColumn("First Name");
+        TableColumn lastNameCol = new TableColumn("Last Name");
+        TableColumn emailCol = new TableColumn("Email");
+
+        table.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
+        final Label label = new Label("List of pacients");
+
+        final VBox vbox = new VBox();
+        vbox.setSpacing(5);
+        vbox.setPadding(new Insets(20, 0, 0, 10));
+        vbox.getChildren().addAll(label, backToMeniu, table);
+
+        Scene sceneShowPacienti = new Scene(vbox, 500,475);
+        buttonP.setOnAction(e->window.setScene(sceneShowPacienti));
+
+        //hbox.getChildren().addAll(vbox);
+
+        //((Group) scene.getRoot()).getChildren().addAll(vbox);
+
+
+
         primaryStage.setScene(scene);
         primaryStage.show();
     }
