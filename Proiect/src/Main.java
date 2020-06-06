@@ -1450,10 +1450,53 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         final VBox vboxTM = new VBox();
         vboxTM.setSpacing(5);
         vboxTM.setPadding(new Insets(20, 0, 0, 10));
-        final Label labelTM = new Label("List of retete");
+        final Label labelTM = new Label("List of Trimiteri medicale");
         vboxTM.getChildren().addAll(labelTM,backToMeniu6, tableTM);
         Scene sceneShowTrimiteri = new Scene(vboxTM, 1000, 200);
         button5.setOnAction(e->window.setScene(sceneShowTrimiteri));
+
+
+
+        tableCM.setEditable(true);
+
+        TableColumn pacientCM = new TableColumn("Pacient");
+        pacientCM.setMinWidth(100);
+        pacientCM.setCellValueFactory(
+                new PropertyValueFactory<ConcediuMedical, String>("pacient"));
+
+        TableColumn valabilitateCM = new TableColumn("Numar Zile Concediu");
+        valabilitateCM.setMinWidth(100);
+        valabilitateCM.setCellValueFactory(
+                new PropertyValueFactory<ConcediuMedical, String>("nrZileConcediu"));
+
+        TableColumn dataFinalCM = new TableColumn("dataFinal");
+        dataFinalCM.setMinWidth(100);
+        dataFinalCM.setCellValueFactory(
+                new PropertyValueFactory<ConcediuMedical, String>("dataFinal"));
+
+
+        TableColumn eliberatDeCM = new TableColumn("Eliberat De");
+        eliberatDeCM.setMinWidth(100);
+        eliberatDeCM.setCellValueFactory(
+                new PropertyValueFactory<ConcediuMedical, String>("eliberatDe"));
+
+        TableColumn eliberatLaCM = new TableColumn("eliberatLa");
+        eliberatLaCM.setMinWidth(100);
+        eliberatLaCM.setCellValueFactory(
+                new PropertyValueFactory<ConcediuMedical, String>("eliberatLa"));
+
+
+        tableCM.setItems(dataCM);
+        tableCM.getColumns().addAll(pacientCM, valabilitateCM,  dataFinalCM, eliberatDeCM, eliberatLaCM);
+
+        final VBox vboxCM = new VBox();
+        vboxCM.setSpacing(5);
+        vboxCM.setPadding(new Insets(20, 0, 0, 10));
+        final Label labelCM = new Label("List of concedii medicale");
+        vboxCM.getChildren().addAll(labelCM,backToMeniu7, tableCM);
+        Scene sceneShowConcedii = new Scene(vboxCM, 1000, 200);
+        button6.setOnAction(e->window.setScene(sceneShowConcedii));
+
 
 
         primaryStage.setScene(scene);

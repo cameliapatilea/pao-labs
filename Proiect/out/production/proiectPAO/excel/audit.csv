@@ -1,4 +1,7 @@
 Comanda,Data,Ora,ThreadName
-getConcediiFromDb,2020/06/06,22:47:11,getConcediiFromDbThread
-creareCerereConcediu,2020/06/06,22:47:11,creareCerereConcediuThread
-creareCerereConcediu,2020/06/06,22:47:11,creareCerereConcediuThread
+creareTrimitere,2020/06/06,22:55:29,creareTrimitereThread
+creareTrimitere,2020/06/06,22:55:29,creareTrimitereThread
+creareTrimitere,2020/06/06,22:55:29,creareTrimitereThread
+getConcediiFromDb,2020/06/06,22:55:29,getConcediiFromDbThread
+creareCerereConcediu,2020/06/06,22:55:29,creareCerereConcediuThread
+creareCerereConcediu,2020/06/06,22:55:29,creareCerereConcediuThread
