@@ -5,10 +5,13 @@ import Services.Implementations.*;
 import Services.Interfaces.PacientInterface;
 import com.opencsv.CSVWriter;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -27,9 +30,9 @@ import java.sql.*;
 import java.util.*;
 import java.util.List;
 
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
+
+import javax.swing.text.TabExpander;
 
 public class Main extends Application implements EventHandler<ActionEvent> {
 
@@ -1006,19 +1009,65 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Button buttonM;
     Button buttonM1;
     Button buttonM2;
+    Button buttonCreatePacient;
+    Button backToMeniu;
+    Button backToMeniu1;
+    Button backToMeniu2;
+    Button backToMeniu3;
+    Button backToMeniu4;
+    Button backToMeniu5;
+    Button backToMeniu6;
+    Button backToMeniu7;
+    Button showAsistenti;
+    Button showRetete;
+    Button showTrimiteri;
+    Button showConcedii;
+
+    private final GridPane grid = new GridPane();
     private TableView table = new TableView();
+    private TableView tableM = new TableView();
+    private TableView tableA = new TableView();
+    private TableView tableR = new TableView();
+    private TableView tableTM = new TableView();
+    private TableView tableCM = new TableView();
+
+    private final ObservableList<Pacient> data =
+            FXCollections.observableArrayList(
+                    pacientService.getAllFromDb(connObj)
+
+            );
+    private final ObservableList<Medic> dataM =
+            FXCollections.observableArrayList(
+                    medicService.getAllFromDb(connObj)
+            );
+    private final ObservableList<Medic> dataA =
+            FXCollections.observableArrayList(
+                    medicService.getAllFromDb(connObj)
+            );
+    private final ObservableList<Asistent> dataR =
+            FXCollections.observableArrayList(
+                    asistentService.getAllFromDb(connObj)
+            );
+    private final ObservableList<Asistent> dataTM =
+            FXCollections.observableArrayList(
+                    asistentService.getAllFromDb(connObj)
+            );
+    private final ObservableList<Asistent> dataCM =
+            FXCollections.observableArrayList(
+                    asistentService.getAllFromDb(connObj)
+            );
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Stage window;
         button  = new Button();
         button.setText("Pacienti");
-        StackPane layout = new StackPane();
-        //layout.getChildren().add(button);
+
 
 
         button2 = new Button();
         button2.setText("Medici");
-        //layout.getChildren().add(button2);
+
 
         button3 = new Button();
         button3.setText("Asistenti");
@@ -1032,19 +1081,35 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         button7.setText("Adeverinte Medicale");
         button8 = new Button();
         button8.setText("Cabinet Medical");
+
+
         HBox hbox = new HBox(button, button2, button3, button4, button5, button6, button7, button8);
         buttonP = new Button();
         buttonP.setText("Show all pacienti");
 
         buttonP2 = new Button();
         buttonP2.setText("Add pacient in the database");
-        Button backToMeniu = new Button();
+
+        backToMeniu = new Button();
         backToMeniu.setText("Back to Main Menu");
         buttonP3 = new Button();
         buttonP3.setText("Delete Pacient");
         HBox hbox2 = new HBox(backToMeniu, buttonP, buttonP2, buttonP3);
 
-
+        backToMeniu1 = new Button();
+        backToMeniu1.setText("Back to Main Menu");
+        backToMeniu2 = new Button();
+        backToMeniu2.setText("Back to Main Menu");
+        backToMeniu3 = new Button();
+        backToMeniu3.setText("Back to Main Menu");
+        backToMeniu4 = new Button();
+        backToMeniu4.setText("Back to Main Menu");
+        backToMeniu5 = new Button();
+        backToMeniu5.setText("Back to Main Menu");
+        backToMeniu6 = new Button();
+        backToMeniu6.setText("Back to Main Menu");
+        backToMeniu7 = new Button();
+        backToMeniu7.setText("Back to Main Menu");
 
         buttonM = new Button();
         buttonM.setText("Show all doctors");
@@ -1053,7 +1118,19 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         buttonM2 = new Button();
         buttonM2.setText("Show working hours");
 
-        HBox hbox3 = new HBox(backToMeniu, buttonM, buttonM1, buttonM2);
+
+        HBox hbox3;
+
+        hbox3 = new HBox(backToMeniu1, buttonM, buttonM1, buttonM2);
+
+        showAsistenti = new Button();
+        showAsistenti.setText("Back to meniu");
+        showRetete = new Button();
+        showRetete.setText("Back to meniu");
+        showTrimiteri = new Button();
+        showTrimiteri.setText("Back to meniu");
+        showConcedii = new Button();
+        showConcedii.setText("Back to meniu");
 
 
         window =  primaryStage;
@@ -1065,30 +1142,236 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
         backToMeniu.setOnAction(e->window.setScene(scene));
         button2.setOnAction(e->window.setScene(scene3));
-        backToMeniu.setOnAction(e->window.setScene(scene));
-
-
+        backToMeniu1.setOnAction(e->window.setScene(scene));
+        backToMeniu2.setOnAction(e->window.setScene(scene));
+        backToMeniu3.setOnAction(e->window.setScene(scene));
+        backToMeniu4.setOnAction(e->window.setScene(scene));
+        backToMeniu5.setOnAction(e->window.setScene(scene));
+        backToMeniu6.setOnAction(e->window.setScene(scene));
+        backToMeniu7.setOnAction(e->window.setScene(scene));
 
         table.setEditable(true);
 
-        TableColumn firstNameCol = new TableColumn("First Name");
-        TableColumn lastNameCol = new TableColumn("Last Name");
-        TableColumn emailCol = new TableColumn("Email");
+        TableColumn id = new TableColumn("Id Pacient");
+        id.setMinWidth(100);
+        id.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("id"));
 
-        table.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
+        TableColumn lastNameCol = new TableColumn("Last Name");
+        lastNameCol.setMinWidth(100);
+        lastNameCol.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("nume"));
+
+        TableColumn firstNameCol = new TableColumn("First Name");
+        firstNameCol.setMinWidth(100);
+        firstNameCol.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("prenume"));
+
+        TableColumn dataNastere = new TableColumn("Data nasterii");
+        dataNastere.setMinWidth(100);
+        dataNastere.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("DataNasterii"));
+
+        TableColumn varsta = new TableColumn("Varsta");
+        varsta.setMinWidth(50);
+        varsta.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("varsta"));
+        TableColumn gen = new TableColumn("Gen");
+        gen.setMinWidth(100);
+        gen.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("gen"));
+        TableColumn afectiuni = new TableColumn("Afectiuni");
+        afectiuni.setMinWidth(200);
+        afectiuni.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("afectiuni"));
+
+        System.out.println(data);
+
+        table.setItems(data);
+        table.getColumns().addAll(id, firstNameCol, lastNameCol, dataNastere, varsta, gen, afectiuni);
         final Label label = new Label("List of pacients");
 
         final VBox vbox = new VBox();
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(20, 0, 0, 10));
-        vbox.getChildren().addAll(label, backToMeniu, table);
+        vbox.getChildren().addAll(label, backToMeniu2, table);
 
-        Scene sceneShowPacienti = new Scene(vbox, 500,475);
+        Scene sceneShowPacienti = new Scene(vbox, 1000,475);
         buttonP.setOnAction(e->window.setScene(sceneShowPacienti));
 
-        //hbox.getChildren().addAll(vbox);
 
-        //((Group) scene.getRoot()).getChildren().addAll(vbox);
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(10,10,10,10));
+        grid.setVgap(5);
+        grid.setHgap(5);
+
+        final Label labelCreate = new Label("Create a pacient and add it to the database");
+        final VBox vboxCreateP = new VBox();
+        vbox.setSpacing(5);
+        vbox.setPadding(new Insets(20, 0, 0, 10));
+        HBox hb = new HBox();
+        hb.setSpacing(5);
+        hb.setPadding(new Insets(20,0,0,10));
+        Label label1 = new Label("ID:");
+        TextField textField1 = new TextField ();
+        GridPane.setConstraints(label1, 0,0);
+        Label label2 = new Label("Last Name:");
+        TextField textField2 = new TextField ();
+        GridPane.setConstraints(label2, 0,1);
+        Label label3 = new Label("First Name:");
+        TextField textField3 = new TextField ();
+        GridPane.setConstraints(label3, 1,0);
+        Label label4 = new Label("Age:");
+        TextField textField4 = new TextField ();
+        GridPane.setConstraints(label4, 1,1);
+
+        Label label5 = new Label("Birthday:");
+        TextField textField5 = new TextField ();
+        GridPane.setConstraints(label5, 2,0);
+        Label label6 = new Label("Gendre:");
+        TextField textField6 = new TextField ();
+        GridPane.setConstraints(label6, 2,1);
+        Label label7 = new Label("Afections:");
+        TextField textField7 = new TextField ();
+        GridPane.setConstraints(label7, 3,0);
+        grid.getChildren().addAll( textField1, textField2, textField3, textField4, textField5,  textField6,textField7);
+
+        //hb.getChildren().addAll(labelCreate, backToMeniu,label1, textField1);
+          //      hb.getChildren().addAll(label2, textField2, label3, textField3,label4, textField4,label5, textField5, label6, textField6,label7,  textField7);
+
+        Scene sceneCreatePacient = new Scene(grid, 1000, 500);
+        buttonP2.setOnAction(e->window.setScene(sceneCreatePacient));
+        buttonCreatePacient = new Button();
+        buttonCreatePacient.setText("Add pacient");
+        buttonCreatePacient.setOnAction(e->window.setTitle("Pacient added"));
+
+        tableM.setEditable(true);
+        TableColumn idM = new TableColumn("Id Pacient");
+        idM.setMinWidth(100);
+        idM.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("id"));
+
+        TableColumn lastNameColM = new TableColumn("Last Name");
+        lastNameColM.setMinWidth(100);
+        lastNameColM.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("nume"));
+
+        TableColumn firstNameColM = new TableColumn("First Name");
+        firstNameCol.setMinWidth(100);
+        firstNameColM.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("prenume"));
+
+        TableColumn dataNastereM = new TableColumn("Data nasterii");
+        dataNastereM.setMinWidth(100);
+        dataNastereM.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("DataNasterii"));
+
+        TableColumn varstaM = new TableColumn("Varsta");
+        varstaM.setMinWidth(50);
+        varstaM.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("varsta"));
+        TableColumn genM = new TableColumn("Gen");
+        genM.setMinWidth(100);
+        genM.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("gen"));
+
+        TableColumn specializareM = new TableColumn("Specializare");
+        specializareM.setMinWidth(100);
+        specializareM.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("specializare"));
+
+        TableColumn oraStartM = new TableColumn("ora Start");
+        oraStartM.setMinWidth(100);
+        oraStartM.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("oraStart"));
+
+        TableColumn oraEndM = new TableColumn("oraEnd");
+        oraEndM.setMinWidth(100);
+        oraEndM.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("oraEnd"));
+
+        TableColumn codParafaM = new TableColumn("Cod Parafa");
+        codParafaM.setMinWidth(100);
+        codParafaM.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("codParafa"));
+
+        tableM.setItems(dataM);
+        tableM.getColumns().addAll(id, firstNameColM, lastNameColM, dataNastereM, varstaM, genM, specializareM, oraStartM, oraEndM, codParafaM);
+
+        final VBox vboxM = new VBox();
+        vboxM.setSpacing(5);
+        vboxM.setPadding(new Insets(20, 0, 0, 10));
+        final Label labelM = new Label("List of doctors");
+        vboxM.getChildren().addAll(labelM,backToMeniu3, tableM);
+        Scene sceneShowMedici = new Scene(vboxM, 1000, 200);
+        buttonM.setOnAction(e->window.setScene(sceneShowMedici));
+
+
+
+
+        tableM.setEditable(true);
+        TableColumn idA = new TableColumn("Id Pacient");
+        idA.setMinWidth(100);
+        idA.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("id"));
+
+        TableColumn lastNameColA = new TableColumn("Last Name");
+        lastNameColA.setMinWidth(100);
+        lastNameColA.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("nume"));
+
+        TableColumn firstNameColA = new TableColumn("First Name");
+        firstNameColA.setMinWidth(100);
+        firstNameColA.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("prenume"));
+
+        TableColumn dataNastereA = new TableColumn("Data nasterii");
+        dataNastereA.setMinWidth(100);
+        dataNastereA.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("DataNasterii"));
+
+        TableColumn varstaA = new TableColumn("Varsta");
+        varstaA.setMinWidth(50);
+        varstaA.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("varsta"));
+        TableColumn genA = new TableColumn("Gen");
+        genA.setMinWidth(100);
+        genA.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("gen"));
+
+        TableColumn specializareA = new TableColumn("Specializare");
+        specializareA.setMinWidth(100);
+        specializareA.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("specializare"));
+
+        TableColumn oraStartA = new TableColumn("ora Start");
+        oraStartA.setMinWidth(100);
+        oraStartA.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("oraStart"));
+
+        TableColumn oraEndA = new TableColumn("oraEnd");
+        oraEndA.setMinWidth(100);
+        oraEndA.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("oraEnd"));
+
+        TableColumn ture = new TableColumn("Ture");
+        ture.setMinWidth(100);
+        ture.setCellValueFactory(
+                new PropertyValueFactory<Pacient, String>("ture"));
+
+        tableA.setItems(dataA);
+        tableA.getColumns().addAll(idA, firstNameColA, lastNameColA, dataNastereA, varstaA, genA, specializareA, oraStartA, oraEndA, ture);
+
+        final VBox vboxA = new VBox();
+        vboxA.setSpacing(5);
+        vboxA.setPadding(new Insets(20, 0, 0, 10));
+        final Label labelA = new Label("List of asistenti");
+        vboxA.getChildren().addAll(labelA,backToMeniu4, tableA);
+        Scene sceneShowAsistenti = new Scene(vboxA, 1000, 200);
+        button3.setOnAction(e->window.setScene(sceneShowAsistenti));
+
+
+
 
 
 
@@ -1110,6 +1393,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         }
         if(event.getSource() == buttonP){
             
+        }
+        if (event.getSource() == buttonCreatePacient) {
+
         }
     }
 }
