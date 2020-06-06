@@ -1,3 +1,4 @@
 Comanda,Data,Ora,ThreadName
-creareAsistent,2020/06/06,21:44:02,creareAsistentThread
-creareAsistent,2020/06/06,21:44:02,creareAsistentThread
+getConcediiFromDb,2020/06/06,22:47:11,getConcediiFromDbThread
+creareCerereConcediu,2020/06/06,22:47:11,creareCerereConcediuThread
+creareCerereConcediu,2020/06/06,22:47:11,creareCerereConcediuThread

@@ -1044,17 +1044,17 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             FXCollections.observableArrayList(
                     medicService.getAllFromDb(connObj)
             );
-    private final ObservableList<Asistent> dataR =
+    private final ObservableList<Reteta> dataR =
             FXCollections.observableArrayList(
-                    asistentService.getAllFromDb(connObj)
+                    retetaService.getAllFromDb(connObj)
             );
-    private final ObservableList<Asistent> dataTM =
+    private final ObservableList<TrimitereMedicala> dataTM =
             FXCollections.observableArrayList(
-                    asistentService.getAllFromDb(connObj)
+                    trimitereService.getAllTrimiteriFromDb(connObj)
             );
-    private final ObservableList<Asistent> dataCM =
+    private final ObservableList<ConcediuMedical> dataCM =
             FXCollections.observableArrayList(
-                    asistentService.getAllFromDb(connObj)
+                    concediuService.getConcediiFromDb(connObj)
             );
 
     @Override
@@ -1249,51 +1249,51 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         TableColumn idM = new TableColumn("Id Pacient");
         idM.setMinWidth(100);
         idM.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("id"));
+                new PropertyValueFactory<Medic, String>("id"));
 
         TableColumn lastNameColM = new TableColumn("Last Name");
         lastNameColM.setMinWidth(100);
         lastNameColM.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("nume"));
+                new PropertyValueFactory<Medic, String>("nume"));
 
         TableColumn firstNameColM = new TableColumn("First Name");
         firstNameCol.setMinWidth(100);
         firstNameColM.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("prenume"));
+                new PropertyValueFactory<Medic, String>("prenume"));
 
         TableColumn dataNastereM = new TableColumn("Data nasterii");
         dataNastereM.setMinWidth(100);
         dataNastereM.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("DataNasterii"));
+                new PropertyValueFactory<Medic, String>("DataNasterii"));
 
         TableColumn varstaM = new TableColumn("Varsta");
         varstaM.setMinWidth(50);
         varstaM.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("varsta"));
+                new PropertyValueFactory<Medic, String>("varsta"));
         TableColumn genM = new TableColumn("Gen");
         genM.setMinWidth(100);
         genM.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("gen"));
+                new PropertyValueFactory<Medic, String>("gen"));
 
         TableColumn specializareM = new TableColumn("Specializare");
         specializareM.setMinWidth(100);
         specializareM.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("specializare"));
+                new PropertyValueFactory<Medic, String>("specializare"));
 
         TableColumn oraStartM = new TableColumn("ora Start");
         oraStartM.setMinWidth(100);
         oraStartM.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("oraStart"));
+                new PropertyValueFactory<Medic, String>("oraStart"));
 
         TableColumn oraEndM = new TableColumn("oraEnd");
         oraEndM.setMinWidth(100);
         oraEndM.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("oraEnd"));
+                new PropertyValueFactory<Medic, String>("oraEnd"));
 
         TableColumn codParafaM = new TableColumn("Cod Parafa");
         codParafaM.setMinWidth(100);
         codParafaM.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("codParafa"));
+                new PropertyValueFactory<Medic, String>("codParafa"));
 
         tableM.setItems(dataM);
         tableM.getColumns().addAll(id, firstNameColM, lastNameColM, dataNastereM, varstaM, genM, specializareM, oraStartM, oraEndM, codParafaM);
@@ -1309,55 +1309,55 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
 
 
-        tableM.setEditable(true);
+        tableA.setEditable(true);
         TableColumn idA = new TableColumn("Id Pacient");
         idA.setMinWidth(100);
         idA.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("id"));
+                new PropertyValueFactory<Asistent, String>("id"));
 
         TableColumn lastNameColA = new TableColumn("Last Name");
         lastNameColA.setMinWidth(100);
         lastNameColA.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("nume"));
+                new PropertyValueFactory<Asistent, String>("nume"));
 
         TableColumn firstNameColA = new TableColumn("First Name");
         firstNameColA.setMinWidth(100);
         firstNameColA.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("prenume"));
+                new PropertyValueFactory<Asistent, String>("prenume"));
 
         TableColumn dataNastereA = new TableColumn("Data nasterii");
         dataNastereA.setMinWidth(100);
         dataNastereA.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("DataNasterii"));
+                new PropertyValueFactory<Asistent, String>("DataNasterii"));
 
         TableColumn varstaA = new TableColumn("Varsta");
         varstaA.setMinWidth(50);
         varstaA.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("varsta"));
+                new PropertyValueFactory<Asistent, String>("varsta"));
         TableColumn genA = new TableColumn("Gen");
         genA.setMinWidth(100);
         genA.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("gen"));
+                new PropertyValueFactory<Asistent, String>("gen"));
 
         TableColumn specializareA = new TableColumn("Specializare");
         specializareA.setMinWidth(100);
         specializareA.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("specializare"));
+                new PropertyValueFactory<Asistent, String>("specializare"));
 
         TableColumn oraStartA = new TableColumn("ora Start");
         oraStartA.setMinWidth(100);
         oraStartA.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("oraStart"));
+                new PropertyValueFactory<Asistent, String>("oraStart"));
 
         TableColumn oraEndA = new TableColumn("oraEnd");
         oraEndA.setMinWidth(100);
         oraEndA.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("oraEnd"));
+                new PropertyValueFactory<Asistent, String>("oraEnd"));
 
         TableColumn ture = new TableColumn("Ture");
         ture.setMinWidth(100);
         ture.setCellValueFactory(
-                new PropertyValueFactory<Pacient, String>("ture"));
+                new PropertyValueFactory<Asistent, String>("ture"));
 
         tableA.setItems(dataA);
         tableA.getColumns().addAll(idA, firstNameColA, lastNameColA, dataNastereA, varstaA, genA, specializareA, oraStartA, oraEndA, ture);
@@ -1373,6 +1373,87 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
 
 
+        tableR.setEditable(true);
+
+        TableColumn pacientR = new TableColumn("Pacient");
+        pacientR.setMinWidth(100);
+        pacientR.setCellValueFactory(
+                new PropertyValueFactory<Reteta, String>("pacient"));
+
+
+
+        TableColumn eliberatDeR = new TableColumn("Eliberat De");
+        eliberatDeR.setMinWidth(100);
+        eliberatDeR.setCellValueFactory(
+                new PropertyValueFactory<Reteta, String>("eliberatDe"));
+
+        TableColumn eliberatLaR = new TableColumn("eliberatLa");
+        eliberatLaR.setMinWidth(100);
+        eliberatLaR.setCellValueFactory(
+                new PropertyValueFactory<Reteta, String>("eliberatLa"));
+
+        TableColumn medicamenteR = new TableColumn("Medicamente ");
+        medicamenteR.setMinWidth(100);
+        medicamenteR.setCellValueFactory(
+                new PropertyValueFactory<Reteta, String>("medicamente"));
+
+        tableR.setItems(dataR);
+        tableR.getColumns().addAll(pacientR, eliberatDeR, eliberatLaR, medicamenteR);
+
+        final VBox vboxR = new VBox();
+        vboxR.setSpacing(5);
+        vboxR.setPadding(new Insets(20, 0, 0, 10));
+        final Label labelR = new Label("List of retete");
+        vboxR.getChildren().addAll(labelR,backToMeniu5, tableR);
+        Scene sceneShowRetete = new Scene(vboxR, 1000, 200);
+        button4.setOnAction(e->window.setScene(sceneShowRetete));
+
+
+
+
+        tableTM.setEditable(true);
+
+        TableColumn pacientTM = new TableColumn("Pacient");
+        pacientTM.setMinWidth(100);
+        pacientTM.setCellValueFactory(
+                new PropertyValueFactory<TrimitereMedicala, String>("pacient"));
+
+        TableColumn valabilitateTM = new TableColumn("Valabilitate");
+        valabilitateTM.setMinWidth(100);
+        valabilitateTM.setCellValueFactory(
+                new PropertyValueFactory<TrimitereMedicala, String>("valabilitate"));
+
+        TableColumn scopTM = new TableColumn("Scop");
+        scopTM.setMinWidth(100);
+        scopTM.setCellValueFactory(
+                new PropertyValueFactory<TrimitereMedicala, String>("scop"));
+
+        TableColumn catreTM = new TableColumn("Catre");
+        catreTM.setMinWidth(100);
+        catreTM.setCellValueFactory(
+                new PropertyValueFactory<TrimitereMedicala, String>("catre"));
+
+        TableColumn eliberatDeTM = new TableColumn("Eliberat De");
+        eliberatDeTM.setMinWidth(100);
+        eliberatDeTM.setCellValueFactory(
+                new PropertyValueFactory<TrimitereMedicala, String>("eliberatDe"));
+
+        TableColumn eliberatLaTM = new TableColumn("eliberatLa");
+        eliberatLaTM.setMinWidth(100);
+        eliberatLaTM.setCellValueFactory(
+                new PropertyValueFactory<TrimitereMedicala, String>("eliberatLa"));
+
+
+        tableTM.setItems(dataTM);
+        tableTM.getColumns().addAll(pacientTM, valabilitateTM, scopTM, catreTM, eliberatDeTM, eliberatLaTM);
+
+        final VBox vboxTM = new VBox();
+        vboxTM.setSpacing(5);
+        vboxTM.setPadding(new Insets(20, 0, 0, 10));
+        final Label labelTM = new Label("List of retete");
+        vboxTM.getChildren().addAll(labelTM,backToMeniu6, tableTM);
+        Scene sceneShowTrimiteri = new Scene(vboxTM, 1000, 200);
+        button5.setOnAction(e->window.setScene(sceneShowTrimiteri));
 
 
         primaryStage.setScene(scene);
