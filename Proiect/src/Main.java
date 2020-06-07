@@ -32,6 +32,7 @@ import java.util.List;
 
 import javafx.scene.layout.VBox;
 
+import javax.swing.*;
 import javax.swing.text.TabExpander;
 
 public class Main extends Application implements EventHandler<ActionEvent> {
@@ -1018,6 +1019,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     Button backToMeniu5;
     Button backToMeniu6;
     Button backToMeniu7;
+    Button backToMeniu8;
     Button showAsistenti;
     Button showRetete;
     Button showTrimiteri;
@@ -1110,6 +1112,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         backToMeniu6.setText("Back to Main Menu");
         backToMeniu7 = new Button();
         backToMeniu7.setText("Back to Main Menu");
+        backToMeniu8 = new Button();
+        backToMeniu8.setText("Back to Main Menu");
 
         buttonM = new Button();
         buttonM.setText("Show all doctors");
@@ -1149,6 +1153,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         backToMeniu5.setOnAction(e->window.setScene(scene));
         backToMeniu6.setOnAction(e->window.setScene(scene));
         backToMeniu7.setOnAction(e->window.setScene(scene));
+        backToMeniu8.setOnAction(e->window.setScene(scene));
 
         table.setEditable(true);
 
@@ -1200,53 +1205,74 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         buttonP.setOnAction(e->window.setScene(sceneShowPacienti));
 
 
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10,10,10,10));
-        grid.setVgap(5);
-        grid.setHgap(5);
 
-        final Label labelCreate = new Label("Create a pacient and add it to the database");
-        final VBox vboxCreateP = new VBox();
-        vbox.setSpacing(5);
-        vbox.setPadding(new Insets(20, 0, 0, 10));
-        HBox hb = new HBox();
-        hb.setSpacing(5);
-        hb.setPadding(new Insets(20,0,0,10));
-        Label label1 = new Label("ID:");
-        TextField textField1 = new TextField ();
-        GridPane.setConstraints(label1, 0,0);
-        Label label2 = new Label("Last Name:");
-        TextField textField2 = new TextField ();
-        GridPane.setConstraints(label2, 0,1);
-        Label label3 = new Label("First Name:");
-        TextField textField3 = new TextField ();
-        GridPane.setConstraints(label3, 1,0);
-        Label label4 = new Label("Age:");
-        TextField textField4 = new TextField ();
-        GridPane.setConstraints(label4, 1,1);
+        /*Button deletePacient = new Button("Delete Pacient");
+        deletePacient.setOnAction(e->{
+            PreparedStatement pst;
+            String query = "DELETE from Pacienti where id = ?";
+            try {
+                pst = connObj.prepareStatement(query);
+                pst.setString(1, id.getText());
+                pst.executeUpdate();
+                pst.close();
 
-        Label label5 = new Label("Birthday:");
-        TextField textField5 = new TextField ();
-        GridPane.setConstraints(label5, 2,0);
-        Label label6 = new Label("Gendre:");
-        TextField textField6 = new TextField ();
-        GridPane.setConstraints(label6, 2,1);
-        Label label7 = new Label("Afections:");
-        TextField textField7 = new TextField ();
-        GridPane.setConstraints(label7, 3,0);
-        grid.getChildren().addAll( textField1, textField2, textField3, textField4, textField5,  textField6,textField7);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });*/
+        JLabel ID, NUME,PRENUME, VARSTA,GEN,DATANASTERII,AFECTIUNI;
+        JTextField Id, Nume,Prenume, Varsta,Gen,DataNasterii,Afectiuni;
+        JButton insertP, deleteP, updateP;
 
-        //hb.getChildren().addAll(labelCreate, backToMeniu,label1, textField1);
-          //      hb.getChildren().addAll(label2, textField2, label3, textField3,label4, textField4,label5, textField5, label6, textField6,label7,  textField7);
+        ID = new JLabel("id:");
+        NUME = new JLabel("NUME:");
+        PRENUME = new JLabel("PRENUME:");
+        VARSTA = new JLabel("VARSTA:");
+        GEN = new JLabel("GEN:");
+        DATANASTERII = new JLabel("DATA NASTERII:");
+        AFECTIUNI = new JLabel("AFECTIUNI:");
 
-        Scene sceneCreatePacient = new Scene(grid, 1000, 500);
-        buttonP2.setOnAction(e->window.setScene(sceneCreatePacient));
-        buttonCreatePacient = new Button();
-        buttonCreatePacient.setText("Add pacient");
-        buttonCreatePacient.setOnAction(e->window.setTitle("Pacient added"));
+        ID.setBounds(20,20,100,20);
+        NUME.setBounds(20,50,100,20);
+        PRENUME.setBounds(20,80,100,20);
+        VARSTA.setBounds(20,110,100,20);
+        DATANASTERII.setBounds(1400,50,100,20);
+        GEN.setBounds(20,170,100,20);
+        AFECTIUNI.setBounds(200,50,100,20);
+
+        Id = new JTextField(20);
+        Nume = new JTextField(20);
+        Prenume = new JTextField(20);
+        Varsta = new JTextField(20);
+        DataNasterii = new JTextField(20);
+        Gen = new JTextField(20);
+        Afectiuni = new JTextField(20);
+
+        Id.setBounds(130,20,150,20);
+        Nume.setBounds(130,50,150,20);
+        Prenume.setBounds(130,80,150,20);
+        Varsta.setBounds(130,110,150,20);
+        DataNasterii.setBounds(130,140,150,20);
+        Gen.setBounds(130,50,170,20);
+        Afectiuni.setBounds(130,200,150,20);
+
+        insertP = new JButton("Insert");
+        deleteP = new JButton("Delete");
+        updateP = new JButton("Update");
+
+        insertP.setBounds(300,50,80,20);
+        deleteP.setBounds(300,80,80,20);
+        updateP.setBounds(300,110,80,20);
+
+
+
+
+
+
+
 
         tableM.setEditable(true);
-        TableColumn idM = new TableColumn("Id Pacient");
+        TableColumn idM = new TableColumn("Id Medic");
         idM.setMinWidth(100);
         idM.setCellValueFactory(
                 new PropertyValueFactory<Medic, String>("id"));
